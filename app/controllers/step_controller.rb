@@ -1,2 +1,0 @@
-class StepController < ApplicationController
-end
