@@ -1,10 +1,9 @@
-class CreateQuestions < ActiveRecord::Migration[5.2]
+class CreateComments < ActiveRecord::Migration[5.2]
   def change
-    create_table :questions do |t|
+    create_table :comments do |t|
     	t.string :title, index: true
     	t.text 	:body
     	t.integer :tag_id, index: true
-    	t.integer :comment_id, index: true
 
       t.timestamps
     end
