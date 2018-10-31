@@ -1,0 +1,18 @@
+
+
+<p>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</p>
+
+                <div class="questions_list">
+                    <ul>
+                        <% @question.each do |c| %>
+                            <li><%= c.Question%>  </li>
+                        <%end%>
+                    </ul>
+                </div>    
+                
+
+
+<%= link_to 'Back', question_path %>
