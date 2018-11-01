@@ -1,2 +1,9 @@
 <h1><%=@project.title%></h1>
 <h2>Start date <%= @project.start_date %></h2>
+<h3>
+	<% @project.sections.each do |section| %>
+		<%= render partial: "sections/section", locals: { section: section } %>
+	<% end %> 
+</h3>
+
+<p> <%= render partial: 'sections/form', locals: { project: @project, section: Section.new }%> </p>

@@ -1,3 +1,3 @@
 class Project < ApplicationRecord
-	has_many :projects, dependent: :destroy 
+	has_many :sections, dependent: :destroy 
 end
