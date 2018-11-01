@@ -2,7 +2,10 @@
 <h2>Start date <%= @project.start_date %></h2>
 <h3>
 	<% @project.sections.each do |section| %>
-		<%= render partial: "sections/section", locals: { section: section } %>
+		<%= render partial: "sections/section", locals: { section: section } %> 
+		<%= link_to('View', project_section_path(@project, section)) %>
+		<%= link_to('Edit', edit_project_section_path(@project, section)) %>
+		<%= link_to('Delete', project_section_path(@project, section), method: :delete, data: {confirm: 'Are you sure?'}) %>
 	<% end %> 
 </h3>
 

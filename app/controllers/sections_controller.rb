@@ -1,17 +1,17 @@
 class SectionsController < ApplicationController
 	before_action :set_project
+	before_action :set_section, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@section = section.all
+		@section = Section.all
 	end
 
-	# def show
-	# 	set_section
-	# end
+	def show
+	end
 
 	def new
 		@section = Section.new
-		@section.project = @project.id
+		@section.project = @project
 	end
 
 	def create
@@ -21,22 +21,21 @@ class SectionsController < ApplicationController
 		redirect_to @project
 	end
 
-	# def update
-	# 	if @section.update(section_params)
- #          format.html { redirect_to @project, notice: 'section was saved successfully.' }
- #        else
- #          format.html { render :edit, notice: 'section not saved.' }
- #        end
-	# end
+	def update
+		if @section.update(section_params)
+          redirect_to project_section_path(@project, @section)
+        else
+          format.html { render :edit, notice: 'section not saved.' }
+        end
+	end
 
-	# def edit
-	# 	set_section
-	# end
+	def edit
+	end
 
-	# def destroy
-	# 	@section.destroy
-	# 	redirect_to @project
-	# end
+	def destroy
+		@section.destroy
+		redirect_to @project
+	end
 
 	private
 
