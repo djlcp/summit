@@ -19,12 +19,12 @@ class TasksController < ApplicationController
 		@task = Task.new(task_params)
 		@task.section = @section
 		@task.save
-		redirect_to project_section_path(@section.project, @section)
+		redirect_to project_section_path(@project, @section)
 	end
 
 	def update
 		if @task.update(task_params)
-	         redirect_to project_section_path(@section.project, @section)
+	         redirect_to project_section_path(@project, @section)
 	       else
 	         format.html { render :edit, notice: 'section not saved.' }
  	  end
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
 
 	def destroy
 		@task.destroy
-		redirect_to project_section_path(@section.project, @section)
+		redirect_to project_section_path(@project, @section)
 	end
 
 	private
