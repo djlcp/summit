@@ -4,7 +4,7 @@ class Section < ApplicationRecord
 
 
 	def start_date
-		project.start_date + commencement_day - 1
+		project.start_date + commencement_day
 	end
 
 	def deadline

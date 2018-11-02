@@ -1,4 +1,5 @@
 <h4> <%= task.title %> </h4> 
+<h5> <%= task.deadline %> </h5>
 <p> <%= task.description %> </p>
 <%= link_to('View', project_section_task_path(@project, @section, task)) %>
 <%= link_to('Edit', edit_project_section_task_path(@project, @section, task)) %>
