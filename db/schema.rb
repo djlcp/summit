@@ -12,12 +12,17 @@
 
 ActiveRecord::Schema.define(version: 2018_10_27_151156) do
 
-  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_comments_on_tag_id"
+    t.index ["title"], name: "index_comments_on_title"
   end
 
-  create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.date "start_date"
     t.datetime "created_at", null: false
@@ -25,21 +30,54 @@ ActiveRecord::Schema.define(version: 2018_10_27_151156) do
     t.index ["title"], name: "index_projects_on_title"
   end
 
-  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "tag_id"
+    t.integer "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_questions_on_comment_id"
+    t.index ["tag_id"], name: "index_questions_on_tag_id"
+    t.index ["title"], name: "index_questions_on_title"
   end
 
-  create_table "sections", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "sections", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.integer "commencement_day"
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "project_id"
+    t.index ["project_id"], name: "index_sections_on_project_id"
     t.index ["title"], name: "index_sections_on_title"
   end
 
-  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "steps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.integer "task_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_steps_on_task_id"
+    t.index ["title"], name: "index_steps_on_title"
+  end
+
+  create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.integer "section_id"
+    t.integer "days_given"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_id"], name: "index_tasks_on_section_id"
+    t.index ["title"], name: "index_tasks_on_title"
+  end
+
+  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "comment_id"
+    t.integer "direction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
