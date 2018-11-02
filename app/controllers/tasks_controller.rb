@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
 	before_action :set_section
+	before_action :set_project
 	before_action :set_task, only: [:show, :edit, :destroy, :update]
 
 	def index
@@ -41,6 +42,10 @@ class TasksController < ApplicationController
 
 	def set_section
 		@section = Section.find(params[:section_id])
+	end
+
+	def set_project
+		@project = @section.project 
 	end
 
 	def set_task

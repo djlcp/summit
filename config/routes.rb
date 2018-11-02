@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   	root to: 'projects#index'
   	resources :projects do
   		resources :sections do
-  			resources :tasks
+  			resources :tasks do
+  				resources :steps 
+  			end
   		end
   	end
 end
