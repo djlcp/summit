@@ -1,7 +1,7 @@
 <h2><%=@project.title%></h2>
 <h1><%= @section.title %> 
 	<%= link_to('edit', edit_project_section_path(@section)) %>
-	<%= link_to('Delete', project_section_path(@project, @section), method: :Delete, data: {confirm: "Are you sure?"}) %>
+	<%= link_to('Delete', project_section_path(@project, @section), method: :delete, data: {confirm: "Are you sure?"}) %>
 </h1>
 <h3>
 	<% @section.tasks.each do |task| %>

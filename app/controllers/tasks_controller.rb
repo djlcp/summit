@@ -1,12 +1,12 @@
 class TasksController < ApplicationController
 	before_action :set_section
+	before_action :set_task, only: [:show, :edit, :destroy, :update]
 
 	def index
 		@task = Task.all
 	end
 
 	def show
-		set_task
 	end
 
 	def new
@@ -21,22 +21,21 @@ class TasksController < ApplicationController
 		redirect_to project_section_path(@section.project, @section)
 	end
 
-	# def update
-	# 	if @section.update(section_params)
-	#          format.html { redirect_to @project, notice: 'section was saved successfully.' }
-	#        else
-	#          format.html { render :edit, notice: 'section not saved.' }
- 	#   end
-	# end
+	def update
+		if @task.update(task_params)
+	         redirect_to project_section_path(@section.project, @section)
+	       else
+	         format.html { render :edit, notice: 'section not saved.' }
+ 	  end
+	end
 
-	# def edit
-	# 	set_section
-	# end
+	def edit
+	end
 
-	# def destroy
-	# 	@section.destroy
-	# 	redirect_to @project
-	# end
+	def destroy
+		@task.destroy
+		redirect_to project_section_path(@section.project, @section)
+	end
 
 	private
 
