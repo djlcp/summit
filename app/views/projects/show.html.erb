@@ -1,6 +1,6 @@
 <h1><%=@project.title%></h1>
 <%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
-<h2>Start date <%= @project.start_date %></h2>
+<h2>Start date <%= @project.start_date %>. Completion date <%=@project.completion_date%></h2>
 <h3>
 	<% @project.sections.each do |section| %>
 		<%= render partial: "sections/section", locals: { section: section } %> 
