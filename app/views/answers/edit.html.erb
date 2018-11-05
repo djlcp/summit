@@ -1,0 +1,4 @@
+<h2><%=@question.title%></h2>
+<h5><%=@question.content%></h5>
+<h4>Edit your answer</h4>
+<%= render partial: 'form', locals: { question: @question, answer: @answer } %>
