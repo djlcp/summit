@@ -1,0 +1,35 @@
+<%= form_for([project, section]) do |form| %>
+  <div>
+    <% if section.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+        <% @section.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :title,'Enter your Section title'%>
+      <%= form.text_field :title, placeholder: "Project title..."%>
+    </div>
+
+    <div>
+      <%= form.label :commencement_day,'Enter the day of the course on which the section commences'%>
+      <%= form.text_field :commencement_day%>
+    </div>
+
+    <div>
+      <%= form.label :duration, 'Enter the duration of the section'%>
+      <%= form.text_field :duration %>
+    </div>
+
+    <div>
+      <%= form.submit 'Go!', class: 'actions'%>
+      <%= link_to 'Back', projects_path%>
+    </div>
+  </div>
+<% end %>
