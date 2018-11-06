@@ -10,4 +10,8 @@ class Section < ApplicationRecord
 	def deadline
 		start_date + duration
 	end
+
+	def timeline_position
+		(duration.to_f/project.project_length)*100
+	end
 end
