@@ -1,0 +1,4 @@
+<%= render partial: 'questions/question', question: @question %>
+
+<h4>Add a Comment</h4>
+<%= render partial: 'form', locals: {question: @question, comment: Comment.new} %>
