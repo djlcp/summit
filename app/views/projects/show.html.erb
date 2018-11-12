@@ -1,6 +1,19 @@
 <h1><%=@project.title%></h1>
 <%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
 <h2>Start date <%= @project.start_date %>. Completion date <%=@project.completion_date%></h2>
+
+<div class="timeline_div">
+	<div class='timeline_line'>
+	
+		<div class="dot timeline_item first_item"></div>
+		<% @project.sections.each do |section| %>
+			<div class="timeline_item dot" style="left:<%= section.timeline_position %>%;">
+			</div>
+		<% end %>
+	</div>
+
+</div>
+
 <h3>
 	<% @project.sections.each do |section| %>
 		<%= render partial: "sections/section", locals: { section: section } %> 
