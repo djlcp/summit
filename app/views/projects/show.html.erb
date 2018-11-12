@@ -4,12 +4,13 @@
 
 <div class="timeline_div">
 	<div class='timeline_line'>
+	
+		<div class="dot timeline_item"></div>
+		<% @project.sections.each do |section| %>
+			<div class="timeline_item dot" style="left:<%= section.timeline_position %>%;">
+			</div>
+		<% end %>
 	</div>
-	<span class="dot timeline_item"></span>
-	<% @project.sections.each do |section| %>
-		<span class="dot timeline_item" style="margin-left:<%= section.timeline_position %>%;"></span>
-	<% end %>
-
 
 </div>
 

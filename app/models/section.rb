@@ -11,7 +11,11 @@ class Section < ApplicationRecord
 		start_date + duration
 	end
 
+	def section_completion_day
+		commencement_day + duration
+	end
+
 	def timeline_position
-		(duration.to_f/project.project_length)*100
+		(section_completion_day.to_f/project.project_length)*100
 	end
 end
