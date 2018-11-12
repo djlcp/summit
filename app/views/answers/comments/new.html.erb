@@ -1,4 +1,6 @@
-<%= render partial: 'questions/question', question: @question %>
+<h3><%= @question.title %></h3>
+<h4><%= @question.content %></h4>
+<h3><%= @answer.content %></h3>
 
 <h4>Add a Comment</h4>
-<%= render partial: 'form', locals: {question: @question, comment: Comment.new} %>
+<%= render partial: 'form', locals: {question: @question, answer: @answer, comment: Comment.new} %>
