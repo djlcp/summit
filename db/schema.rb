@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_174843) do
+ActiveRecord::Schema.define(version: 2018_11_12_163451) do
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 2018_11_08_174843) do
     t.integer "project_id"
     t.index ["project_id"], name: "index_sections_on_project_id"
     t.index ["title"], name: "index_sections_on_title"
+  end
+
+  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.integer "session_no"
+    t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_sessions_on_project_id"
+    t.index ["session_no"], name: "index_sessions_on_session_no"
+    t.index ["title"], name: "index_sessions_on_title"
   end
 
   create_table "steps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
