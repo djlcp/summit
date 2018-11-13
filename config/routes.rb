@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   end
 
 	resources :projects do
+    resources :lessons, only: [:new, :create, :index]
 		resources :sections do
 			resources :tasks do
 				resources :steps 
@@ -21,6 +22,6 @@ Rails.application.routes.draw do
 		end
 	end
 
-  resources :sessions
+  resources :lessons, only: [:edit, :update, :destroy, :index]
 
 end

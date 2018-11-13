@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 2018_11_12_163451) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lessons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.integer "lesson_no"
+    t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_no"], name: "index_lessons_on_lesson_no"
+    t.index ["project_id"], name: "index_lessons_on_project_id"
+    t.index ["title"], name: "index_lessons_on_title"
+  end
+
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.date "start_date"
@@ -53,17 +64,6 @@ ActiveRecord::Schema.define(version: 2018_11_12_163451) do
     t.integer "project_id"
     t.index ["project_id"], name: "index_sections_on_project_id"
     t.index ["title"], name: "index_sections_on_title"
-  end
-
-  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title"
-    t.integer "session_no"
-    t.integer "project_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_sessions_on_project_id"
-    t.index ["session_no"], name: "index_sessions_on_session_no"
-    t.index ["title"], name: "index_sessions_on_title"
   end
 
   create_table "steps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

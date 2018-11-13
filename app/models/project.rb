@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
 	has_many :sections, dependent: :destroy 
-	has_many :sessions, dependent: :destroy
+	has_many :lessons, dependent: :destroy
 
 	def completion_date
 		if sections.count > 0
