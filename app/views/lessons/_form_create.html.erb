@@ -1,0 +1,30 @@
+<%= form_for([project, lesson]) do |form| %>
+  <div>
+    <% if lesson.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+        <% @lesson.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :title,'Enter your Lesson title'%>
+      <%= form.text_field :title, placeholder: "Lesson title..."%>
+    </div>
+
+    <div>
+      <%= form.label :lesson_no,'Enter the lesson number'%>
+      <%= form.text_field :lesson_no%>
+    </div>
+
+    <div>
+      <%= form.submit 'Go!', class: 'actions'%>
+      <%= link_to 'Back', new_project_lesson_path(project)%>
+    </div>
+  </div>
+<% end %>

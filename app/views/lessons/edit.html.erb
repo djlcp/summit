@@ -2,6 +2,8 @@
 <% @project.lessons.each do |lesson| %>
 	<%= render partial: 'lesson', locals: {lesson: lesson} %>
 <% end %>
+
 <hr>
-<h3>Create a Lesson</h3>
-<%= render partial: 'form_create', locals: {project: @project, lesson: Lesson.new} %>
+
+<h3>Edit a Lesson</h3>
+<%= render 'form_edit', lesson: @lesson %>

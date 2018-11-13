@@ -1,11 +1,11 @@
-<%= form_for([project, lesson]) do |form| %>
+<%= form_with(model: lesson, local: true) do |form| %>
   <div>
     <% if lesson.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this post from being saved:</h2>
+        <h2><%= pluralize(lesson.errors.count, "error") %> prohibited this post from being saved:</h2>
 
         <ul>
-        <% @lesson.errors.full_messages.each do |message| %>
+        <% lesson.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
         </ul>
@@ -24,7 +24,7 @@
 
     <div>
       <%= form.submit 'Go!', class: 'actions'%>
-      <%= link_to 'Back', project_path(project)%>
+      <%= link_to 'Back', new_project_lesson_path(lesson.project)%>
     </div>
   </div>
 <% end %>

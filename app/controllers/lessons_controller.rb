@@ -14,7 +14,25 @@ class LessonsController < ApplicationController
 		@lesson = Lesson.new(lesson_params)
 		@lesson.project = @project
 		@lesson.save
-		redirect_to @new_project_lesson_path(@project)
+		redirect_to new_project_lesson_path(@project, Lesson.new)
+	end
+
+	def edit
+		@project = @lesson.project
+	end
+
+	def update
+		if @lesson.update(lesson_params)
+			redirect_to project_path(@lesson.project)
+		else
+			render :edit
+		end
+	end
+
+	def destroy
+		@project = @lesson.project
+		@lesson.destroy
+		redirect_to @project
 	end
 
 	private
