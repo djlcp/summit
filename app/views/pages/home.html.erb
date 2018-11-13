@@ -2,8 +2,9 @@
 
 
 <% if current_user %>
-	<%=link_to 'sign out', destroy_user_session_path, method: :delete%>
-	
+	<%=link_to 'sign out', destroy_user_session_path, method: :delete %>
+	<%=link_to 'Invite new user', new_user_invitation_path %>
+	<%=link_to 'edit profile', edit_user_registration_path %>
 
 <% else %>
 	<%# sign up only required for testing as addition only usually through email invite%>
