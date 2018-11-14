@@ -4,6 +4,7 @@
 	<%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
 	<h2>Start date <%= @project.start_date %>. Completion date <%=@project.completion_date%></h2>
 	<p> Course days mask value <%= @project.course_days %> </p>
+	<p> lesson days <%= @project.lesson_days_array %> </p>
 
 	<div class="timeline_div">
 		<div class='timeline_line'>
