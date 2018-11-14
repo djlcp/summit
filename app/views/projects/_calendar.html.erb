@@ -28,14 +28,20 @@
 		<% date_range.each_slice(7) do |week| %>
 			<tr>
 				<% week.each do |day| %>
-					<td><%= day.day %>
-					<% @project.assign_lesson_dates.each do |lesson| %>
-						<% if lesson[0] == day %>
-							<%= lesson[1].title %>
+					<% if @project.lesson_dates.include?(day) %>
+						<% @project.assign_lesson_dates.each do |lesson| %>
+							<% if lesson[0] == day %>
+								<td><%= link_to(day.day, lesson_path(lesson[1])) %></td>
+							<% end %>
 						<% end %>
-					<% end %></td>
+					<% else %>
+						<td><%= day.day %></td>
+					<% end %>
 				<% end %>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+
+<%= link_to("New Lesson", new_project_lesson_path(@project, Lesson.new)) %>
+

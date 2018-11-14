@@ -22,6 +22,6 @@ Rails.application.routes.draw do
 		end
 	end
 
-  resources :lessons, only: [:edit, :update, :destroy, :index]
+  resources :lessons, only: [:edit, :update, :destroy, :index, :show]
 
 end

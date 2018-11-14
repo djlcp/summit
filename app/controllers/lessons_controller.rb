@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
 	before_action :set_project, only: [:new, :create]
-	before_action :set_lesson, only: [:edit, :update, :destroy]
+	before_action :set_lesson, only: [:edit, :update, :destroy, :show]
 
 	def index
 		@lessons = Lesson.all
@@ -8,6 +8,9 @@ class LessonsController < ApplicationController
 
 	def new
 		@lesson = Lesson.new
+	end
+
+	def show
 	end
 
 	def create
