@@ -14,19 +14,23 @@ class ProjectsController < ApplicationController
 
 	def create
 		@project = Project.new(project_params)
+		mask_course_days
 		@project.save
 		redirect_to @project
 	end
 
 	def update
 		if @project.update(project_params)
-          format.html { redirect_to @project, notice: 'project was saved successfully.' }
+			mask_course_days
+			@project.save
+          	redirect_to @project
         else
-          format.html { render :edit, notice: 'project not saved.' }
+          render :edit
         end
 	end
 
 	def edit
+		set_course_days_params
 	end
 
 	def destroy
@@ -35,6 +39,27 @@ class ProjectsController < ApplicationController
 	end
 
 	private
+
+	def mask_course_days
+		@project.course_days = 0
+		@project.course_days += 64 if params[:sunday] == '1'
+		@project.course_days += 32 if params[:monday] == '1'
+		@project.course_days += 16 if params[:tuesday] == '1'
+		@project.course_days += 8 if params[:wednesday] == '1'
+		@project.course_days += 4 if params[:thursday] == '1'
+		@project.course_days += 2 if params[:friday] == '1'
+		@project.course_days += 1 if params[:saturday] == '1'
+	end
+
+	def set_course_days_params
+		params[:sunday] = '1' if @project.course_days & 64
+		params[:monday] = '1' if @project.course_days & 32
+		params[:tuesday] = '1' if @project.course_days & 16
+		params[:wednesday] = '1' if @project.course_days & 8
+		params[:thursday] = '1' if @project.course_days & 4
+		params[:friday] = '1' if @project.course_days & 2
+		params[:saturday] = '1' if @project.course_days & 1
+	end
 
 	def set_project
 		@project = Project.find(params[:id])

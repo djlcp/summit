@@ -23,6 +23,23 @@
     </div>
 
     <div>
+      <%= check_box_tag(:sunday) %>
+      <%= label_tag(:sunday, "Sunday") %>
+      <%= check_box_tag(:monday) %>
+      <%= label_tag(:monday, "Monday") %>
+      <%= check_box_tag(:tuesday) %>
+      <%= label_tag(:tuesday, "Tuesday") %>
+      <%= check_box_tag(:wednesday) %>
+      <%= label_tag(:wednesday, "Wednesday") %>
+      <%= check_box_tag(:thursday) %>
+      <%= label_tag(:thursday, "Thursday") %>
+      <%= check_box_tag(:friday) %>
+      <%= label_tag(:friday, "Friday") %>
+      <%= check_box_tag(:saturday) %>
+      <%= label_tag(:saturday, "Saturday") %>
+    </div>
+
+    <div>
       <%= form.submit 'Go!', class: 'actions'%>
       <%= link_to 'Back', projects_path%>
     </div>

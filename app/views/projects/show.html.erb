@@ -1,7 +1,9 @@
 <main>
 	<h1><%=@project.title%></h1>
+	<%= link_to('Edit', edit_project_path(@project)) %>
 	<%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
 	<h2>Start date <%= @project.start_date %>. Completion date <%=@project.completion_date%></h2>
+	<p> Course days mask value <%= @project.course_days %> </p>
 
 	<div class="timeline_div">
 		<div class='timeline_line'>
