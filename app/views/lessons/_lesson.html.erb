@@ -1,0 +1,1 @@
+<h4> <%= "Session #{lesson.lesson_no}: #{lesson.title}" %> <%= link_to('Edit', edit_lesson_path(lesson)) %> <%= link_to('Delete', lesson_path(lesson), method: :delete, data: {confirm: 'Are you sure?'}) %></h4>

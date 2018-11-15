@@ -1,0 +1,32 @@
+<%= form_with(model: question, local: true) do |form| %>
+
+
+  <div>
+    <% if question.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+        <ul>
+        <% question.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :title,'Give your question a title' %>
+      <%= form.text_field :title, placeholder: "Question title..."%>
+    </div>
+
+    <div>
+      <%= form.label :content,'Enter your question' %>
+      <%= form.text_area :content, placeholder: "Question content", cols: "1", rows: "6"%>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Post!' %>
+      <%= link_to 'Back', questions_path %>
+    </div>
+  </div>
+<% end %>

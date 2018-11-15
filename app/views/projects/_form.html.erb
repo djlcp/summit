@@ -1,0 +1,47 @@
+<%= form_with(model: project, local: true) do |form| %>
+  <div>
+    <% if @project.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :title,'Enter your Project title'%>
+      <%= form.text_field :title, placeholder: "Project title..."%>
+    </div>
+
+    <div>
+      <%= form.label :start_date,'Enter the course start date'%>
+      <%= form.date_field :start_date%>
+    </div>
+
+    <div>
+      <%= check_box_tag(:sunday) %>
+      <%= label_tag(:sunday, "Sunday") %>
+      <%= check_box_tag(:monday) %>
+      <%= label_tag(:monday, "Monday") %>
+      <%= check_box_tag(:tuesday) %>
+      <%= label_tag(:tuesday, "Tuesday") %>
+      <%= check_box_tag(:wednesday) %>
+      <%= label_tag(:wednesday, "Wednesday") %>
+      <%= check_box_tag(:thursday) %>
+      <%= label_tag(:thursday, "Thursday") %>
+      <%= check_box_tag(:friday) %>
+      <%= label_tag(:friday, "Friday") %>
+      <%= check_box_tag(:saturday) %>
+      <%= label_tag(:saturday, "Saturday") %>
+    </div>
+
+    <div>
+      <%= form.submit 'Go!', class: 'actions'%>
+      <%= link_to 'Back', projects_path%>
+    </div>
+  </div>
+<% end %>
