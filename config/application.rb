@@ -16,4 +16,16 @@ module Summit
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
   end
+
+  ActionMailer::Base.smtp_settings = {
+
+          :address           	=> 'smtp.gmail.com',
+          :domain            	=> 'mail.google.com',
+          :port              	=> 587,
+          :user_name        	=> "summitmailerapp@gmail.com",
+          :password            	=> "jamiesmells",
+          :authentication 		=> 'login',
+          :enable_starttls_auto => true
+          
+      }
 end
