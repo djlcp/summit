@@ -1,0 +1,24 @@
+<%= form_for [question, answer] do |form| %>
+
+  <div>
+    <% if answer.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(answer.errors.count, "error") %> prohibited this answer from being saved:</h2>
+
+        <ul>
+        <% answer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.text_area :content, cols: "1", rows: "6"%>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Post!' %>
+    </div>
+  </div>
+<% end %>

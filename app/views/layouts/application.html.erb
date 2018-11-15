@@ -10,6 +10,12 @@
   </head>
 
   <body>
+    <header>
+      <%= link_to('Projects', root_path) %>
+      <%= link_to('New Project', new_project_path) %>
+      <%= link_to('Q&A', questions_path) %>
+      <%= link_to('Calendar', lessons_path) %>
+    </header>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,25 @@
+<%= form_for [question, answer, comment] do |form| %>
+
+
+  <div>
+    <% if comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(comment.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+        <ul>
+        <% comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.text_area :content, placeholder: "Put your comment here", cols: "1", rows: "6"%>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Post!' %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<%= render partial: 'question', question: @question %>
+<%= link_to('Edit', edit_question_path(@question)) %>
+<%= link_to('Delete', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}) %>
+<h4>Comments:</h4>
+<%= link_to('Add a comment', new_question_comment_path(@question)) %>
+<% @question.comments.each do |comment| %>
+	<%= render partial: 'questions/comments/comment', locals: {question: @question, comment: comment} %>
+	<hr>
+<% end %>
+<% if @question.answers.count >= 1 %>
+	<h3> Answers: </h3>
+<% end %> 
+<% @question.answers.each do |answer| %>
+	<%= render partial: 'answers/answer', locals: {answer: answer} %>
+	<hr>
+<% end %>
+<h3>Your Answer</h3>
+<%= render partial: 'answers/form', locals: { question: @question, answer: Answer.new } %>

@@ -1,0 +1,9 @@
+<main class="post-section flex column">
+
+  	<% @projects.each do |project| %>
+		<div>
+			<%= link_to(project.title, project)%>
+		</div>
+	<% end %>
+</main>
+
