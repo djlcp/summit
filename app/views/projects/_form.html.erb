@@ -1,3 +1,5 @@
+<%= @checked_weekdays %>
+
 <%= form_with(model: project, local: true) do |form| %>
   <div>
     <% if @project.errors.any? %>
@@ -25,9 +27,9 @@
     <div>
       <%= check_box_tag(:sunday) %>
       <%= label_tag(:sunday, "Sunday") %>
-      <%= check_box_tag(:monday) %>
+      <%= check_box_tag :monday, {}, checked: @checked_weekdays.include?(:monday) %>
       <%= label_tag(:monday, "Monday") %>
-      <%= check_box_tag(:tuesday) %>
+      <%= check_box_tag(:tuesday, {}, checked: @checked_weekdays.include?(:tuesday)) %>
       <%= label_tag(:tuesday, "Tuesday") %>
       <%= check_box_tag(:wednesday) %>
       <%= label_tag(:wednesday, "Wednesday") %>
