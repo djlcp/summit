@@ -1,5 +1,5 @@
 <h1><%= @project.title %></h1>
-<% @project.lessons.each do |lesson| %>
+<% @project.lessons.sort_by {|lesson| lesson.lesson_no}.each do |lesson| %>
 	<%= render partial: 'lesson', locals: {lesson: lesson} %>
 <% end %>
 <hr>
