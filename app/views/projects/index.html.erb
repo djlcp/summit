@@ -1,9 +1,37 @@
-<main class="post-section flex column">
+<main class="container bg-light">
 
   	<% @projects.each do |project| %>
-		<div>
-			<%= link_to(project.title, project)%>
-		</div>
+		<div class='pb-4 project_container mb-2 bg-white border rounded'>
+			<div class='pt-2 mt-3 pl-3'>
+				<h3><%= link_to(project.title, project, class: 'text-secondary')%></h3>
+			</div>
+			<p></p>
+			<div class="timeline_div mt-4 pt-3 pb-3">
+				<div class='timeline_line'>
+					<div class="dot timeline_item first_item"></div>
+					<% project.sections.each do |section| %>
+						<div class="timeline_item dot" style="left:<%= section.timeline_position %>%;">
+						</div>
+					<% end %>
+					</div>
+				</div>
+			</div>
+		<!-- </div> -->
+
+		<div class='bg-white pl-3 pt-3 pb-4 rounded border'>
+			<h3 class='text-secondary'>Next Steps:</h3>
+			<div class='pl-3'>
+				<h5 class='text-secondary'>Sample task for layout</h5>
+				<h5 class='text-secondary'>Sample task for layout</h5>
+			</div>
+			<hr class='mr-3'>
+
+				<h3 class='text-danger'>Overdue:</h3>
+				<div class='pl-3'>
+					<h5 class='text-danger'>Sample overdue task</h5>
+				</div>
+			</div>
 	<% end %>
+
 </main>
 

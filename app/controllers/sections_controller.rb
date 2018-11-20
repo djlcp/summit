@@ -12,6 +12,10 @@ class SectionsController < ApplicationController
 	def new
 		@section = Section.new
 		@section.project = @project
+  		respond_to do |format|
+    		format.html
+		    format.js
+		end
 	end
 
 	def create
