@@ -1,7 +1,7 @@
-<main class="container bg-light">
+<main class="content-container container pr-0 pl-0">
 
   	<% @projects.each do |project| %>
-		<div class='pb-4 project_container mb-2 bg-white border rounded'>
+		<div class='shadow-sm pb-4 project_container container mb-2 bg-white border rounded mx-auto'>
 			<div class='pt-2 mt-3 pl-3'>
 				<h3><%= link_to(project.title, project, class: 'text-secondary')%></h3>
 			</div>

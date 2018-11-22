@@ -12,9 +12,11 @@ class SectionsController < ApplicationController
 	def new
 		@section = Section.new
 		@section.project = @project
+
   		respond_to do |format|
-    		format.html
-		    format.js
+#   		format.html { render partial: 'sections/new'}
+		  #  format.html { @content = render_to_string(partial: 'sections/new')}
+		    format.js { render layout: false, partial: 'sections/new' }
 		end
 	end
 

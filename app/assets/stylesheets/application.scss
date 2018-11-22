@@ -3,3 +3,28 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
 @import 'timeline';
+
+.bg-navy {
+	background: #25476a;
+}
+
+.page-head {
+	height: 200px;
+	margin-bottom: -30px;
+}
+
+.content-container {
+	width: 90%;
+}
+
+.profile-nav {
+	height: 100vh;
+}
+
+.nav-break {
+	width: 90%
+}
+
+.nav-button {
+	width: 95%;
+}
