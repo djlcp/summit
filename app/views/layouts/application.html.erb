@@ -24,6 +24,16 @@
       <%= link_to('New Project', new_project_path) %>
       <%= link_to('Q&A', questions_path) %>
       <%= link_to('Calendar', lessons_path) %>
+    <% if current_user %>
+      <%=link_to 'sign out', destroy_user_session_path, method: :delete %>
+      <%=link_to 'Invite new user', new_user_invitation_path %>
+      <%=link_to 'edit profile', edit_user_registration_path %>
+
+    <% else %>
+      <%# sign up only required for testing as addition only usually through email invite%>
+      <%=link_to 'sign up', new_user_registration_path %>
+      <%=link_to 'sign in', new_user_session_path %>
+    <% end%>
     </header>
 
     <%= yield %>
