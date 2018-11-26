@@ -9,7 +9,10 @@ class ProjectsController < ApplicationController
 	end
 
 	def new
+		@checked_weekdays = []
 		@project = Project.new
+		@project.course_days = 0
+		set_course_days
 	end
 
 	def create
@@ -30,7 +33,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def edit
-		set_course_days_params
+		set_course_days
 	end
 
 	def destroy
@@ -42,24 +45,24 @@ class ProjectsController < ApplicationController
 
 	def mask_course_days
 		@project.course_days = 0
-		@project.course_days += 64 if params[:sunday] == '1'
-		@project.course_days += 32 if params[:monday] == '1'
-		@project.course_days += 16 if params[:tuesday] == '1'
-		@project.course_days += 8 if params[:wednesday] == '1'
-		@project.course_days += 4 if params[:thursday] == '1'
-		@project.course_days += 2 if params[:friday] == '1'
-		@project.course_days += 1 if params[:saturday] == '1'
+		@project.course_days += params[:sunday].to_i if params[:sunday]
+		@project.course_days += params[:monday].to_i if params[:monday]
+		@project.course_days += params[:tuesday].to_i if params[:tuesday]
+		@project.course_days += params[:wednesday].to_i if params[:wednesday]
+		@project.course_days += params[:thursday].to_i if params[:thursday]
+		@project.course_days += params[:friday].to_i if params[:friday]
+		@project.course_days += params[:saturday].to_i if params[:saturday]
 	end
 
-	def set_course_days_params
+	def set_course_days
 		@checked_weekdays = []		
-		@checked_weekdays << :sunday if @project.course_days & 64
-		@checked_weekdays << :monday if @project.course_days & 32
-		@checked_weekdays << :tuesday if @project.course_days & 16
-		@checked_weekdays << :wednesday if @project.course_days & 8
-		@checked_weekdays << :thursday if @project.course_days & 4
-		@checked_weekdays << :friday if @project.course_days & 2
-		@checked_weekdays << :saturday if @project.course_days & 1
+		@checked_weekdays << :sunday if @project.course_days & 64 > 0
+		@checked_weekdays << :monday if @project.course_days & 32 > 0
+		@checked_weekdays << :tuesday if @project.course_days & 16 > 0
+		@checked_weekdays << :wednesday if @project.course_days & 8 > 0
+		@checked_weekdays << :thursday if @project.course_days & 4 > 0
+		@checked_weekdays << :friday if @project.course_days & 2 > 0
+		@checked_weekdays << :saturday if @project.course_days & 1 > 0
 	end
 
 	def set_project

@@ -1,7 +1,11 @@
-<h1><%= @project.title %></h1>
-<% @project.lessons.each do |lesson| %>
-	<%= render partial: 'lesson', locals: {lesson: lesson} %>
-<% end %>
-<hr>
-<h3>Create a Lesson</h3>
-<%= render partial: 'form_create', locals: {project: @project, lesson: Lesson.new} %>
+<div class='container bg-white border rounded'>
+
+	<h1><%= @project.title %></h1>
+	<% @project.lessons.sort_by {|lesson| lesson.lesson_no}.each do |lesson| %>
+		<%= render partial: 'lesson', locals: {lesson: lesson} %>
+	<% end %>
+	<hr>
+	<h3>Create a Lesson</h3>
+	<%= render partial: 'form_create', locals: {project: @project, lesson: Lesson.new} %>
+
+</div>
