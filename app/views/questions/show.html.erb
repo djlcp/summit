@@ -1,4 +1,4 @@
-<div class="container bg-white border rounded">	
+<div class="container bg-white border rounded content-container">	
 	<%= render partial: 'question', question: @question %>
 	<%= link_to('Edit', edit_question_path(@question)) %>
 	<%= link_to('Delete', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}) %>

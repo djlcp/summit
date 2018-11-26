@@ -1,7 +1,7 @@
-<main class='container bg-white border rounded'>
+<main class='container bg-white border rounded content-container'>
 	<section class="row">
 		<div class='col'>
-			<h1 class='mt-4'><%=@project.title%></h1>
+			<h1 class='mt-4 text-navy'><%=@project.title%></h1>
 			<%= link_to('Edit', edit_project_path(@project)) %>
 			<%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
 
@@ -20,9 +20,9 @@
 											<button class="btn btn-link" type='button' data-toggle='collapse' data-target='#collapse_<%=section.id.to_s%>' aria-expanded='true' aria-controls='collapse_<%=section.id.to_s%>'>
 												<%= section.title %> 										
 											</button>
-											<div class="section-links d-flex">
+											<div class="section-links d-flex justify-content-between">
 												<%= link_to('View', project_section_path(@project, section), class: 'btn btn-primary mr-2') %>
-												<%= link_to('Edit', edit_project_section_path(@project, section), class: 'btn btn-primary mr-2') %>
+												<%= link_to('Edit', edit_project_section_path(@project, section), class: 'btn btn-light border rounded mr-2') %>
 												<%= link_to('Delete', project_section_path(@project, section), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-primary mr-2 btn-light') %>
 											</div>
 										</h5>
