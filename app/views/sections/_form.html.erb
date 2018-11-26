@@ -28,8 +28,13 @@
     </div>
 
     <div>
-      <%= form.submit 'Go!', class: 'actions'%>
-      <%= link_to 'Back', projects_path%>
+      
+      
     </div>
+
+    <div class="modal-footer">
+      <%= form.submit 'Save', class: 'actions btn btn-primary'%>
+      <%= link_to 'Back', project_path(@project), class: 'actions btn btn-light'%>
+    </div>  
   </div>
 <% end %>

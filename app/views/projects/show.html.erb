@@ -16,24 +16,38 @@
 								<div class="card-header" id='header_<%=section.id.to_s%>'>
 									<div class="timeline_vitem dot">
 									</div>
-										<h5 class='mb-0'>
+										<h5 class='mb-0 d-flex justify-content-between'>
 											<button class="btn btn-link" type='button' data-toggle='collapse' data-target='#collapse_<%=section.id.to_s%>' aria-expanded='true' aria-controls='collapse_<%=section.id.to_s%>'>
 												<%= section.title %> 										
 											</button>
-											
+											<div class="section-links d-flex">
+												<%= link_to('View', project_section_path(@project, section), class: 'btn btn-primary mr-2') %>
+												<%= link_to('Edit', edit_project_section_path(@project, section), class: 'btn btn-primary mr-2') %>
+												<%= link_to('Delete', project_section_path(@project, section), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-primary mr-2 btn-light') %>
+											</div>
 										</h5>
 
 								
 								</div>
 								<div class="collapse" id='collapse_<%=section.id.to_s%>' aria-labelledby='header_<%=section.id.to_s%>' data-parent='#sectionAccordion'>
 									<div class="card-body">
-										<%= link_to('View', project_section_path(@project, section)) %>
-										<%= link_to('Edit', edit_project_section_path(@project, section)) %>
-										<%= link_to('Delete', project_section_path(@project, section), method: :delete, data: {confirm: 'Are you sure?'}) %>
 										<div class="d-flex justify-content-end">
-											<%= section.tasks.each do |task| %>
+											<% section.tasks.each do |task| %>
 												<%= task.title %>
 											<% end %>
+												<%= link_to 'Create a new task.', new_project_section_task_path(@project, section, Task.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window-new-task', class: 'btn btn-primary btn'}  %>
+												<div id="modal-window-new-task" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												  <div class="modal-dialog" role="document">
+													    <div id="modal-content" class="modal-content">
+															<div class="modal-header">
+															  <h4 class="modal-title" id="myModalLabel">Create a new task.</h4>
+															  <button type="button" class="close" data-dismiss="modal">x</button>
+															</div>
+															<div class="modal-body">
+															</div>
+													    </div>
+												  </div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -50,28 +64,18 @@
 		
 	</section>
 
-	<p> <%= render partial: 'sections/form', locals: { project: @project, section: Section.new }%> </p>
-<a data-toggle="modal" data-target="#modal-window" class="btn btn-primary">OI</a>
-
-	<%= link_to 'Create a new section.', new_project_section_path(@project, Section.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn-lg'}  %>
-	<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<%= link_to 'Create a new section.', new_project_section_path(@project, Section.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window-new-section', class: 'btn btn-primary btn'}  %>
+	<div id="modal-window-new-section" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 			    <div id="modal-content" class="modal-content">
-<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal">x</button>
-  <h4 class="modal-title" id="myModalLabel">Create a new section for the project.</h4>
-</div>
-<div class="modal-body">
-</div>
-<div class="modal-footer">
-  <button class="btn btn-primary">Save</button>
-</div>				    	
+					<div class="modal-header">
+					  <h4 class="modal-title" id="myModalLabel">Create a new section for the project.</h4>
+					  <button type="button" class="close" data-dismiss="modal">x</button>
+					</div>
+					<div class="modal-body">
+					</div>
 			    </div>
 		  </div>
 	</div>
 
 </main>
-
-<aside class='col-sm-3 container'>
-	<%= render partial: 'calendar' %>
-</aside>

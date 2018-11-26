@@ -1,37 +1,21 @@
-<h1>Lessons Calendar</h1>
+<main class='container pl-0 pr-0 ml-0 mr-0 d-flex justify-content-around'>
 
+	<div class='shadow-sm pb-4 project_container container mb-2 bg-white border rounded pt-4 col-6'>
+		<%= render partial: 'calendar', locals: {project: Project.first} %>
+	</div>
 
-<% start_date = params.fetch(:start_date, Date.today).to_date %>
-<% date_range = (start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
-
-<%= link_to(raw("&laquo;"), start_date: date_range.first - 1.day) %>
-<span>
-	<%= I18n.t("date.month_names")[start_date.month] %> 
-	<%= start_date.year %>
-</span>
-<%= link_to(raw("&raquo;"), start_date: date_range.last + 1.day) %>
-
-
-<table>
-	<thead>
-		<tr>
-			<th>Sunday</th>
-			<th>Monday</th>
-			<th>Tuesday</th>
-			<th>Wednesday</th>
-			<th>Thursday</th>
-			<th>Friday</th>
-			<th>Saturday</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% date_range.each_slice(7) do |week| %>
-			<tr>
-				<% week.each do |day| %>
-					<td><%= day.day %></td>
-				<% end %>
-			</tr>
+	<div class='shadow-sm pb-4 container project_container mb-2 bg-white border rounded col-4'>
+		<h3>Upcoming Sessions</h3>
+		<% lessons_array = Project.first.assign_lesson_dates.keep_if{ |lesson| lesson[0] > Date.today}%>
+		<% lessons_array[1..4].each do |lesson| %>
+		<hr>
+			<div class="lesson-container d-flex justify-content-between">
+				<h6><%= lesson[1].title %> </h6>
+				<span><%= lesson[0] %></span>
+			</div>
 		<% end %>
-	</tbody>
-</table>
 
+	</div>
+
+
+</main>

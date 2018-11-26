@@ -1,7 +1,9 @@
-<% @questions.each do |question| %>
-	<%= link_to(question_path(question)) do %> 
-		<h2><%= question.title %></h2>
+<div class="container bg-white border rounded"> 
+		<% @questions.each do |question| %>
+		<%= link_to(question_path(question)) do %> 
+			<h2><%= question.title %></h2>
+		<% end %>
 	<% end %>
-<% end %>
 
-<%= link_to('Ask a question', new_question_path) %>
+	<%= link_to('Ask a question', new_question_path) %>
+</div>

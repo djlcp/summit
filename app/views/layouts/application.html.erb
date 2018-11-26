@@ -16,7 +16,7 @@
 
   <body class='bg-light'>
     <header>
-      <nav class="navbar navbar-expand navbar-dark sticky-top bg-navy pt-3 pb-3 d-flex">
+      <nav class="navbar navbar-expand navbar-dark sticky-top pt-3 pb-3 d-flex bg-banner">
         <div class='navbar-links d-flex flex-grow-1'>
           <div class="nav-links d-flex flex-row flex-grow-1 align-items-center">
             <h4 class='mr-auto text-white'>Summit Logo</h4>
@@ -46,7 +46,7 @@
             <%= link_to('Projects', root_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-secondary nav-button bg-navy') %>
             <%= link_to('New Project', new_project_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button') %>
             <%= link_to('Q&A', questions_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button') %>
-            <div class='btn-group'>
+            <div class='btn-group dropright'>
               <%= link_to('Calendar', lessons_path, class: 'navbar-nav ml-1 mb-1 btn btn-light nav-button') %>
               <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split mr-1 mb-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="sr-only">Toggle Dropdown</span>
@@ -56,10 +56,11 @@
               </div>
             </div>
           </nav>
+          <hr class='nav-break mt-2 ml-1 mr-1'>
         </div>
 
         <div class='col-10 pl-0'>
-          <div class="page-head d-flex flex-column align-items-center bg-navy pt-5 pb-5">
+          <div class="page-head d-flex flex-column align-items-center bg-banner pt-5 pb-5">
             <h3 class='text-white'>Page Header</h3>
             <h6 class='text-white'>Page info</h6>
           </div>

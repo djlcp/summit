@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def new
+		@checked_weekdays = []
 		@project = Project.new
 	end
 
