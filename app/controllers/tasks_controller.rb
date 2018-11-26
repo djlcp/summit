@@ -13,6 +13,10 @@ class TasksController < ApplicationController
 	def new
 		@task = Task.new
 		@task.section = @section
+
+  		respond_to do |format|
+		    format.js { render layout: false, partial: 'tasks/new' }
+		end
 	end
 
 	def create

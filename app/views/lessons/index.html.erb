@@ -8,13 +8,13 @@
 		<h3>Upcoming Sessions</h3>
 		<% lessons_array = Project.first&.assign_lesson_dates&.keep_if{ |lesson| lesson[0] > Date.today} %>
 		<% unless lessons_array.nil? %>
-			<% lessons_array[1..4].each do |lesson| %>
-		<% end %>
-		<hr>
-			<div class="lesson-container d-flex justify-content-between">
-				<h6><%= lesson[1].title %> </h6>
-				<span><%= lesson[0] %></span>
-			</div>
+			<% lessons_array[1..4]&.each do |lesson| %>
+			<hr>
+				<div class="lesson-container d-flex justify-content-between">
+					<h6><%= lesson[1].title %> </h6>
+					<span><%= lesson[0] %></span>
+				</div>
+			<% end %>
 		<% end %>
 
 	</div>
