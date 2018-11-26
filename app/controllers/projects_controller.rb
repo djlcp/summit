@@ -43,13 +43,13 @@ class ProjectsController < ApplicationController
 
 	def mask_course_days
 		@project.course_days = 0
-		@project.course_days += 64 if params[:sunday] == '1'
-		@project.course_days += 32 if params[:monday] == '1'
-		@project.course_days += 16 if params[:tuesday] == '1'
-		@project.course_days += 8 if params[:wednesday] == '1'
-		@project.course_days += 4 if params[:thursday] == '1'
-		@project.course_days += 2 if params[:friday] == '1'
-		@project.course_days += 1 if params[:saturday] == '1'
+		@project.course_days += 64 if params[:sunday] == 64
+		@project.course_days += 32 if params[:monday] == 32
+		@project.course_days += 16 if params[:tuesday] == 16
+		@project.course_days += 8 if params[:wednesday] == 8
+		@project.course_days += 4 if params[:thursday] == 4
+		@project.course_days += 2 if params[:friday] == 2
+		@project.course_days += 1 if params[:saturday] == 1
 	end
 
 	def set_course_days_params

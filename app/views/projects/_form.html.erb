@@ -25,19 +25,20 @@
     </div>
 
     <div>
-      <%= check_box_tag(:sunday) %>
+      <%= @project.course_days %>
+      <%= check_box_tag(:sunday, 64, @checked_weekdays.include?(:sunday)) %>
       <%= label_tag(:sunday, "Sunday") %>
-      <%= check_box_tag :monday, {}, checked: @checked_weekdays.include?(:monday) %>
+      <%= check_box_tag(:monday, 32, @checked_weekdays.include?(:monday)) %>
       <%= label_tag(:monday, "Monday") %>
-      <%= check_box_tag(:tuesday, {}, checked: @checked_weekdays.include?(:tuesday)) %>
+      <%= check_box_tag(:tuesday, 16, @checked_weekdays.include?(:tuesday)) %>
       <%= label_tag(:tuesday, "Tuesday") %>
-      <%= check_box_tag(:wednesday) %>
+      <%= check_box_tag(:wednesday, 8, @checked_weekdays.include?(:wednesday)) %>
       <%= label_tag(:wednesday, "Wednesday") %>
-      <%= check_box_tag(:thursday) %>
+      <%= check_box_tag(:thursday, 4, @checked_weekdays.include?(:thursday)) %>
       <%= label_tag(:thursday, "Thursday") %>
-      <%= check_box_tag(:friday) %>
+      <%= check_box_tag(:friday, 2, @checked_weekdays.include?(:friday)) %>
       <%= label_tag(:friday, "Friday") %>
-      <%= check_box_tag(:saturday) %>
+      <%= check_box_tag(:saturday, 1, @checked_weekdays.include?(:saturday)) %>
       <%= label_tag(:saturday, "Saturday") %>
     </div>
 
