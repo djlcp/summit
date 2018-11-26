@@ -6,8 +6,10 @@
 
 	<div class='shadow-sm pb-4 container project_container mb-2 bg-white border rounded col-4'>
 		<h3>Upcoming Sessions</h3>
-		<% lessons_array = Project.first.assign_lesson_dates.keep_if{ |lesson| lesson[0] > Date.today}%>
-		<% lessons_array[1..4].each do |lesson| %>
+		<% lessons_array = Project.first&.assign_lesson_dates&.keep_if{ |lesson| lesson[0] > Date.today} %>
+		<% unless lessons_array.nil? %>
+			<% lessons_array[1..4].each do |lesson| %>
+		<% end %>
 		<hr>
 			<div class="lesson-container d-flex justify-content-between">
 				<h6><%= lesson[1].title %> </h6>
