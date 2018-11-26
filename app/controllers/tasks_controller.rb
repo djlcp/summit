@@ -8,6 +8,9 @@ class TasksController < ApplicationController
 	end
 
 	def show
+		respond_to do |format|
+			format.js { render layout: false, partial: 'tasks/show' }
+		end
 	end
 
 	def new
@@ -23,7 +26,7 @@ class TasksController < ApplicationController
 		@task = Task.new(task_params)
 		@task.section = @section
 		@task.save
-		redirect_to project_section_path(@project, @section)
+		redirect_to project_path(@project)
 	end
 
 	def update
