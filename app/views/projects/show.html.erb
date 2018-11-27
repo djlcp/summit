@@ -1,30 +1,79 @@
-<main>
-	<h1><%=@project.title%></h1>
-	<%= link_to('Edit', edit_project_path(@project)) %>
-	<%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
-	<h2>Start date <%= @project.start_date %>. Completion date <%=@project.completion_date%></h2>
+<main class='container bg-white border rounded content-container shadow-sm'>
+	<section class="row">
+		<div class='col'>
+			<h1 class='mt-4 text-navy'><%=@project.title%></h1>
+			<%= link_to('Edit', edit_project_path(@project)) %>
+			<%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
 
-	<div class="timeline_div">
-		<div class='timeline_line'>
-			<div class="dot timeline_item first_item"></div>
-			<% @project.sections.each do |section| %>
-				<div class="timeline_item dot" style="left:<%= section.timeline_position %>%;">
+			<div class='sections row mt-3'>
+				<div class='h-timeline'>
+					<div class='timeline_tall ml-4'></div>
 				</div>
-			<% end %>
+				<div class='col-11'>
+					<div class='accordion' id='sectionAccordion'>
+						<% @project.sections.each do |section| %>
+							<div class="card">
+								<div class="card-header" id='header_<%=section.id.to_s%>'>
+									<div class="timeline_vitem dot">
+									</div>
+										<h5 class='mb-0 d-flex justify-content-between'>
+											<button class="btn btn-link" type='button' data-toggle='collapse' data-target='#collapse_<%=section.id.to_s%>' aria-expanded='true' aria-controls='collapse_<%=section.id.to_s%>'>
+												<%= section.title %> 										
+											</button>
+											<div class="section-links d-flex justify-content-between">
+												<%= link_to'View', project_section_path(@project, section), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary mr-2'} %>
+												<%= link_to('Edit', edit_project_section_path(@project, section), class: 'btn btn-light border rounded mr-2') %>
+												<%= link_to('Delete', project_section_path(@project, section), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-delete mr-2 btn-light') %>
+											</div>
+										</h5>
+
+								
+								</div>
+								<div class="collapse" id='collapse_<%=section.id.to_s%>' aria-labelledby='header_<%=section.id.to_s%>' data-parent='#sectionAccordion'>
+									<div class="card-body">
+										<div class="d-flex justify-content-between container">
+											<% section.tasks.each do |task| %>
+												<div>
+													<%= link_to(project_section_task_path(@project, section, task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) do%>
+														<%= task.title %>
+													<% end %>
+												</div>
+											<% end %>
+											<div>
+												<%= link_to 'Create a new task.', new_project_section_task_path(@project, section, Task.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>	
+						<% end %> 
+						<div class="final_item mt-2">
+							<div class='timeline_vitem dot last_item'></div><h6>End of course. Completion Date <%=@project.completion_date%></h6>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
+		
+	</section>
+
+	<%= link_to 'Create a new section.', new_project_section_path(@project, Section.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
+
+	
+	<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+			    <div id="modal-content" class="modal-content">
+					<div class="modal-header contrast-border border-bottom-0 rounded-top">
+					  <h4 class="modal-title" id="myModalLabel"></h4>
+					  <button type="button" class="close" data-dismiss="modal">x</button>
+					</div>
+					<div class="modal-body bg-lgrey border-0 rounded-bottom p-0">
+					</div>
+			    </div>
+		  </div>
 	</div>
-	<h3>
-		<% @project.sections.each do |section| %>
-			<%= render partial: "sections/section", locals: { section: section } %> 
-			<%= link_to('View', project_section_path(@project, section)) %>
-			<%= link_to('Edit', edit_project_section_path(@project, section)) %>
-			<%= link_to('Delete', project_section_path(@project, section), method: :delete, data: {confirm: 'Are you sure?'}) %>
-		<% end %> 
-	</h3>
 
-	<p> <%= render partial: 'sections/form', locals: { project: @project, section: Section.new }%> </p>
+	<%= link_to('Add a lesson to the course?', new_project_lesson_path(@project), class: 'btn btn-primary') %>
+
 </main>
-
-<aside>
-	<%= render partial: 'calendar' %>
-</aside>

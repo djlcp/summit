@@ -7,11 +7,19 @@ class SectionsController < ApplicationController
 	end
 
 	def show
+		respond_to do |format|
+			format.html 
+			format.js { render layout: false, partial: 'sections/show'}
+		end
 	end
 
 	def new
 		@section = Section.new
 		@section.project = @project
+
+  		respond_to do |format|
+		    format.js { render layout: false, partial: 'sections/new' }
+		end
 	end
 
 	def create
