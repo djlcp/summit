@@ -8,6 +8,7 @@ class SectionsController < ApplicationController
 
 	def show
 		respond_to do |format|
+			format.html 
 			format.js { render layout: false, partial: 'sections/show'}
 		end
 	end

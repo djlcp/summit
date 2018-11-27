@@ -21,6 +21,10 @@
 	background-color: hsl(0,0%,96%)
 }
 
+.bg-grey {
+	background: #d9d9d9;
+}
+
 .page-head {
 	height: 200px;
 	margin-bottom: -30px;
@@ -74,4 +78,19 @@
 }
 .in-page-search-field {
 	border-radius: 50px 0px 0px 50px;
+}
+
+.contrast-border {
+	border-top: 8px solid #6fdcdc;
+}
+
+.btn-delete {
+	color: hsl(0, 91%, 38%);
+	background: hsl(0, 50%, 95%);
+}
+
+.btn-delete:hover {
+	color: hsl(0, 91%, 38%);
+	background: hsl(0, 50%, 95%);
+	border-color: hsl(0, 91%, 38%);
 }

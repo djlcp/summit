@@ -1,2 +1,10 @@
-<h3> <%= section.title %> </h3>
-<h5> <%="starts #{section.start_date}. Deadline: #{section.deadline}"%> </h5>
+<div class='p-4'>
+	<h5> <%="starts #{section.start_date}. Deadline: #{section.deadline}"%> </h5>
+	<hr class='mt-2'>
+	<div class="d-flex flex-column">
+	<% section.tasks.each do |task| %>
+		<h6><%= task.title %></h6>
+	<% end %>
+	</div>
+</div>
+
