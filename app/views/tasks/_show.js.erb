@@ -1,2 +1,2 @@
-$('#modal-content .modal-body').html("<%= j render partial: 'task', locals: {project: @project, section: @section, task: @task} %>");
+$('#modal-content .modal-body').html("<%= j render partial: 'task', locals: { task: @task } %>");
 $('#modal-window').modal();

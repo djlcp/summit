@@ -10,7 +10,7 @@
 				<div class='timeline_line bg-grey'>
 					<div class="dot timeline_item first_item shadow-sm"></div>
 					<% project.sections.each do |section| %>
-						<%= link_to '', project_section_path(project, section), { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class: "timeline_item dot shadow-sm", style: "left: #{section.timeline_position}%;" } %>
+						<%= link_to '', section_path(section), { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class: "timeline_item dot shadow-sm", style: "left: #{section.timeline_position}%;" } %>
 					<% end %>
 				</div>
 			</div>

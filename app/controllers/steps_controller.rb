@@ -1,7 +1,5 @@
 class StepsController < ApplicationController
-	before_action :set_task
-	before_action :set_section
-	before_action :set_project
+	before_action :set_task, only: [:new, :create]
 	before_action :set_step, only: [:show, :edit, :destroy, :update]
 
 	def show
@@ -16,12 +14,12 @@ class StepsController < ApplicationController
 		@step = Step.new(step_params)
 		@step.task = @task
 		@step.save
-		redirect_to project_section_task_path(@project, @section, @task)
+		redirect_to task_path(@task)
 	end
 
 	def update
 		if @step.update(step_params)
-	         redirect_to project_section_task_path(@project, @section, @task)
+	         redirect_to task_path(@task)
 	       else
 	         format.html { render :edit, notice: 'section not saved.' }
  	  end
@@ -32,18 +30,10 @@ class StepsController < ApplicationController
 
 	def destroy
 		@step.destroy
-		redirect_to project_section_task_path(@project, @section, @task)
+		redirect_to task_path(@task)
 	end
 
 	private
-
-	def set_section
-		@section = @task.section
-	end
-
-	def set_project
-		@project = @section.project 
-	end
 
 	def set_task
 		@task = Task.find(params[:task_id])
@@ -51,6 +41,9 @@ class StepsController < ApplicationController
 
 	def set_step
 		@step = Step.find(params[:id])
+		@task = @step.task
+		@section = @task.section
+		@project = @section.project
 	end
 
 	def step_params

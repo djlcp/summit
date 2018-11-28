@@ -1,5 +1,5 @@
 class SectionsController < ApplicationController
-	before_action :set_project
+	before_action :set_project, only: [:new, :create]
 	before_action :set_section, only: [:show, :edit, :update, :destroy]
 
 	def index
@@ -24,14 +24,14 @@ class SectionsController < ApplicationController
 
 	def create
 		@section = Section.new(section_params)
-		@section.project_id = @project.id
+		@section.project = @project
 		@section.save
 		redirect_to @project
 	end
 
 	def update
 		if @section.update(section_params)
-          redirect_to project_section_path(@project, @section)
+          redirect_to section_path(@section)
         else
           format.html { render :edit, notice: 'section not saved.' }
         end
@@ -53,6 +53,7 @@ class SectionsController < ApplicationController
 
 	def set_section
 		@section = Section.find(params[:id])
+		@project = @section.project
 	end
 
 	def section_params

@@ -1,6 +1,5 @@
 class TasksController < ApplicationController
-	before_action :set_section
-	before_action :set_project
+	before_action :set_section, only: [:new, :create]
 	before_action :set_task, only: [:show, :edit, :destroy, :update]
 
 	def index
@@ -9,14 +8,13 @@ class TasksController < ApplicationController
 
 	def show
 		respond_to do |format|
+			format.html
 			format.js { render layout: false, partial: 'tasks/show' }
 		end
 	end
 
 	def new
 		@task = Task.new
-		@task.section = @section
-
   		respond_to do |format|
 		    format.js { render layout: false, partial: 'tasks/new' }
 		end
@@ -31,10 +29,10 @@ class TasksController < ApplicationController
 
 	def update
 		if @task.update(task_params)
-	         redirect_to project_section_path(@project, @section)
+	         redirect_to section_path(@section)
 	       else
 	         format.html { render :edit, notice: 'section not saved.' }
- 	  end
+ 	  	end
 	end
 
 	def edit
@@ -42,7 +40,7 @@ class TasksController < ApplicationController
 
 	def destroy
 		@task.destroy
-		redirect_to project_section_path(@project, @section)
+		redirect_to section_path(@section)
 	end
 
 	private
@@ -57,6 +55,8 @@ class TasksController < ApplicationController
 
 	def set_task
 		@task = Task.find(params[:id])
+		@section = @task.section
+		@project = @section.project
 	end
 
 	def task_params

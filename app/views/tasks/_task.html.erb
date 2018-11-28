@@ -1,8 +1,8 @@
 <h4> <%= task.title %> </h4> 
 <h5> <%= task.deadline %> </h5>
 <p> <%= task.description %> </p>
-<%= link_to('View', project_section_task_path(@project, @section, task)) %>
-<%= link_to('Edit', edit_project_section_task_path(@project, @section, task)) %>
-<%= link_to('Delete', project_section_task_path(@project, @section, task), method: :delete, data: {Confirm: 'Are you sure?'}) %>
+<%= link_to('View', task_path(task)) %>
+<%= link_to('Edit', edit_task_path(task)) %>
+<%= link_to('Delete', task_path(task), method: :delete, data: {Confirm: 'Are you sure?'}) %>
 <p>Add a step</p>
-<%= render partial: 'steps/form', locals: { project: @project, section: @section, task: task, step: Step.new }%>
+<%= render partial: 'steps/form', locals: { task: task, step: Step.new }%>
