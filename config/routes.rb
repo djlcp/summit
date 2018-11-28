@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
 	resources :projects do
     resources :lessons, only: [:new, :create, :index]
+    resources :users_projects
 		resources :sections do
 			resources :tasks do
 				resources :steps 

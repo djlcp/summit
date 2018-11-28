@@ -59,7 +59,9 @@
 	</section>
 
 	<%= link_to 'Create a new section.', new_project_section_path(@project, Section.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
+	<%= link_to('Add a lesson to the course?', new_project_lesson_path(@project), class: 'btn btn-primary') %>
 
+	<%= link_to('Add a user to this project?', new_project_users_project_path(@project), class: 'btn btn-primary') %>
 	
 	<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
@@ -73,7 +75,4 @@
 			    </div>
 		  </div>
 	</div>
-
-	<%= link_to('Add a lesson to the course?', new_project_lesson_path(@project), class: 'btn btn-primary') %>
-
 </main>
