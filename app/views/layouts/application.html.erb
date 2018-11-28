@@ -15,26 +15,36 @@
   </head>
 
   <body class='bg-light'>
-    <header>
-      <nav class="navbar navbar-expand navbar-dark sticky-top pt-3 pb-3 d-flex bg-banner">
+    <header class='page-head bg-topograph contrast-border'>
+      <nav class="navbar navbar-expand navbar-dark pt-3 pb-3 d-flex">
         <div class='navbar-links d-flex flex-grow-1'>
           <div class="nav-links d-flex flex-row flex-grow-1 align-items-center">
-            <h4 class='mr-auto text-white'>Summit Logo</h4>
+            <h4 class='mr-auto ml-5 text-white'>Summit Logo</h4>
             <p class='flex-grow-1 text-white'> </p>
             <%= link_to('Projects', root_path, class: 'navbar-nav text-white ml-2 mr-2') %>
             <%= link_to('New Project', new_project_path, class: 'navbar-nav text-white ml-2 mr-2') %>
             <%= link_to('Q&A', questions_path, class: 'navbar-nav text-white ml-2 mr-2') %>
             <%= link_to('Calendar', lessons_path, class: 'navbar-nav text-white ml-2 mr-2') %>
+            <% if current_user %>
+              <%=link_to 'sign out', destroy_user_session_path, class: 'navbar-nav text-white ml-2 mr-2', method: :delete %>
+              <%=link_to 'Invite new user', new_user_invitation_path, class: 'navbar-nav text-white ml-2 mr-2' %>
+              <%=link_to 'edit profile', edit_user_registration_path, class: 'navbar-nav text-white ml-2 mr-2' %>
+            <% else %>
+              <%# sign up only required for testing as addition only usually through email invite%>
+              <%=link_to 'sign up', new_user_registration_path, class: 'navbar-nav text-white ml-2 mr-2' %>
+              <%=link_to 'sign in', new_user_session_path, class: 'navbar-nav text-white ml-2 mr-2' %>
+          <% end%>
           </div>
         </div>
       </nav>
 
     </header>
 
+
     <div class="body-content">
 
-      <div class='d-flex width-100'>
-        <div class='profile-nav bg-white col-2 ml-0 pr-0 pl-0 d-flex align-items-center flex-column'>
+      <div class='d-flex'>
+        <div class='profile-nav bg-white col-2 ml-5 pr-0 pl-0 d-flex align-items-center sticky flex-column border rounded shadow-sm'>
           <div class="profile d-flex flex-column align-items-center">
             <img src="https://picsum.photos/100" class='rounded-circle mt-4'>
             <h6 class='mt-2'>User Name</h6>
@@ -59,8 +69,8 @@
           <hr class='nav-break mt-2 ml-1 mr-1'>
         </div>
 
-        <div class='col-10 pl-0 pr-0'>
-          <div class="page-head d-flex flex-column align-items-center bg-banner pt-5 pb-5">
+        <div class='width-100 pl-0 pr-0'>
+          <div class="d-flex flex-column align-items-center pt-5 pb-5">
             <h3 class='text-white'>Page Header</h3>
             <h6 class='text-white'>Page info</h6>
           </div>
@@ -68,9 +78,5 @@
         </div>
       </div>
     </div>
-
-
-    
-
   </body>
 </html>

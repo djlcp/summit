@@ -1,24 +1,22 @@
-<main class="content-container container pr-0 pl-0">
+<main class="container pr-0 pl-0 ml-5 mr-4 content-container">
 
   	<% @projects.each do |project| %>
-		<div class='shadow-sm pb-4 project_container container mb-2 bg-white border rounded mx-auto'>
+		<div class='shadow-sm pb-4 project_container container mb-5 bg-white border rounded mx-auto'>
 			<div class='pt-2 mt-3 pl-3'>
-				<h3><%= link_to(project.title, project, class: 'text-secondary')%></h3>
+				<h3><%= link_to(project.title, project, class: 'text-navy')%></h3>
 			</div>
 			<p></p>
 			<div class="timeline_div mt-4 pt-3 pb-3">
-				<div class='timeline_line'>
-					<div class="dot timeline_item first_item"></div>
+				<div class='timeline_line bg-grey'>
+					<div class="dot timeline_item first_item shadow-sm"></div>
 					<% project.sections.each do |section| %>
-						<div class="timeline_item dot" style="left:<%= section.timeline_position %>%;">
-						</div>
+						<%= link_to '', project_section_path(project, section), { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class: "timeline_item dot shadow-sm", style: "left: #{section.timeline_position}%;" } %>
 					<% end %>
-					</div>
 				</div>
 			</div>
-		<!-- </div> -->
+		</div>
 
-		<div class='bg-white pl-3 pt-3 pb-4 rounded border'>
+		<div class='bg-white pl-3 pt-3 pb-4 container rounded border shadow-sm'>
 			<h3 class='text-secondary'>Next Steps:</h3>
 			<div class='pl-3'>
 				<h5 class='text-secondary'>Sample task for layout</h5>
@@ -35,3 +33,15 @@
 
 </main>
 
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+		    <div id="modal-content" class="modal-content">
+				<div class="modal-header contrast-border border-bottom-0 rounded-top">
+				  <h4 class="modal-title" id="myModalLabel"></h4>
+				  <button type="button" class="close" data-dismiss="modal">x</button>
+				</div>
+				<div class="modal-body bg-lgrey border-0 rounded-bottom p-0">
+				</div>
+		    </div>
+	  </div>
+</div>

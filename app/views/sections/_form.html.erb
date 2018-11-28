@@ -1,5 +1,5 @@
 <%= form_for([project, section]) do |form| %>
-  <div>
+  <div class='p-4'>
     <% if section.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -26,15 +26,10 @@
       <%= form.label :duration, 'Enter the duration of the section'%>
       <%= form.text_field :duration %>
     </div>
-
-    <div>
-      
-      
-    </div>
-
-    <div class="modal-footer">
-      <%= form.submit 'Save', class: 'actions btn btn-primary'%>
-      <%= link_to 'Back', project_path(@project), class: 'actions btn btn-light'%>
-    </div>  
   </div>
+  <div class="modal-footer bg-white border-0 rounded-bottom m-0">
+    <%= form.submit 'Save', class: 'actions btn btn-primary'%>
+    <%= link_to 'Back', project_path(@project), class: 'actions btn btn-light'%>
+  </div>  
+
 <% end %>

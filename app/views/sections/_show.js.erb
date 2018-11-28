@@ -1,0 +1,3 @@
+$('#modal-content .modal-header .modal-title').html( "<%= @section.title %>" )
+$('#modal-content .modal-body').html("<%= j render partial: 'section', locals: {project: @project, section: @section} %>");
+$('#modal-window').modal();
