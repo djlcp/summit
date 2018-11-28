@@ -11,6 +11,7 @@ module Answers
 		def create
 			@comment = Comment.new(comment_params)
 			@comment.post = @answer
+			@comment.user = current_user
 			@comment.save
 			redirect_to question_path(@question)
 		end

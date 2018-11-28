@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
 	has_many :sections, dependent: :destroy 
 	has_many :lessons, dependent: :destroy
-	has_many :users_projects
+	has_many :users_projects, dependent: :destroy
 	has_many :users, :through => :users_projects
 
 	def completion_date

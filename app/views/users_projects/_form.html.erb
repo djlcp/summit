@@ -12,8 +12,6 @@
       </div>
     <% end %>
 
-    <%= (User.all.collect {|user| user.email}).zip(User.all.collect {|user| user.id}) %>
-
     <%= form.select(:user_id, (User.all.collect {|user| user.email}).zip(User.all.collect {|user| user.id})) %>
 
   </div>
