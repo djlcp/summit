@@ -18,4 +18,8 @@ class Section < ApplicationRecord
 	def timeline_position
 		(section_completion_day.to_f/project.project_length)*100
 	end
+
+	def complete?(user)
+		tasks.all? {|t| t.complete?(user)}
+	end
 end

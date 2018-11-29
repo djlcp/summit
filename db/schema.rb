@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2018_11_28_144320) do
   create_table "completes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "step_id"
-    t.boolean "completed", default: true
+    t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["step_id"], name: "index_completes_on_step_id"

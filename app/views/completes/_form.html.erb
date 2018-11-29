@@ -1,7 +1,6 @@
-<%= form_for([step, complete], url: step_complete_path(step, complete)) do |form| %>
-<div class='form-check'>
-  <%= form.check_box :completed, { checked: complete.completed, class: 'form-check-input', onchange: 'this.form.submit();',  url: step_complete_path(step, complete), method: :patch, remote: true} , checked_value: true, unchecked_value: false %>
-</div>
+<%= form_for([step, complete], { url: step_complete_path(step, complete), remote: true, method: :put, html: {id: 'cb-complete-form'} }) do |form| %>
+	<div class='form-check'>
+	  <%= form.check_box :completed, { checked: complete.completed, class: 'form-check-input', id: 'cb-complete' } , checked_value: true, unchecked_value: false %>
+	</div>
+	<%=form.submit '', class: 'stealth-form-submit' %>
 <% end %>
-
-<!-- , :html=>{:id=>"your_form_id",:multipart => true, :remote=>true} -->

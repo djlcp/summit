@@ -1,2 +1,7 @@
 $('#modal-content .modal-body').html("<%= j render partial: 'task', locals: { task: @task } %>");
 $('#modal-window').modal();
+
+$('#cb-complete').on('change', function() {
+
+  $('#cb-complete-form').find('input[type=submit]').click();
+});
