@@ -1,8 +1,15 @@
-<h4> <%= task.title %> </h4> 
-<h5> <%= task.deadline %> </h5>
-<p> <%= task.description %> </p>
-<%= link_to('View', task_path(task)) %>
-<%= link_to('Edit', edit_task_path(task)) %>
-<%= link_to('Delete', task_path(task), method: :delete, data: {Confirm: 'Are you sure?'}) %>
-<p>Add a step</p>
-<%= render partial: 'steps/form', locals: { task: task, step: Step.new }%>
+<div class="p-4">
+	<h4> <%= task.title %> </h4> 
+	<h5> <%= task.deadline %> </h5>
+	<p> <%= task.description %> </p>
+	<%= link_to('View', task_path(task)) %>
+	<%= link_to('Edit', edit_task_path(task)) %>
+	<%= link_to('Delete', task_path(task), method: :delete, data: {Confirm: 'Are you sure?'}) %>
+	<hr>
+	<p>Steps to complete the task</p>
+	<% task.steps.each do |step| %>
+		<%= render partial: 'steps/step', locals: { task: task, step: step} %>
+	<% end %>
+	<p>Add a step</p>
+	<%= render partial: 'steps/form', locals: { task: task, step: Step.new }%>
+</div>

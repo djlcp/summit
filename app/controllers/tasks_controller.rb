@@ -47,6 +47,7 @@ class TasksController < ApplicationController
 
 	def set_section
 		@section = Section.find(params[:section_id])
+		@project = @section.project
 	end
 
 	def set_project

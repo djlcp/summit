@@ -40,10 +40,11 @@ Rails.application.routes.draw do
   end
 
   resources :steps, only: [:edit, :update, :destroy, :show] do
-    resources :completes, only: [:new, :create]
+    resources :completes, only: [:new, :create, :edit, :update]
   end
 
   resources :completes, only: [:destroy]
+
 end
 
 
