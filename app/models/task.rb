@@ -9,4 +9,8 @@ class Task < ApplicationRecord
 	def complete?(user)
 		steps.all? {|s| s.complete?(user)}
 	end
+
+	def overdue?(user)
+		Date.today > deadline && complete?(user) == false
+	end
 end

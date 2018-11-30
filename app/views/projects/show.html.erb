@@ -1,44 +1,49 @@
-<main class='container bg-white border rounded content-container shadow-sm'>
+<main class='container bg-white border rounded content-container shadow-sm px-4 pt-3'>
 	<section class="row">
 		<div class='col'>
-			<h1 class='mt-4 text-navy'><%=@project.title%></h1>
+			<h1 class='text-navy'><%=@project.title%></h1>
 			<%= link_to('Edit', edit_project_path(@project)) %>
 			<%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
 
 			<div class='sections row mt-3'>
-				<div class='h-timeline'>
-					<div class='timeline_tall ml-4'></div>
-				</div>
-				<div class='col-11'>
+				<div class='col-12'>
 					<div class='accordion' id='sectionAccordion'>
 						<% @project.sections.each do |section| %>
-							<div class="card">
-								<div class="card-header" id='header_<%=section.id.to_s%>'>
-									<div class="timeline_vitem dot">
-									</div>
+							<div class="card d-flex border-0">
+								<div class="card-header d-flex px-0 justify-content-between border-0 bg-white" id='header_<%=section.id.to_s%>'>
+									<div class='d-flex'>
+										<div class="timeline_vitem dot align-self-center <%= 'dot-complete' if section.complete?(current_user) %>"></div>
 										<h5 class='mb-0 d-flex justify-content-between'>
-											<button class="btn btn-link" type='button' data-toggle='collapse' data-target='#collapse_<%=section.id.to_s%>' aria-expanded='true' aria-controls='collapse_<%=section.id.to_s%>'>
-												<%= section.title %> 										
+											<button class="btn btn-link nav-link" type='button' data-toggle='collapse' data-target='#collapse_<%=section.id.to_s%>' aria-expanded='true' aria-controls='collapse_<%=section.id.to_s%>'>
+												<%= section.title %>									
 											</button>
-											<div class="section-links d-flex justify-content-between">
-												<%= link_to'View', section_path(section), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary mr-2'} %>
-												<%= link_to('Edit', edit_section_path(section), class: 'btn btn-light border rounded mr-2') %>
-												<%= link_to('Delete', section_path(section), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-delete mr-2 btn-light') %>
-											</div>
-										</h5>
+										</div>
+										<div class="section-links d-flex justify-content-between">
+											<%= link_to'View', section_path(section), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary mr-2'} %>
+											<%= link_to('Edit', edit_section_path(section), class: 'btn btn-light border rounded mr-2') %>
+											<%= link_to('Delete', section_path(section), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-delete btn-light') %>
+										</div>
+									</h5>
 
 								
 								</div>
-								<div class="collapse" id='collapse_<%=section.id.to_s%>' aria-labelledby='header_<%=section.id.to_s%>' data-parent='#sectionAccordion'>
-									<div class="card-body">
-										<div class="d-flex justify-content-between container">
-											<% section.tasks.each do |task| %>
-												<div>
-													<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}) do%>
-														<%= task.title %>
-													<% end %>
+								<div class="collapse <%='show' if section.current %>" id='collapse_<%=section.id.to_s%>' aria-labelledby='header_<%=section.id.to_s%>' data-parent='#sectionAccordion'>
+									<div class="card-body pl-4 pr-0 pt-3">
+										<div class="d-flex justify-content-between container pl-3 pr-0">
+											<div class="d-flex flex-column">
+												<% section.tasks.each do |task| %>
+													<div class='d-flex align-items-center'>
+														<% if task.complete?(current_user) %>
+															<i class="far fa-check-circle mr-2"></i>
+														<% else %> 
+															<i class="far fa-circle mr-2"></i>
+														<% end %> 
+														<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'nav-link'}) do%>
+															<%= task.title %>
+														<% end %>
+													</div>
+												<% end %>
 												</div>
-											<% end %>
 											<div>
 												<%= link_to 'Create a new task.', new_section_task_path(section, Task.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
 											</div>
@@ -47,9 +52,6 @@
 								</div>
 							</div>	
 						<% end %> 
-						<div class="final_item mt-2">
-							<div class='timeline_vitem dot last_item'></div><h6>End of course. Completion Date <%=@project.completion_date%></h6>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -76,3 +78,7 @@
 		  </div>
 	</div>
 </main>
+
+<script>$('#modal-window').on('hidden.bs.modal', function () {
+  location.reload();
+});</script>

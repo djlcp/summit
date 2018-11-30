@@ -14,6 +14,14 @@
 	color: #25476a;
 }
 
+.text-overdue {
+	color: red;
+}
+
+.text-overdue:hover {
+	color: hsl(0, 91%, 38%);
+}
+
 .bg-lpurple {
 	background: #9c92ac;
 }
@@ -79,6 +87,14 @@
 
 .width-100 {
 	width: 100%;
+}
+
+.width-40 {
+	width: 40%
+}
+
+.width-30 {
+	width: 30%;
 }
 
 .in-page-search {

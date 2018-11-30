@@ -1,5 +1,12 @@
 <div class="p-4">
-	<h4> <%= task.title %> </h4> 
+	<div class="d-flex align-items-center">
+		<% if task.complete?(current_user) %>
+			<i class="far fa-check-circle mr-2"></i>
+		<% else %> 
+			<i class="far fa-circle mr-2"></i>
+		<% end %> 
+		<h4> <%= task.title %> </h4> 
+	</div>
 	<h5> <%= task.deadline %> </h5>
 	<p> <%= task.description %> </p>
 	<%= link_to('View', task_path(task)) %>

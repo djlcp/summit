@@ -1,34 +1,44 @@
 <main class="container pr-0 pl-0 ml-5 mr-4 content-container">
 
   	<% @projects.each do |project| %>
-		<div class='shadow-sm pb-4 project_container container mb-5 bg-white border rounded mx-auto'>
+		<div class='shadow-sm pb-4 project_container container mb-4 bg-white border rounded mx-auto'>
 			<div class='pt-2 mt-3 pl-3'>
-				<h3><%= link_to(project.title, project, class: 'text-navy')%></h3>
+				<h3><%= link_to(project.title, project, class: 'text-navy nav-link')%></h3>
 			</div>
 			<p></p>
 			<div class="timeline_div mt-4 pt-3 pb-3">
 				<div class='timeline_line bg-grey'>
-					<div class="dot timeline_item first_item shadow-sm"></div>
+					<div class="dot timeline_item first_item dot-complete shadow-sm"></div>
 					<% project.sections.each do |section| %>
-						<%= link_to '', section_path(section), { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class: "timeline_item dot shadow-sm", style: "left: #{section.timeline_position}%;" } %>
+						<%= link_to '', section_path(section), { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class: "timeline_item dot shadow-sm #{'dot-overdue' if section.overdue?(current_user)} #{'dot-complete' if section.complete?(current_user)}", style: "left: #{section.timeline_position}%;" } %>
 					<% end %>
 				</div>
 			</div>
 		</div>
 
-		<div class='bg-white pl-3 pt-3 pb-4 container rounded border shadow-sm'>
-			<h3 class='text-secondary'>Next Steps:</h3>
-			<div class='pl-3'>
-				<h5 class='text-secondary'>Sample task for layout</h5>
-				<h5 class='text-secondary'>Sample task for layout</h5>
-			</div>
-			<hr class='mr-3'>
+		<div class='d-flex justify-content-start width-100'>
 
-				<h3 class='text-danger'>Overdue:</h3>
-				<div class='pl-3'>
-					<h5 class='text-danger'>Sample overdue task</h5>
+			<div class='bg-white pl-3 pt-3 pb-4 container rounded border shadow-sm width-33 justify-self-start m-0 pl-5 pt-4'>
+				<h3 class='text-secondary'>Next Steps:</h3>
+				<div>
+					<% current_user.tasks.each do |task| %>
+						<% unless task.complete?(current_user) %>
+							<div class='d-flex align-items-center'>
+								<% if task.complete?(current_user) %>
+									<i class="far fa-check-circle mr-2"></i>
+								<% else %> 
+									<i class="far fa-circle mr-2"></i>
+								<% end %> 
+								<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: "nav-link #{'text-overdue' if task.overdue?(current_user)}"}) do%>
+									<%= task.title %>
+								<% end %>
+							</div>
+						<% end %>
+					<% end %>
 				</div>
 			</div>
+
+		</div>
 	<% end %>
 
 </main>
@@ -45,3 +55,8 @@
 		    </div>
 	  </div>
 </div>
+
+
+<script>$('#modal-window').on('hidden.bs.modal', function () {
+  location.reload();
+});</script>

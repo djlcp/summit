@@ -1,6 +1,6 @@
 class CompletesController < ApplicationController
 
-	skip_before_action :verify_authenticity_token, :only => :update
+	skip_before_action :verify_authenticity_token, only: :update
 
 	def update
 		@step = Step.find(params[:step_id])

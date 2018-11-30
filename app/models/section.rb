@@ -22,4 +22,12 @@ class Section < ApplicationRecord
 	def complete?(user)
 		tasks.all? {|t| t.complete?(user)}
 	end
+
+	def overdue?(user)
+		Date.today > deadline && complete?(user) == false
+	end
+
+	def current
+		Date.today >= start_date && Date.today <= deadline
+	end
 end
