@@ -1,6 +1,6 @@
-<%= form_for(section) do |form| %>
+<%= form_for([project, section]) do |form| %>
   <div class='p-4'>
-    <% if section.errors.any? %>
+    <% if @section.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
 

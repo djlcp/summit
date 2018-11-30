@@ -26,17 +26,17 @@ Rails.application.routes.draw do
 	resources :projects do
     resources :lessons, only: [:new, :create, :index]
     resources :users_projects
-		resources :sections, only: [:new, :create]
+		resources :sections, only: [:new, :create, :edit, :update]
 	end
 
   resources :lessons, only: [:edit, :update, :destroy, :index, :show]
 
   resources :sections, only: [:edit, :update, :destroy, :show] do
-      resources :tasks, only: [:new, :create] 
+      resources :tasks, only: [:new, :create, :edit, :update] 
   end
 
   resources :tasks, only: [:edit, :update, :destroy, :show] do
-    resources :steps, only: [:new, :create]
+    resources :steps, only: [:new, :create, :edit, :update]
   end
 
   resources :steps, only: [:edit, :update, :destroy, :show] do
