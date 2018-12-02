@@ -1,4 +1,13 @@
-<h4><%=step.title%></h4>
-<%= link_to('Edit', edit_project_section_task_step_path(@project, @section, @task, step)) %>
-<%= link_to('Delete', project_section_task_step_path(@project, @section, @task, step), method: :delete, data: {confirm: 'Are you sure?'}) %>
-<h5><%=step.description%></h5>
+<div class="d-flex justify-content-between">
+	<div class='d-flex justify-content-between'>
+		<%= render partial: 'completes/form', locals: { step: step, complete: Complete.find_or_create_by(step_id: step.id, user_id: current_user.id)} %>
+		<h4><%=step.title%></h4>
+	</div>
+	<div>
+	<%= link_to('Edit', edit_step_path(step)) %>
+	<%= link_to('Delete', step_path(step), method: :delete, data: {confirm: 'Are you sure?'}) %>
+	</div>
+</div>
+<div>
+	<h5><%=step.description%></h5>
+</div>

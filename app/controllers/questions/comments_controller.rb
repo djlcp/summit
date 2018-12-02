@@ -10,6 +10,7 @@ module Questions
 		def create
 			@comment = Comment.new(comment_params)
 			@comment.post = @question 
+			@comment.user = current_user
 			@comment.save
 			redirect_to @question 
 		end

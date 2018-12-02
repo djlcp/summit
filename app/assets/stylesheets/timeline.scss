@@ -21,19 +21,22 @@
 }
 
 .timeline_vitem {
-	margin-bottom: -20px;
-	position: relative;
-	z-index: 1;
-	left: -8.3%;
-	top: 8px;
-	margin-right: -20px;
 }
 
 .dot {
 	height: 20px;
 	width: 20px;
 	border-radius: 50%;
-	background: green;
+	background: white;
+	border: solid 1px grey;
+}
+
+.dot-overdue {
+	background: red;
+}
+
+.dot-complete {
+	background: #00b300;
 }
 
 .first_item {
@@ -55,4 +58,6 @@
 	background: grey;
 	margin-top: 23px;
 	height: 87%;
+	margin-left: 16px;
+	margin-right: 2px;
 }
