@@ -1,7 +1,7 @@
 <div class="input-group mb-3 in-page-search width-33">
   <input type="text" class="form-control bg-lgrey in-page-search-field border-0 shadow-sm" placeholder="Search the knowledge base." aria-label="#" aria-describedby="basic-addon2">
   <div class="input-group-append">
-    <button class="btn btn-light border rounded-0 bg-lgrey in-page-search-btn border-0 shadow-sm " type="button" id="button-addon2"><i class="fas fa-search"></i></button>
+    <button class="btn btn-light border rounded-0 bg-lgrey in-page-search-btn border-0 shadow-sm " type="button" id="button-addon2"><i class="fas fa-search text-navy"></i></button>
   </div>
 </div>
 
@@ -49,3 +49,8 @@
 		    </div>
 	  </div>
 </div>
+
+
+<script>$('#modal-window').on('hidden.bs.modal', function () {
+  location.reload();
+});</script>

@@ -15,13 +15,36 @@
 		<div class="pl-4">
 			<% question.comments.each do |comment| %>
 				<hr class= 'mt-1 mb-1'>
-				<p class='mb-0'><%= comment.content %> - <%= comment.user.email %></p>
+				<div class="d-flex justify-content-between">
+					<p class='mb-0'><%= comment.content %> - <%= comment.user.email %></p>
+					<%= link_to('Delete', question_comment_path(question, comment), method: :delete, data: {confirm: 'Are you sure'}, remote: true)%>
+					<a class="nav-link pl-0" data-toggle="collapse" href="#collapseAnswerCommentEdit<%= comment.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+						    Edit
+					</a>
+				</div>
+				<div class="collapse" id="collapseAnswerCommentEdit<%= comment.id %>">
+				  <div class="card card-body p-0 border-0">
+				    <%= render partial: 'questions/comments/form', locals: {question: question, comment: comment} %>
+				  </div>
+				</div>
 			<% end %>
+			<a class="nav-link pl-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+			    Add a comment.
+			</a>
+			<div class="collapse" id="collapseExample">
+			  <div class="card card-body p-0 border-0">
+			    <%= render partial: 'questions/comments/form', locals: {question: question, comment: Comment.new} %>
+			  </div>
+			</div>
 		</div>
 	</div>
 </div>
-<h5 class='pl-4'><%= question.answers.count %> <%= question.answers.count == 1 ? "Answer" : 'Answers' %></h5>
+<h5 class='pl-4'><%= question.answers.count %> <%= question.answers.count == 1 ? "Answer" : 'Answers' %>:</h5>
 <hr class= 'm-1 mx-4'>
 <% question.answers.each do |answer| %>
 	<%= render partial: 'answers/answer', locals: {answer: answer} %>
 <% end %>
+<hr class='m-1 mx-4'>
+<div class="mt-0 p-4">
+		<%= render partial: 'answers/form', locals: {question: question, answer: Answer.new} %>
+</div>

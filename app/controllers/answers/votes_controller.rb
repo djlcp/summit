@@ -8,6 +8,7 @@ class Answers::VotesController < VotesController
 
 	def set_post
 		@post = Answer.find(params[:answer_id])
+		@question = @post.question
 	end
 
 end
