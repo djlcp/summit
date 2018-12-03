@@ -13,8 +13,9 @@ Rails.application.routes.draw do
 	root to: 'projects#index'
 
   resources :questions do 
+    resources :votes, module: :questions, only: [:create, :update]
   	scope module: :questions do
-  		resources :comments
+  		resources :comments 
   	end
   	resources :answers do
   		scope module: :answers do
@@ -45,6 +46,7 @@ Rails.application.routes.draw do
 
   resources :completes, only: [:destroy]
 
+  resources :answers do
+    resources :votes, only: [:create, :update], module: :answers
+  end
 end
-
-
