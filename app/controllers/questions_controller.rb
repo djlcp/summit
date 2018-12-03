@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
 	before_action :set_question, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user!
 
 	def index 
 		@questions = Question.all
@@ -10,6 +11,10 @@ class QuestionsController < ApplicationController
 	end
 
 	def show
+		respond_to do |format|
+			# format.html 
+			format.js { render layout: false, partial: 'questions/show'}
+		end
 	end
 
 	def edit

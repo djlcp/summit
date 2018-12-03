@@ -1,2 +1,27 @@
-<h2><%= @question.title %></h2>
-<h5><%= @question.content %> </h5>
+<div class="d-flex p-4">
+	<div class="d-flex flex-column justify-content-start vote-form">
+		<%= render partial: 'votes/vote', locals: {post: question, vote: Vote.find_or_create_by(post_id: @question.id, post_type: 'Question', user_id: current_user.id)} %>
+	</div>
+	<div class='flex-grow-1 pr-4'>
+		<div class='pl-4 d-flex'>
+			<div class='flex-grow-1'>
+				<h6><%= question.content %> </h6>
+			</div>
+			<div class='d-flex flex-column justify-content-start align-items-center'>
+				<p>Created by:</p>
+				<p><%= question.user.email %></p>
+			</div>
+		</div> 
+		<div class="pl-4">
+			<% question.comments.each do |comment| %>
+				<hr class= 'mt-1 mb-1'>
+				<p class='mb-0'><%= comment.content %> - <%= comment.user.email %></p>
+			<% end %>
+		</div>
+	</div>
+</div>
+<h5 class='pl-4'><%= question.answers.count %> <%= question.answers.count == 1 ? "Answer" : 'Answers' %></h5>
+<hr class= 'm-1 mx-4'>
+<% question.answers.each do |answer| %>
+	<%= render partial: 'answers/answer', locals: {answer: answer} %>
+<% end %>
