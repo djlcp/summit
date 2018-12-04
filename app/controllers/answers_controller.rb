@@ -15,14 +15,14 @@ class AnswersController < ApplicationController
 	end
 
 	def edit
+		respond_to do |format|
+			format.js {render layout: false, partial: 'answers/edit'}
+		end
 	end
 
 	def update
-		if @answer.update(answer_params)
-			redirect_to question_path(@question)
-		else
-			render :edit
-		end
+		@answer.update(answer_params)
+		js_modal_refresh
 	end
 
 	def destroy

@@ -1,0 +1,3 @@
+$('#modal-content .modal-header .modal-title').html( "Edit you answer to <%= @answer.question.title %>" )
+$('#modal-content .modal-body').html("<%= j render partial: 'editmodal' %>");
+$('#modal-window').modal();

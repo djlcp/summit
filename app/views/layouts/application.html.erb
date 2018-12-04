@@ -34,7 +34,9 @@
               <%# sign up only required for testing as addition only usually through email invite%>
               <%=link_to 'sign up', new_user_registration_path, class: 'navbar-nav text-white ml-2 mr-2' %>
               <%=link_to 'sign in', new_user_session_path, class: 'navbar-nav text-white ml-2 mr-2' %>
-          <% end%>
+            <% end%>
+            <p class="notice m-0"><%= notice %></p>
+            <p class="alert m-0"><%= alert %></p>
           </div>
         </div>
       </nav>
