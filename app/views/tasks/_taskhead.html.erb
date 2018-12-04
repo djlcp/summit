@@ -1,0 +1,8 @@
+<div class="d-flex align-items-center">
+	<% if task.complete?(current_user) %>
+		<i class="far fa-check-circle mr-2 text-grey"></i>
+	<% else %> 
+		<i class="far fa-circle mr-2 text-grey"></i>
+	<% end %> 
+	<h4 class='m-0'> <%= task.title %> </h4> 
+</div>
