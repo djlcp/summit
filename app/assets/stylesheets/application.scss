@@ -52,8 +52,8 @@
 }
 
 .page-head {
-	height: 330px;
-	margin-bottom: -260px;
+	height: 380px;
+	margin-bottom: -310px;
 }
 
 .content-container {
@@ -62,6 +62,16 @@
 
 .profile-nav {
 	height: 100vh;
+	margin-top: 45px;
+	border: solid 1px white;
+}
+
+.profile-nav-section {
+	margin-top: -75px;
+}
+
+.nav-profile-img {
+	border: solid 3px white;
 }
 
 .nav-break {
@@ -105,6 +115,14 @@
 	width: 30%;
 }
 
+.width-0 {
+	width: 0%;
+}
+
+.project-container {
+	height: 270px;
+}
+
 .in-page-search {
 	position: fixed;
 	right: 0;
@@ -115,7 +133,7 @@
 }
 
 .contrast-border {
-	border-top: 8px solid #6fdcdc;
+	border-top: 5px solid #9c92ac;
 }
 
 .btn-delete {

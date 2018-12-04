@@ -2,6 +2,8 @@
 	<%= render partial: 'question', question: @question %>
 	<%= link_to('Edit', edit_question_path(@question)) %>
 	<%= link_to('Delete', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}) %>
+	<%= render partial: 'votes/vote', locals: {post: @question, vote: Vote.find_or_create_by(post_id: @question.id, post_type: 'Question', user_id: current_user.id)} %>
+	<%= "Votes: #{@question.score}" %>
 	<h4>Comments:</h4>
 	<%= link_to('Add a comment', new_question_comment_path(@question)) %>
 	<% @question.comments.each do |comment| %>

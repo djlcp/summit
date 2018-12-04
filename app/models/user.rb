@@ -7,6 +7,7 @@ class User < ApplicationRecord
 	has_many :answers, dependent: :destroy
 	has_many :comments, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_many :votes, dependent: :destroy
 		
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -21,7 +22,6 @@ class User < ApplicationRecord
     	tasks_array = all_tasks_array.uniq
     	tasks_array.sort_by { |task| task.deadline }
     end
-
 
 
 end

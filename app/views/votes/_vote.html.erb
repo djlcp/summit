@@ -1,0 +1,25 @@
+<div class="flex flex--justify-between" style='margin-top: 90px'>
+  <%= form_with model: [post, vote], local: true, class: 'form' do |f| %>
+
+    <%= f.hidden_field :direction, value: :up %>
+
+    <%= f.submit '&uarr;'.html_safe,
+      class: 'voting-button voting-button--up',
+      style: 'width: 50px',
+      disabled: vote.up?
+    %>
+
+  <% end %>
+
+  <%= form_with model: [post, vote], local: true, class: 'form' do |f| %>
+
+    <%= f.hidden_field :direction, value: :down %>
+
+    <%= f.submit '&darr;'.html_safe,
+      class: 'voting-button voting-button--down',
+      style: 'width: 50px',
+      disabled: vote.down?
+    %>
+
+  <% end %>
+</div>

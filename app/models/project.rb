@@ -42,4 +42,23 @@ class Project < ApplicationRecord
 		lessons_array = lesson_dates.zip(ordered_lessons_array)
 		lessons_array.delete_if {|lesson| lesson.include?(nil)}
 	end
+
+    def user_timeline_position(user)
+    	(user_progress(user).to_f/project_length)*100
+    end
+
+    def user_progress(user)
+		current_section = sections.detect { |section| section.complete?(user) == false } 
+		section_progress = 0
+  		if current_section != nil
+  			progress = current_section.commencement_day
+  			current_section.tasks.each do |task|
+  				section_progress = task.days_given if task.complete?(user)
+  			end
+  		else
+  			progress = project_length
+  		end
+  		progress += section_progress
+    end
+
 end
