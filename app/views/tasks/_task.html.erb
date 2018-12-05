@@ -9,9 +9,11 @@
 	<p> <%= task.description %> </p>
 	<hr>
 	<p>Steps to complete the task</p>
-	<% task.steps.each do |step| %>
-		<%= render partial: 'steps/step', locals: { task: task, step: step} %>
-	<% end %>
+	<div class="accordion" id="accordionStep">
+		<% task.steps.each do |step| %>
+			<%= render partial: 'steps/step', locals: { task: task, step: step} %>
+		<% end %>
+	</div>
 	<p>Add a step</p>
 	<%= render partial: 'steps/form', locals: { task: task, step: Step.new }%>
 </div>
