@@ -49,4 +49,6 @@ Rails.application.routes.draw do
   resources :answers do
     resources :votes, only: [:create, :update], module: :answers
   end
+
+  resources :notifications, only: [:index, :update]
 end

@@ -3,7 +3,11 @@ class QuestionsController < ApplicationController
 	before_action :authenticate_user!
 
 	def index 
-		@questions = Question.all
+		if params[:qsearch]
+			@questions = Question.where("title LIKE ? OR content LIKE ?", "%#{params[:qsearch]}%", "%#{params[:qsearch]}%")
+		else
+			@questions = Question.all
+		end
 	end
 
 	def new
@@ -24,11 +28,18 @@ class QuestionsController < ApplicationController
 		@question = Question.new(question_params)
 		@question.user = current_user
 		@question.save
+		#User.all to be updated once user schema issue corrected
+		User.all.each do |user|
+			Notification.create(recipient: user, actor: current_user, action: 'asked a new question:', notifiable: @question)
+		end
 		redirect_to questions_path
 	end
 
 	def update
 	    @question.update(question_params)
+	    @question.users.each do |user|
+			Notification.create(recipient: user, actor: current_user, action: 'edited their question: ', notifiable: @question)
+		end
 	    js_modal_refresh
 	end
 
@@ -40,7 +51,7 @@ class QuestionsController < ApplicationController
 	private
 
 	def question_params
-		params.require(:question).permit(:title, :content)
+		params.require(:question).permit(:title, :content, :qsearch)
 	end
 
 	def set_question

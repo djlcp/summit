@@ -22,10 +22,18 @@
           <div class="nav-links d-flex flex-row flex-grow-1 align-items-center">
             <h4 class='mr-auto ml-5 text-white'>Summit Logo</h4>
             <p class='flex-grow-1 text-white'> </p>
-            <%= link_to('Projects', root_path, class: 'navbar-nav text-white ml-2 mr-2') %>
-            <%= link_to('New Project', new_project_path, class: 'navbar-nav text-white ml-2 mr-2') %>
-            <%= link_to('Q&A', questions_path, class: 'navbar-nav text-white ml-2 mr-2') %>
             <%= link_to('Calendar', lessons_path, class: 'navbar-nav text-white ml-2 mr-2') %>
+            <div class="btn-group btn-group-nav-top bg-transaparent">
+              <button type="button" class="btn btn-outline-light border-0 dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <% unless current_user.notifications.unread.count == 0 %>
+                  <span class='badge badge-pill badge-danger nav-badge'><%= current_user.notifications.unread.count %></span>
+                <% end %>
+               <i class='far fa-bell'></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right nav-dd-width border-0 shadow-sm">
+                <%= render partial: 'notifications/index' %> 
+              </div>
+            </div>
             <% if current_user %>
               <%=link_to 'sign out', destroy_user_session_path, class: 'navbar-nav text-white ml-2 mr-2', method: :delete %>
               <%=link_to 'Invite new user', new_user_invitation_path, class: 'navbar-nav text-white ml-2 mr-2' %>
@@ -51,7 +59,7 @@
           <div class="profile-nav-section d-flex flex-column align-items-center">
             <img src="https://picsum.photos/100" class='rounded-circle mt-4 nav-profile-img'>
             <h6 class='mt-2'>User Name</h6>
-            <p class='text-secondary'>User email</p>
+            <p class='text-secondary'><%= current_user.email %></p>
           </div>
           <hr class='nav-break mt-0 ml-1 mr-1'>
           <h6 class='align-self-start ml-4'>Navigation</h6>

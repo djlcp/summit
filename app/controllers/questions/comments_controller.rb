@@ -12,6 +12,9 @@ module Questions
 			@comment.post = @question 
 			@comment.user = current_user
 			@comment.save
+			@question.users.each do |user|
+				Notification.create(recipient: user, actor: current_user, action: 'commented on', notifiable: @question)
+			end
 			js_modal_refresh
 		end
 
@@ -20,6 +23,9 @@ module Questions
 
 		def update
 			@comment.update(comment_params)
+			@question.users.each do |user|
+				Notification.create(recipient: user, actor: current_user, action: 'updated their comment on', notifiable: @question)
+			end
 			js_modal_refresh
 		end
 

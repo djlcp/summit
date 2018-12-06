@@ -30,10 +30,10 @@
 			<% end %>
 			<%= link_to('Edit', edit_question_answer_path(answer.question, answer), remote: true) %>
 			<%= link_to('Delete', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Are you sure?'}, remote: true) %>
-			<a class="nav-link pl-0" data-toggle="collapse" href="#collapseAnswerComment" role="button" aria-expanded="false" aria-controls="collapseExample">
+			<a class="nav-link pl-0" data-toggle="collapse" href="#collapseAnswer<%= answer.id %>Comment" role="button" aria-expanded="false" aria-controls="collapseAnswer<%= answer.id %>Comment">
 			    Add a comment.
 			</a>
-			<div class="collapse" id="collapseAnswerComment">
+			<div class="collapse" id="collapseAnswer<%= answer.id%>Comment">
 			  <div class="card card-body p-0 border-0">
 			    <%= render partial: 'answers/comments/form', locals: {question: answer.question, answer: answer, comment: Comment.new} %>
 			  </div>
