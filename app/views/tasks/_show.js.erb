@@ -1,3 +1,4 @@
+$('#modal-content .modal-header .modal-title').html( "<%= j render partial: 'taskhead', locals: { task: @task } %>" )
 $('#modal-content .modal-body').html("<%= j render partial: 'task', locals: { task: @task } %>");
 $('#modal-window').modal();
 

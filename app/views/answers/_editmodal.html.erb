@@ -1,0 +1,5 @@
+<div class='p-4'>
+	<h6><%= @question.content %></h6>
+	<%= render partial: 'form', locals: {question: @question, answer: @answer} %>
+	<%= link_to("Actually, I'm happy with my answer", question_path(@question), remote: true) %>
+</div>

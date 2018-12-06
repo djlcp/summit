@@ -1,22 +1,19 @@
 <div class="p-4">
-	<div class="d-flex align-items-center">
-		<% if task.complete?(current_user) %>
-			<i class="far fa-check-circle mr-2"></i>
-		<% else %> 
-			<i class="far fa-circle mr-2"></i>
-		<% end %> 
-		<h4> <%= task.title %> </h4> 
+	<div class="d-flex justify-content-between">
+		<h5> Due on <%= task.deadline %> </h5>
+		<div class="d-flex">
+			<%= link_to('Edit', edit_task_path(task), class: 'nav-link p-0 mr-2') %>
+			<%= link_to('Delete', task_path(task), method: :delete, data: {Confirm: 'Are you sure?'}, class: 'nav-link p-0 mr-2') %>
+		</div>
 	</div>
-	<h5> <%= task.deadline %> </h5>
 	<p> <%= task.description %> </p>
-	<%= link_to('View', task_path(task)) %>
-	<%= link_to('Edit', edit_task_path(task)) %>
-	<%= link_to('Delete', task_path(task), method: :delete, data: {Confirm: 'Are you sure?'}) %>
 	<hr>
 	<p>Steps to complete the task</p>
-	<% task.steps.each do |step| %>
-		<%= render partial: 'steps/step', locals: { task: task, step: step} %>
-	<% end %>
+	<div class="accordion" id="accordionStep">
+		<% task.steps.each do |step| %>
+			<%= render partial: 'steps/step', locals: { task: task, step: step} %>
+		<% end %>
+	</div>
 	<p>Add a step</p>
 	<%= render partial: 'steps/form', locals: { task: task, step: Step.new }%>
 </div>

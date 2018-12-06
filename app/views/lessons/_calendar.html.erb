@@ -29,10 +29,10 @@
 				<% week.each do |day| %>
 					<% unless project.nil? %>
 						<% if project.lesson_dates.include?(day) %>
-							<% project.assign_lesson_dates.each do |lesson| %>
-								<% if lesson[0] == day %>
-									<td><%= link_to(day.day, lesson_path(lesson[1])) %></td>
-								<% end %>
+							<% if project.assign_lesson_dates.assoc(day) != nil %>
+								<td><%= link_to(day.day, ((project.assign_lesson_dates.assoc(day))[1])) %></td>
+							<% else %>
+								<td><%= day.day %></td>
 							<% end %>
 						<% else %>
 							<td><%= day.day %></td>
@@ -45,3 +45,4 @@
 		<% end %>
 	</tbody>
 </table>
+
