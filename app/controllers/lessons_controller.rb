@@ -4,6 +4,9 @@ class LessonsController < ApplicationController
 
 	def index
 		@lessons = Lesson.all
+		respond_to do |format|
+			format.js {render layout: false, partial: 'update'}
+		end
 	end
 
 	def new

@@ -14,6 +14,10 @@
 	color: #25476a;
 }
 
+.bg-dnavy {
+	background: #000099;
+}
+
 .bg-lblue-grey {
 	background: #edf2fa;
 }
@@ -57,7 +61,7 @@
 
 .page-head {
 	height: 380px;
-	margin-bottom: -310px;
+	margin-bottom: -280px;
 }
 
 .content-container {
@@ -76,6 +80,10 @@
 
 .nav-profile-img {
 	border: solid 3px white;
+}
+
+.navbar-logo {
+	width: 200px;
 }
 
 .nav-break {
@@ -116,6 +124,10 @@
 
 .notification-link:hover {
 	overflow: scroll;
+}
+
+.btn-group-nav-top {
+	width: 57px;
 }
 
 .btn-group-nav-top:focus {
