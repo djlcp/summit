@@ -61,7 +61,7 @@
 
 .page-head {
 	height: 380px;
-	margin-bottom: -280px;
+	margin-bottom: -265px;
 }
 
 .content-container {
@@ -76,6 +76,14 @@
 
 .profile-nav-section {
 	margin-top: -75px;
+}
+
+.yield-container {
+	margin-top: -45px;
+}
+
+.title-card {
+	margin-bottom: 45px;
 }
 
 .nav-profile-img {
@@ -128,6 +136,14 @@
 
 .btn-group-nav-top {
 	width: 57px;
+}
+
+.btn-logo {
+	border: none;
+}
+
+.btn-logo:hover {
+	border: solid 1px #edf2fa;
 }
 
 .btn-group-nav-top:focus {
@@ -193,14 +209,18 @@
 .in-page-search {
 	position: fixed;
 	right: 0;
-	top: 175px;
+	top: 195px;
 }
 .in-page-search-field {
 	border-radius: 50px 0px 0px 50px;
 }
 
 .contrast-border {
-	border-top: 5px solid #9c92ac;
+	border-top: 5px solid #66ffcc;
+}
+
+.contrast-border-left {
+	border-left: 5px solid #66ffcc;
 }
 
 .btn-delete {

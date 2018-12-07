@@ -23,7 +23,9 @@
       <nav class="navbar navbar-expand navbar-dark pt-3 pb-3 d-flex align-items-start">
         <div class='navbar-links d-flex flex-grow-1'>
           <div class="nav-links d-flex flex-row flex-grow-1 align-items-start">
-            <%= image_tag 'summit-logo.png', class: 'navbar-logo ml-5' %>
+            <%= link_to(projects_path, class: 'rounded btn btn-logo ml-5 mb-2') do %>
+              <%= image_tag 'summit-logo.png', class: 'navbar-logo ' %>
+            <% end %>
             <p class='flex-grow-1 text-white'> </p>
             <div class="btn-group btn-group-nav-top bg-transaparent ">
               <button type="button" class="btn btn-outline-light border-0 dropdown-toggle" id='calendar-dd-btn' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,17 +79,21 @@
             <p class='text-secondary'><%= current_user.email %></p>
           </div>
           <hr class='nav-break mt-0 ml-1 mr-1'>
-          <h6 class='align-self-start ml-4'>Navigation</h6>
           <nav class='w-100 d-flex flex-column active'>
-            <%= link_to('Projects', root_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button') %>
-            <%= link_to('New Project', new_project_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button') %>
-            <%= link_to('Q&A', questions_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button') %>
+            <h6 class='align-self-start ml-4'>Navigation</h6>
+            <%= link_to('Projects', root_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+            <%= link_to('Q&A', questions_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+            <%= link_to('Sessions', lessons_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+            <hr class='nav-break mt-0 ml-1 mr-1'>
+             <h6 class='align-self-start ml-4'>Admin Panel</h6>
+             <%= link_to('New Project', new_project_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+
           </nav>
           <hr class='nav-break mt-2 ml-1 mr-1'>
         </div>
 
-        <div class='width-100 pl-0 pr-0'>
-          <div class="d-flex flex-column align-items-center pt-5 pb-5">
+        <div class='width-100 pl-0 pr-0 yield-container'>
+          <div class="d-flex flex-column align-items-center pt-5 pb-5 title-card">
             <h3 class='text-white'>Page Header</h3>
             <h6 class='text-white'>Page info</h6>
           </div>
