@@ -19,6 +19,7 @@
     <p class="notice m-0 p-0 border-0"><%= notice %></p>
     <p class="alert m-0 p-0 border-0"><%= alert %></p>
     <header class='page-head bg-topograph contrast-border'>
+      <% if current_user %>
       <nav class="navbar navbar-expand navbar-dark pt-3 pb-3 d-flex">
         <div class='navbar-links d-flex flex-grow-1'>
           <div class="nav-links d-flex flex-row flex-grow-1 align-items-center">
@@ -103,6 +104,12 @@
         </div>
       </div>
     </div>
+
+    <% else %>
+      <%=link_to 'sign up', new_user_registration_path, class: 'navbar-nav text-navy ml-2 mr-2 text-white' %>
+      <%=link_to 'sign in', new_user_session_path, class: 'navbar-nav text-navy ml-2 mr-2 text-white' %>
+      <%= yield %>
+    <% end %>
   </body>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
 </html>
