@@ -26,5 +26,8 @@ class User < ApplicationRecord
     	tasks_array.sort_by { |task| task.deadline }
     end
 
+    def admin? 
+      admin == true
+    end
 
 end
