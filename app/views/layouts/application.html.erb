@@ -84,7 +84,6 @@
                 <% end%>
               </div>
             </div>
->>>>>>> develop
           </div>
         </div>
       </nav>
@@ -97,17 +96,17 @@
       <div class='d-flex'>
         <div class='profile-nav bg-white col-2 ml-5 pr-0 pl-0 d-flex align-items-center sticky flex-column rounded shadow-sm'>
           <div class="profile-nav-section d-flex flex-column align-items-center">
-
-          <% if @user.profile.image.attached? %>
-            <%= image_tag (@user.profile.image), class: 'rounded-circle mt-4 nav-profile-img'  %>
+            <div class='nav-profile-img-parent mt-4 rounded-circle d-flex justify-content-center'>
+          <% if current_user&.profile&.image&.attached? %>
+            <%= image_tag (current_user&.profile&.image), class: ' nav-profile-img'  %>
           <% else %>
-            <img src="https://picsum.photos/100" class='rounded-circle mt-4 nav-profile-img'>
+            <img src="https://picsum.photos/100" class='nav-profile-img'>
 
           <% end %>
-
+          </div>
             
-            <h6 class='mt-2'><%= @user.profile.user_name %></h6>
-            <p class='text-secondary'><%= @user.email %></p>
+            <h6 class='mt-2'><%= current_user&.profile&.user_name %></h6>
+            <p class='text-secondary'><%= current_user.email %></p>
 
 
           </div>
@@ -121,6 +120,12 @@
              <h6 class='align-self-start ml-4'>Admin Panel</h6>
              <%= link_to('New Project', new_project_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
              <%= link_to('Manage Users', users_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+            <hr class='nav-break mt-0 ml-1 mr-1'>
+            <div class="d-flex flex-column align-items-center">
+              <%= image_tag('slack_rgb.png', class: 'width-80')%>
+              <%= image_tag('GitHub_Logo.png', class: 'width-80')%>
+              <%= image_tag('Treehouse Logo Green - Medium.png', class: 'width-80')%>
+            </div>
           </nav>
           <hr class='nav-break mt-0 ml-1 mr-1'>
         </div>

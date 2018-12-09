@@ -65,7 +65,7 @@
 
 .page-head {
 	height: 380px;
-	margin-bottom: -265px;
+	margin-bottom: -275px;
 }
 
 .content-container {
@@ -90,8 +90,17 @@
 	margin-bottom: 45px;
 }
 
-.nav-profile-img {
+.nav-profile-img-parent {
 	border: solid 3px white;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+}
+
+.nav-profile-img {
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
 .navbar-logo {
@@ -204,6 +213,14 @@
 
 .width-0 {
 	width: 0%;
+}
+
+.width-90 {
+	width: 90%;
+}
+
+.height-60 {
+	height: 60%;
 }
 
 .project-container {
