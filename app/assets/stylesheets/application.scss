@@ -90,8 +90,17 @@
 	margin-bottom: 45px;
 }
 
-.nav-profile-img {
+.nav-profile-img-parent {
 	border: solid 3px white;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+}
+
+.nav-profile-img {
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
 }
 
 .navbar-logo {
