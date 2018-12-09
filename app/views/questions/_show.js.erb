@@ -1,0 +1,3 @@
+$('#modal-content .modal-header .modal-title').html( "<%= @question.title %>" )
+$('#modal-content .modal-body').html("<%= j render partial: 'questions/question', locals: {question: @question} %>");
+$('#modal-window').modal();

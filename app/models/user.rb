@@ -13,13 +13,14 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :invitable
-
+         :recoverable, :rememberable, :validatable
     def tasks
     	all_tasks_array = []
-    	steps.each do |step|
-    		all_tasks_array << step.task
-    	end
+    	projects.each do |project|
+        steps.each do |step|
+    		  all_tasks_array << step.task
+      	end
+      end
     	tasks_array = all_tasks_array.uniq
     	tasks_array.sort_by { |task| task.deadline }
     end

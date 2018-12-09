@@ -12,23 +12,23 @@ class AnswersController < ApplicationController
 		@answer.question = @question
 		@answer.user = current_user
 		@answer.save
-		redirect_to question_path(@question)
+		js_modal_refresh
 	end
 
 	def edit
+		respond_to do |format|
+			format.js {render layout: false, partial: 'answers/edit'}
+		end
 	end
 
 	def update
-		if @answer.update(answer_params)
-			redirect_to question_path(@question)
-		else
-			render :edit
-		end
+		@answer.update(answer_params)
+		js_modal_refresh
 	end
 
 	def destroy
 		@answer.destroy
-		redirect_to question_path(@question)
+		js_modal_refresh
 	end
 
 	private
@@ -43,5 +43,11 @@ class AnswersController < ApplicationController
 
 	def set_answer
 		@answer = Answer.find(params[:id])
+	end
+
+	def js_modal_refresh
+		respond_to do |format|
+			format.js {render layout: false, partial: 'questions/show'}
+		end
 	end
 end

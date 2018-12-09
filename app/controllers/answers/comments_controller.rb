@@ -14,23 +14,20 @@ module Answers
 			@comment.post = @answer
 			@comment.user = current_user
 			@comment.save
-			redirect_to question_path(@question)
+			js_modal_refresh
 		end
 
 		def edit
 		end
 
 		def update
-			if @comment.update(comment_params)
-				redirect_to question_path(@question)
-			else
-				render :edit
-			end
+			@comment.update(comment_params)
+			js_modal_refresh
 		end
 
 		def destroy
 			@comment.destroy
-			redirect_to question_path(@question)
+			js_modal_refresh
 		end
 
 
@@ -50,6 +47,12 @@ module Answers
 
 		def comment_params
 			params.require(:comment).permit(:content)
+		end
+
+		def js_modal_refresh
+			respond_to do |format|
+				format.js {render layout: false, partial: 'questions/show'}
+			end
 		end
 
 	end

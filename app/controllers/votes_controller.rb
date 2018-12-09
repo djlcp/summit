@@ -10,7 +10,9 @@ class VotesController < ApplicationController
     else
       flash[:error] = 'Something went wrong'
     end
-    redirect_to @post
+    respond_to do |format|
+      format.js {render layout: false, partial: 'questions/show'}
+    end
   end
 
   def update
@@ -18,6 +20,9 @@ class VotesController < ApplicationController
       flash[:success] = 'Thanks for voting'
     else
       flash[:warning] = 'Something went wrong'
+    end
+    respond_to do |format|
+      format.js {render layout: false, partial: 'questions/show'}
     end
   end
 

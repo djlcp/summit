@@ -1,4 +1,4 @@
-<%= form_for [question, answer] do |form| %>
+<%= form_for [question, answer], remote: true do |form| %>
 
   <div>
     <% if answer.errors.any? %>
@@ -13,12 +13,9 @@
       </div>
     <% end %>
 
-    <div>
-      <%= form.text_area :content, cols: "1", rows: "6"%>
-    </div>
-
-    <div class="actions">
-      <%= form.submit 'Post!' %>
+   <div class='d-flex'>
+      <%= form.text_area :content, class: 'form-control', placeholder: "Your answer here", rows: "3"%>
+      <%= form.submit 'Post!', class: 'btn btn-outline-primary bg-white' %>
     </div>
   </div>
 <% end %>
