@@ -84,7 +84,6 @@
                 <% end%>
               </div>
             </div>
->>>>>>> develop
           </div>
         </div>
       </nav>
@@ -98,16 +97,16 @@
         <div class='profile-nav bg-white col-2 ml-5 pr-0 pl-0 d-flex align-items-center sticky flex-column rounded shadow-sm'>
           <div class="profile-nav-section d-flex flex-column align-items-center">
 
-          <% if @user.profile.image.attached? %>
-            <%= image_tag (@user.profile.image), class: 'rounded-circle mt-4 nav-profile-img'  %>
+          <% if current_user&.profile&.image&.attached? %>
+            <%= image_tag (current_user&.profile&.image), class: 'rounded-circle mt-4 nav-profile-img'  %>
           <% else %>
             <img src="https://picsum.photos/100" class='rounded-circle mt-4 nav-profile-img'>
 
           <% end %>
 
             
-            <h6 class='mt-2'><%= @user.profile.user_name %></h6>
-            <p class='text-secondary'><%= @user.email %></p>
+            <h6 class='mt-2'><%= current_user&.profile&.user_name %></h6>
+            <p class='text-secondary'><%= current_user.email %></p>
 
 
           </div>
