@@ -12,6 +12,9 @@ class AnswersController < ApplicationController
 		@answer.question = @question
 		@answer.user = current_user
 		@answer.save
+		@question.users.each do |user|
+			Notification.create(recipient: user, actor: current_user, action: "posted an answer to ", notifiable: @question)
+		end
 		js_modal_refresh
 	end
 
@@ -23,6 +26,9 @@ class AnswersController < ApplicationController
 
 	def update
 		@answer.update(answer_params)
+		@question.users.each do |user|
+			Notification.create(recipient: user, actor: current_user, action: 'edited their answer to', notifiable: @question)
+		end
 		js_modal_refresh
 	end
 

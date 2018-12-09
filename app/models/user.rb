@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :votes, dependent: :destroy
   accepts_nested_attributes_for :profile
+  has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
+
 		
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -25,5 +27,8 @@ class User < ApplicationRecord
     	tasks_array.sort_by { |task| task.deadline }
     end
 
+    def admin? 
+      admin == true
+    end
 
 end

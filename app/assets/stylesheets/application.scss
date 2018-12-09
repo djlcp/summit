@@ -18,6 +18,14 @@
 	color: #25476a;
 }
 
+.bg-dnavy {
+	background: #000099;
+}
+
+.bg-lblue-grey {
+	background: #edf2fa;
+}
+
 .text-lgrey {
 	color: #f2f2f2;
 }
@@ -57,7 +65,7 @@
 
 .page-head {
 	height: 380px;
-	margin-bottom: -310px;
+	margin-bottom: -265px;
 }
 
 .content-container {
@@ -74,8 +82,20 @@
 	margin-top: -75px;
 }
 
+.yield-container {
+	margin-top: -45px;
+}
+
+.title-card {
+	margin-bottom: 45px;
+}
+
 .nav-profile-img {
 	border: solid 3px white;
+}
+
+.navbar-logo {
+	width: 200px;
 }
 
 .nav-break {
@@ -84,6 +104,69 @@
 
 .nav-button {
 	width: 95%;
+}
+
+.btn-nav-top {
+	background: transaparent;
+}
+
+.btn-nav-top:focus {
+	border: none;
+	box-shadow: none;
+	outline: none;
+}
+
+.btn-outline-light:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.dropdown-toggle:focus {
+	box-shadow: none;
+}
+
+.nav-dd-width {
+	width: 400px;
+}
+
+.notification-link {
+	word-wrap: break-word;
+	overflow: ellipsis;
+}
+
+.notification-link:hover {
+	overflow: scroll;
+}
+
+.btn-group-nav-top {
+	width: 57px;
+}
+
+.btn-logo {
+	border: none;
+}
+
+.btn-logo:hover {
+	border: solid 1px #edf2fa;
+}
+
+.btn-group-nav-top:focus {
+	border: none;
+	box-shadow: none;
+	outline: none;
+}
+
+.btn .badge {
+	top: -18px;
+	left: 32px;
+	margin-right: -23px;
+}
+
+.search-button-div {
+	width: 40px;
+}
+
+.search-form {
 }
 
 .bg-banner {
@@ -130,14 +213,18 @@
 .in-page-search {
 	position: fixed;
 	right: 0;
-	top: 175px;
+	top: 195px;
 }
 .in-page-search-field {
 	border-radius: 50px 0px 0px 50px;
 }
 
 .contrast-border {
-	border-top: 5px solid #9c92ac;
+	border-top: 5px solid #66ffcc;
+}
+
+.contrast-border-left {
+	border-left: 5px solid #66ffcc;
 }
 
 .btn-delete {

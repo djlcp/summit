@@ -16,12 +16,18 @@
   </head>
 
   <body class='bg-light'>
+    <p class="notice m-0 p-0 border-0"><%= notice %></p>
+    <p class="alert m-0 p-0 border-0"><%= alert %></p>
     <header class='page-head bg-topograph contrast-border'>
-      <nav class="navbar navbar-expand navbar-dark pt-3 pb-3 d-flex">
+      <% if current_user %>
+      <nav class="navbar navbar-expand navbar-dark pt-3 pb-3 d-flex align-items-start">
         <div class='navbar-links d-flex flex-grow-1'>
-          <div class="nav-links d-flex flex-row flex-grow-1 align-items-center">
-            <h4 class='mr-auto ml-5 text-white'>Summit Logo</h4>
+          <div class="nav-links d-flex flex-row flex-grow-1 align-items-start">
+            <%= link_to(projects_path, class: 'rounded btn btn-logo ml-5 mb-2') do %>
+              <%= image_tag 'summit-logo.png', class: 'navbar-logo ' %>
+            <% end %>
             <p class='flex-grow-1 text-white'> </p>
+
             <% active_class = current_page?(root_path) ? 'active' : '' %>
             <%= link_to('Projects', root_path, class: "navbar-nav nav-link #{active_class} text-white ml-2 mr-2") %>
             <% active_class = current_page?(new_project_path) ? 'active' : '' %>
@@ -42,6 +48,43 @@
             <% end%>
             <p class="notice m-0"><%= notice %></p>
             <p class="alert m-0"><%= alert %></p>
+
+            <div class="btn-group btn-group-nav-top bg-transaparent ">
+              <button type="button" class="btn btn-outline-light border-0 dropdown-toggle" id='calendar-dd-btn' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="far fa-calendar-alt"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right nav-dd-width border-0 p-0 shadow-sm" id='calendar-dd'>
+                <%= render partial: 'lessons/calendar', locals: {project: current_user.projects.first} %>
+              </div>
+            </div>
+            <div class="btn-group btn-group-nav-top bg-transaparent mr-2">
+              <button type="button" class="btn btn-outline-light border-0 dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <% unless current_user.notifications.unread.count == 0 %>
+                  <span class='badge badge-pill badge-danger nav-badge'><%= current_user.notifications.unread.count %></span>
+                <% end %>
+               <i class='far fa-bell'></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right nav-dd-width border-0 shadow-sm">
+                <%= render partial: 'notifications/index' %> 
+              </div>
+            </div>
+            <div class="btn-group btn-group-nav-top bg-transaparent">
+              <button type="button" class="btn btn-outline-light border-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v"></i>              
+              </button>
+              <div class="dropdown-menu dropdown-menu-right nav-dd-width border-0 p-0 shadow-sm">
+                <% if current_user %>
+                  <%=link_to 'sign out', destroy_user_session_path, class: 'navbar-nav text-navy ml-2 mr-2', method: :delete %>
+                  <%=link_to 'Invite new user', new_user_invitation_path, class: 'navbar-nav text-navy ml-2 mr-2' %>
+                  <%=link_to 'edit profile', edit_user_registration_path, class: 'navbar-nav text-navy ml-2 mr-2' %>
+                <% else %>
+                  <%# sign up only required for testing as addition only usually through email invite%>
+                  <%=link_to 'sign up', new_user_registration_path, class: 'navbar-nav text-navy ml-2 mr-2' %>
+                  <%=link_to 'sign in', new_user_session_path, class: 'navbar-nav text-navy ml-2 mr-2' %>
+                <% end%>
+              </div>
+            </div>
+>>>>>>> develop
           </div>
         </div>
       </nav>
@@ -59,33 +102,31 @@
             <%= image_tag (@user.profile.image), class: 'rounded-circle mt-4 nav-profile-img'  %>
           <% else %>
             <img src="https://picsum.photos/100" class='rounded-circle mt-4 nav-profile-img'>
+
           <% end %>
 
             
             <h6 class='mt-2'><%= @user.profile.user_name %></h6>
             <p class='text-secondary'><%= @user.email %></p>
+
+
           </div>
           <hr class='nav-break mt-0 ml-1 mr-1'>
-          <h6 class='align-self-start ml-4'>Navigation</h6>
           <nav class='w-100 d-flex flex-column active'>
-            <%= link_to('Projects', root_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn nav-button') %>
-            <%= link_to('New Project', new_project_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button') %>
-            <%= link_to('Q&A', questions_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button') %>
-            <div class='btn-group dropright'>
-              <%= link_to('Calendar', lessons_path, class: 'navbar-nav ml-1 mb-1 btn btn-light nav-button') %>
-              <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split mr-1 mb-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <div class='dropdown-menu'>
-                <%= render partial: 'lessons/calendar', locals: {project: Project.first}%>
-              </div>
-            </div>
+            <h6 class='align-self-start ml-4'>Navigation</h6>
+            <%= link_to('Projects', root_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+            <%= link_to('Q&A', questions_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+            <%= link_to('Sessions', lessons_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+            <hr class='nav-break mt-0 ml-1 mr-1'>
+             <h6 class='align-self-start ml-4'>Admin Panel</h6>
+             <%= link_to('New Project', new_project_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+             <%= link_to('Manage Users', users_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
           </nav>
-          <hr class='nav-break mt-2 ml-1 mr-1'>
+          <hr class='nav-break mt-0 ml-1 mr-1'>
         </div>
 
-        <div class='width-100 pl-0 pr-0'>
-          <div class="d-flex flex-column align-items-center pt-5 pb-5">
+        <div class='width-100 pl-0 pr-0 yield-container'>
+          <div class="d-flex flex-column align-items-center pt-5 pb-5 title-card">
             <h3 class='text-white'>Page Header</h3>
             <h6 class='text-white'>Page info</h6>
           </div>
@@ -93,6 +134,25 @@
         </div>
       </div>
     </div>
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div id="modal-content" class="modal-content">
+        <div class="modal-header contrast-border border-bottom-0 rounded-top">
+          <h4 class="modal-title" id="myModalLabel"></h4>
+          <button type="button" class="close" data-dismiss="modal">x</button>
+        </div>
+        <div class="modal-body bg-lgrey border-0 rounded-bottom p-0">
+        </div>
+        </div>
+    </div>
+</div>
+
+
+    <% else %>
+      <%=link_to 'sign up', new_user_registration_path, class: 'navbar-nav text-navy ml-2 mr-2 text-white' %>
+      <%=link_to 'sign in', new_user_session_path, class: 'navbar-nav text-navy ml-2 mr-2 text-white' %>
+      <%= yield %>
+    <% end %>
   </body>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
 </html>
