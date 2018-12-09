@@ -6,6 +6,10 @@
 @import "font-awesome";
 @import 'timeline';
 
+.active {
+	text-decoration: underline;
+}
+
 .bg-navy {
 	background: #25476a;
 }
