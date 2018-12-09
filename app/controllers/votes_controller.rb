@@ -10,6 +10,7 @@ class VotesController < ApplicationController
     else
       flash[:error] = 'Something went wrong'
     end
+    Notification.create(recipient: @post.user, actor: current_user, action: "#{@vote.direction}-voted ", notifiable: @post)
     respond_to do |format|
       format.js {render layout: false, partial: 'questions/show'}
     end
@@ -21,6 +22,7 @@ class VotesController < ApplicationController
     else
       flash[:warning] = 'Something went wrong'
     end
+    Notification.create(recipient: @post.user, actor: current_user, action: "#{@vote.direction}-voted ", notifiable: @post)
     respond_to do |format|
       format.js {render layout: false, partial: 'questions/show'}
     end

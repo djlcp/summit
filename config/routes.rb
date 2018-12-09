@@ -49,4 +49,10 @@ Rails.application.routes.draw do
   resources :answers do
     resources :votes, only: [:create, :update], module: :answers
   end
+
+  resources :notifications, only: [:index, :update]
+
+  resources :users, only: [:index, :show, :update, :destroy] do 
+    resources :users_projects, only: [:create, :destroy]
+  end
 end

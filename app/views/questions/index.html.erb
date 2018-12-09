@@ -1,9 +1,15 @@
 <div class="input-group mb-3 in-page-search width-33">
-  <input type="text" class="form-control bg-lgrey in-page-search-field border-0 shadow-sm" placeholder="Search the knowledge base." aria-label="#" aria-describedby="basic-addon2">
-  <div class="input-group-append">
-    <button class="btn btn-light border rounded-0 bg-lgrey in-page-search-btn border-0 shadow-sm " type="button" id="button-addon2"><i class="fas fa-search text-navy"></i></button>
-  </div>
+  
+	<%= form_tag(questions_path, method: :get, class: 'd-flex width-100 search-form') do %>
+		  	<%= text_field_tag :qsearch, params[:qsearch], class: "form-control bg-lgrey in-page-search-field border-0 shadow-sm flex-grow-1", placeholder: 'Search the knowledge base' %>
+		<div class="input-group-append search-button-div">
+			<%= button_tag(type: "submit", class: "btn btn-light border rounded-0 bg-lgrey in-page-search-btn border-0 shadow-sm") do %>
+			    <i class="fas fa-search text-navy"></i>
+			<% end %>
+		</div>
+	<% end %>
 </div>
+
 
 <div class="container bg-white rounded content-container shadow-sm p-4"> 
 

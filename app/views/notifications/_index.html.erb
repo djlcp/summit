@@ -1,0 +1,10 @@
+<div class='width-100'>
+	<h6 class='text-navy font-weight-bold p-3'>Notifications:</h6>
+	<% current_user.notifications.reverse[0..9].each do |notification| %>
+		<div class="nav-dd-width <%= 'bg-lblue-grey contrast-border-left' if notification.read_at.nil? %>">
+			<p class='m-0 notification-link'><%= link_to(notification_path(notification), method: :put, class: "dropdown-item nav-link p-3 notification-link #{ 'bg-lblue-grey' if notification.read_at.nil? }", remote: true) do%>
+				<span class="font-weight-bold text-navy"><%= notification.actor.email %></span><span class='text-grey'> <%= notification.action %></span> <span class="font-weight-bold text-navy"><%= notification.notifiable.respond_to?(:title) ? notification.notifiable.title : "your " + notification.notifiable.class.to_s.downcase %></span>  
+			<% end %></p>
+		</div>
+	<% end %>
+</div>
