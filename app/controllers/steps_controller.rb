@@ -1,4 +1,5 @@
 class StepsController < ApplicationController
+	before_action :authenticate_user!
 	before_action :set_task, only: [:new, :create]
 	before_action :set_step, only: [:show, :edit, :destroy, :update]
 

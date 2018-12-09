@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+	before_action :authenticate_user!
 	before_action :set_section, only: [:new, :create]
 	before_action :set_task, only: [:show, :edit, :destroy, :update]
 
