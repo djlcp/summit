@@ -38,7 +38,8 @@
             <%= link_to('Calendar', lessons_path, class: "navbar-nav #{active_class} text-white ml-2 mr-2") %>
             <% if current_user %>
               <%=link_to 'sign out', destroy_user_session_path, class: 'navbar-nav text-white ml-2 mr-2', method: :delete %>
-              <%=link_to 'Invite new user', new_user_invitation_path, class: 'navbar-nav text-white ml-2 mr-2' %>
+              <% active_class = current_page?(new_user_invitation_path) ? 'active' : '' %>
+              <%=link_to 'Invite new user', new_user_invitation_path, class: "navbar-nav #{active_class} text-white ml-2 mr-2" %>
               <% active_class = current_page?(edit_user_registration_path) ? 'active' : '' %>
               <%=link_to 'edit profile', edit_user_registration_path, class: "navbar-nav #{active_class} text-white ml-2 mr-2" %>
             <% else %>
@@ -113,13 +114,18 @@
           <hr class='nav-break mt-0 ml-1 mr-1'>
           <nav class='w-100 d-flex flex-column active'>
             <h6 class='align-self-start ml-4'>Navigation</h6>
-            <%= link_to('Projects', root_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
-            <%= link_to('Q&A', questions_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
-            <%= link_to('Sessions', lessons_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+            <% active_class = current_page?(root_path) ? 'active' : '' %>
+            <%= link_to('Projects', root_path, class: "navbar-nav #{active_class} ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey") %>
+            <% active_class = current_page?(questions_path) ? 'active' : '' %>
+            <%= link_to('Q&A', questions_path, class: "navbar-nav #{active_class} ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey") %>
+            <% active_class = current_page?(lessons_path) ? 'active' : '' %>
+            <%= link_to('Sessions', lessons_path, class: "navbar-nav #{active_class} ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey") %>
             <hr class='nav-break mt-0 ml-1 mr-1'>
              <h6 class='align-self-start ml-4'>Admin Panel</h6>
-             <%= link_to('New Project', new_project_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
-             <%= link_to('Manage Users', users_path, class: 'navbar-nav ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey') %>
+             <% active_class = current_page?(new_project_path) ? 'active' : '' %>
+             <%= link_to('New Project', new_project_path, class: "navbar-nav #{active_class} ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey") %>
+             <% active_class = current_page?(users_path) ? 'active' : '' %>
+             <%= link_to('Manage Users', users_path, class: "navbar-nav #{active_class} ml-1 mr-1 mb-1 btn btn-light nav-button bg-lblue-grey") %>
             <hr class='nav-break mt-0 ml-1 mr-1'>
             <div class="d-flex flex-column align-items-center">
               <%= image_tag('slack_rgb.png', class: 'width-80')%>
