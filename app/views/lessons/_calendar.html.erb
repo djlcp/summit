@@ -1,7 +1,7 @@
 <% start_date = params.fetch(:start_date, Date.today).to_date %>
 <% date_range = (start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
 
-<div class="month-nav d-flex justify-content-around pb-2 pt-2 bg-lgrey rounded-top">
+<div class="month-nav d-flex justify-content-around pb-2 pt-2 bg-lblue-grey rounded-top">
 	<h5 class='m-0'><%= link_to(raw("&laquo;"), lessons_path(start_date: date_range.first - 1.day), class: 'nav-link p-0 m-0', remote: true) %></h5>
 	<h4 class='m-0 width-50'>
 		<span class='ml-2 mr-2 text-navy'>
