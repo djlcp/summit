@@ -44,7 +44,7 @@ class Project < ApplicationRecord
 	end
 
     def user_timeline_position(user)
-    	(user_progress(user).to_f/project_length)*100
+		(user_progress(user).to_f/project_length)*100
     end
 
     def user_progress(user)

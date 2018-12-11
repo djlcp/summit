@@ -1,6 +1,6 @@
 <div class="p-4">
 	<div class="d-flex justify-content-between">
-		<h5> Due on <%= task.deadline %> </h5>
+		<h5> Due on <%= task.deadline.strftime("%d/%m/%Y") %> </h5>
 		<div class="d-flex">
 			<%= link_to('Edit', edit_task_path(task), class: 'nav-link p-0 mr-2') %>
 			<%= link_to('Delete', task_path(task), method: :delete, data: {Confirm: 'Are you sure?'}, class: 'nav-link p-0 mr-2') %>

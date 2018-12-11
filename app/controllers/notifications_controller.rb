@@ -19,4 +19,13 @@ class NotificationsController < ApplicationController
 			end
 		end
 	end
+
+	def destroy_all
+		@notifications = current_user.notifications
+		@notifications.destroy_all
+		render json: {}, status: :ok
+	end
+
+	def update_all
+		@notifications = cure
 end

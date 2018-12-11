@@ -49,7 +49,10 @@ Rails.application.routes.draw do
     resources :votes, only: [:create, :update], module: :answers
   end
 
-  resources :notifications, only: [:index, :update]
+  resources :notifications, only: [:index, :update] do
+    delete :destroy_all, on: :collection
+    put :read_all, on: :collection
+  end
 
   resources :users, only: [:index, :show, :update, :destroy] do 
     resources :users_projects, only: [:create, :destroy]

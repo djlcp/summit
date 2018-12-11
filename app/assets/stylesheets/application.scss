@@ -8,7 +8,7 @@
 @import "font-awesome";
 @import 'timeline';
 
-
+@import 'form';
 
 .active {
 	text-decoration: underline;
@@ -107,13 +107,15 @@
 	overflow: hidden;
 	opacity: 0.4;
     filter: alpha(opacity=40);
-    background-color: #000;
 }
 
 .pin-profile-img-parent:hover {
-	z-index: 2000;
 	opacity: 1;
 	position: relative;
+}
+
+.user-pin:hover {
+	z-index: 999;
 }
 
 .pin-image:hover {
