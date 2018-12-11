@@ -142,7 +142,7 @@
 <div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div id="modal-content" class="modal-content">
-        <div class="modal-header contrast-border border-bottom-0 rounded-top">
+        <div class="modal-header contrast-border border-bottom-0 rounded-top d-flex align-items-start">
           <h4 class="modal-title" id="myModalLabel"></h4>
           <button type="button" class="close" data-dismiss="modal">x</button>
         </div>
@@ -160,4 +160,7 @@
     <% end %>
   </body>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
+  <script>$('#modal-window').on('hidden.bs.modal', function () {
+  location.reload();
+});</script>
 </html>

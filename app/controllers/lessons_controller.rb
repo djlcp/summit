@@ -15,6 +15,9 @@ class LessonsController < ApplicationController
 	end
 
 	def show
+		respond_to do |format|
+			format.js {render layout: false, partial: 'show'}
+		end
 	end
 
 	def create

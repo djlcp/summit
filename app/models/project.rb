@@ -61,4 +61,10 @@ class Project < ApplicationRecord
   		progress += section_progress
     end
 
+    def lesson_section(lesson)
+    	sections.detect { |s| lesson.date >= s.start_date && lesson.date <= s.deadline}
+    end
+
+
+
 end

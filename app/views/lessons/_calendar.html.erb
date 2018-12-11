@@ -31,7 +31,7 @@
 					<% unless project.nil? %>
 						<% if project.lesson_dates.include?(day) %>
 							<% if project.assign_lesson_dates.assoc(day) != nil %>
-								<td><%= link_to(day.day, ((project.assign_lesson_dates.assoc(day))[1])) %></td>
+								<td><%= link_to(day.day, ((project.assign_lesson_dates.assoc(day))[1]), remote: true) %></td>
 							<% else %>
 								<td><%= day.day %></td>
 							<% end %>
