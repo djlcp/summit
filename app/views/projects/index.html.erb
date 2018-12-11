@@ -16,7 +16,13 @@
 						<% project.users.each do |user| %>
 							<div class="user-pin width-0" style="left:<%= project.user_timeline_position(user) %>%;">
 								<div>
-									<img src="https://picsum.photos/40" class='rounded-circle user-pin-image shadow-sm'>
+									<div class='pin-profile-img-parent rounded-circle d-flex justify-content-center user-pin-image shadow-sm'>
+						              <% if user&.profile&.image&.attached? %>
+						                <%= image_tag (user&.profile&.image), class: ' nav-profile-img pin-image'  %>
+						              <% else %>
+										<img src="https://picsum.photos/40" class='nav-profile-img'>
+						              <% end %>
+						            </div>
 								</div>
 							</div>
 						<% end %>

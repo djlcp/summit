@@ -97,13 +97,13 @@
         <div class='profile-nav bg-white col-2 ml-5 pr-0 pl-0 d-flex align-items-center sticky flex-column rounded shadow-sm'>
           <div class="profile-nav-section d-flex flex-column align-items-center">
             <div class='nav-profile-img-parent mt-4 rounded-circle d-flex justify-content-center'>
-          <% if current_user&.profile&.image&.attached? %>
-            <%= image_tag (current_user&.profile&.image), class: ' nav-profile-img'  %>
-          <% else %>
-            <img src="https://picsum.photos/100" class='nav-profile-img'>
+              <% if current_user&.profile&.image&.attached? %>
+                <%= image_tag (current_user&.profile&.image), class: ' nav-profile-img'  %>
+              <% else %>
+                <img src="https://picsum.photos/100" class='nav-profile-img'>
 
-          <% end %>
-          </div>
+              <% end %>
+            </div>
             
             <h6 class='mt-2'><%= current_user&.profile&.user_name %></h6>
             <p class='text-secondary'><%= current_user.email %></p>
