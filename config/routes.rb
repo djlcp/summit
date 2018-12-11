@@ -4,16 +4,13 @@ Rails.application.routes.draw do
   devise_for :admins, path: 'admins', controllers: { sessions: "admins/sessions" }
   devise_for :users, path: 'users' , controllers: { sessions: "users/sessions" }
   
-
-  
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
 
 	root to: 'projects#index'
 
   resources :questions do 
     resources :votes, module: :questions, only: [:create, :update]
+    resources :tags_tagables, module: :questions, only: [:create, :destroy]
   	scope module: :questions do
   		resources :comments 
   	end
@@ -33,10 +30,12 @@ Rails.application.routes.draw do
   resources :lessons, only: [:edit, :update, :destroy, :index, :show]
 
   resources :sections, only: [:edit, :update, :destroy, :show] do
-      resources :tasks, only: [:new, :create, :edit, :update] 
+    resources :tags_tagables, module: :sections, only: [:create, :destroy]
+    resources :tasks, only: [:new, :create, :edit, :update] 
   end
 
   resources :tasks, only: [:edit, :update, :destroy, :show] do
+    resources :tags_tagables, module: :tasks, only: [:create, :destroy]
     resources :steps, only: [:new, :create, :edit, :update]
   end
 
@@ -55,4 +54,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :update, :destroy] do 
     resources :users_projects, only: [:create, :destroy]
   end
+
+  get 'tags/:tag', to: 'questions#index', as: :tag
 end

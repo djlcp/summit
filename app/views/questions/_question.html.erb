@@ -10,6 +10,7 @@
 			<div class='d-flex flex-column justify-content-start align-items-center'>
 				<p>Created by:</p>
 				<p><%= question.user.email %></p>
+				<p><small>Tags: <%= raw question.tags.map(&:title).map { |t| link_to t, tag_path(t) }.join(', ') %></small></p>
 			</div>
 		</div> 
 		<div class="pl-4">

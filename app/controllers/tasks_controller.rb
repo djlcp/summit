@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 	before_action :set_task, only: [:show, :edit, :destroy, :update]
 
 	def index
-		@task = Task.all
+		params[:tag] ? @tasks = Task.tagged_with(params[:tag]) : @tasks = Task.all
 	end
 
 	def show
@@ -62,7 +62,7 @@ class TasksController < ApplicationController
 	end
 
 	def task_params
-		params.require(:task).permit(:title, :days_given, :description)
+		params.require(:task).permit(:title, :days_given, :description, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
 	end
 end
 

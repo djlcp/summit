@@ -1,3 +1,10 @@
 $('#modal-content .modal-header .modal-title').html( "Edit your Question: <%= @question.title %>" )
 $('#modal-content .modal-body').html("<%= j render partial: 'editmodal' %>");
 $('#modal-window').modal();
+
+$(document).on('ready page:load', function () {
+$('#question_tag_ids').chosen({
+  allow_single_deselect: true,
+  width: '100%'
+})
+});

@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
 		if params[:qsearch]
 			@questions = Question.where("title LIKE ? OR content LIKE ?", "%#{params[:qsearch]}%", "%#{params[:qsearch]}%")
 		else
-			@questions = Question.all
+			params[:tag] ? @questions = Question.tagged_with(params[:tag]) : @questions = Question.all
 		end
 	end
 
@@ -52,7 +52,7 @@ class QuestionsController < ApplicationController
 	private
 
 	def question_params
-		params.require(:question).permit(:title, :content, :qsearch)
+		params.require(:question).permit(:title, :content, :qsearch, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
 	end
 
 	def set_question

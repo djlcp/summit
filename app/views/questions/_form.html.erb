@@ -20,6 +20,8 @@
     <div class='width-33 rounded ml-4'>
       <div>
         <%= form.text_field :title, placeholder: "Give your question a title", class: 'width-100 bg-white border rounded' %>
+        <%= form.select(:tag_ids, (Tag.all.collect { |t| t.title}).zip(Tag.all.collect { |t| t.id }), { prompt: 'Add some tags'}, {multiple: true}) %>
+        
       </div>
 
       <div class="actions d-flex justify-content-around mt-3">
@@ -27,4 +29,11 @@
       </div>
     </div>
   </div>
+
+  <script>
+    $('#question_tag_ids').chosen({
+      allow_single_deselect: true,
+      width: '100%'
+    })
+</script>
 <% end %>
