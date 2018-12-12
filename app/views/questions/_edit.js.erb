@@ -2,7 +2,7 @@ $('#modal-content .modal-header .modal-title').html( "Edit your Question: <%= @q
 $('#modal-content .modal-body').html("<%= j render partial: 'editmodal' %>");
 $('#modal-window').modal();
 
-$('#question_tag_ids').chosen({
+$('.js-select').chosen({
   allow_single_deselect: true,
   width: '100%'
 })

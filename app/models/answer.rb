@@ -15,6 +15,7 @@ class Answer < ApplicationRecord
 		comments.each do |comment|
 			users << comment.user
 		end
+		users - current_user
 		users.uniq
 	end
 end

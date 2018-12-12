@@ -20,6 +20,7 @@ class Question < ApplicationRecord
 		answers.each do |answer|
 			users + answer.users 
 		end
+		users - current_user
 		users.uniq
 	end
 

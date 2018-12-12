@@ -1,71 +1,90 @@
-<main class='container bg-white border rounded content-container shadow-sm px-4 py-4'>
-	<section class="row">
-		<div class='col'>
-			<h2 class='text-navy'><%=@project.title%></h2>
-			<%= link_to('Edit', edit_project_path(@project)) %>
-			<%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
+<main class='container pr-0 pl-0 ml-5 mr-4 content-container'>
+	<div class='shadow-sm p-4 container mb-4 bg-white rounded mx-auto'>
+		<section class="row">
+			<div class='col'>
+				<h2 class='text-navy'><%=@project.title%></h2>
+				<% if current_user.admin? %>
+					<%= link_to('Edit', edit_project_path(@project)) %>
+					<%= link_to('Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'}) %>
+				<% end %>
 
-			<div class='sections row mt-3'>
-				<div class='col-12'>
-					<div class='accordion' id='sectionAccordion'>
-						<% @project.sections.each do |section| %>
-							<div class="card d-flex border-0">
-								<div class="card-header d-flex px-0 justify-content-between border-0 bg-white" id='header_<%=section.id.to_s%>'>
-									<div class='d-flex'>
-										<div class="timeline_vitem dot align-self-center <%= 'dot-complete' if section.complete?(current_user) %>"></div>
-										<h5 class='mb-0 d-flex justify-content-between'>
-											<button class="btn btn-link nav-link" type='button' data-toggle='collapse' data-target='#collapse_<%=section.id.to_s%>' aria-expanded='true' aria-controls='collapse_<%=section.id.to_s%>'>
-												<%= section.title %>									
-											</button>
-										</div>
-										<div class="section-links d-flex justify-content-between">
-											<%= link_to'View', section_path(section), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary mr-2'} %>
-											<%= link_to('Edit', edit_section_path(section), class: 'btn btn-light border rounded mr-2') %>
-											<%= link_to('Delete', section_path(section), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-delete btn-light') %>
-										</div>
-									</h5>
+				<div class='sections row mt-3'>
+					<div class='col-12'>
+						<div class='accordion' id='sectionAccordion'>
+							<% @project.sections.each do |section| %>
+								<div class="card d-flex border-0">
+									<div class="card-header d-flex px-0 justify-content-between align-items-center border-0 bg-white" id='header_<%=section.id.to_s%>'>
+										<div class='d-flex'>
+											<div class="timeline_vitem dot align-self-center <%= 'dot-overdue' if section.overdue?(current_user) %> <%= 'dot-complete' if section.complete?(current_user) %>"></div>
+											<h5 class='mb-0 d-flex justify-content-between'>
+												<button class="btn btn-link nav-link text-navy flex-grow-1 width-100" type='button' data-toggle='collapse' data-target='#collapse_<%=section.id.to_s%>' aria-expanded='true' aria-controls='collapse_<%=section.id.to_s%>'>
+													<%= section.title %>	
+																	
+												</button>
+											</div>
+											
+										</h5>
 
-								
-								</div>
-								<div class="collapse <%='show' if section.current %>" id='collapse_<%=section.id.to_s%>' aria-labelledby='header_<%=section.id.to_s%>' data-parent='#sectionAccordion'>
-									<div class="card-body pl-4 pr-0 pt-3">
-										<div class="d-flex justify-content-between container pl-3 pr-0">
-											<div class="d-flex flex-column">
-												<% section.tasks.each do |task| %>
-													<div class='d-flex align-items-center text.lgrey'>
-														<span class='text-grey'>
-															<% if task.complete?(current_user) %>
-																<i class="far fa-check-circle mr-2"></i>
-															<% else %> 
-																<i class="far fa-circle mr-2"></i>
-															<% end %> 
-														</span>
-														<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'nav-link'}) do%>
-															<%= task.title %>
-														<% end %>
+										<span class='text-navy'>
+											<% if section.deadline < Date.today %>
+												due <%= distance_of_time_in_words(section.deadline, DateTime.now) %> ago
+											<% elsif section.deadline - Date.today < 7 %>
+												due in <%= distance_of_time_in_words(DateTime.now, section.deadline) %>	
+											<% elsif section.deadline.year == Date.today.year %>
+												due on <%= section.deadline.strftime("%d %B") %>
+											<% else %>
+												due on <%= section.deadline.strftime("%e %B %Y") %>
+											<% end %>
+										</span>
+									</div>
+									<div class="collapse <%='show' if section.current %>" id='collapse_<%=section.id.to_s%>' aria-labelledby='header_<%=section.id.to_s%>' data-parent='#sectionAccordion'>
+										<div class="card-body pl-4 pr-0 pt-3">
+											<div class="d-flex justify-content-between container pl-3 pr-0">
+												<div class="d-flex flex-column flex-grow-1">
+													<% section.tasks.each do |task| %>
+														<div class='d-flex align-items-center text.lgrey justify-content-between'>
+															<div class="d-flex flex-grow-1 align-items-center">
+																<span class='text-grey'>
+																	<% if task.complete?(current_user) %>
+																		<i class="far fa-check-circle mr-2"></i>
+																	<% else %> 
+																		<i class="far fa-circle mr-2"></i>
+																	<% end %> 
+																</span>
+																<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: "nav-link #{task.complete?(current_user) ? "text-grey" : task.overdue?(current_user) ? "text-overdue" : "text-primary"}"}) do%>
+																	<%= task.title %>
+																<% end %>
+															</div>
+															<span class='text-navy pr-3'><%= DateTime.now > task.deadline ? "due" : "due in" %> <%= distance_of_time_in_words(DateTime.now, task.deadline) %> <%= "ago" if DateTime.now > task.deadline %></span>
+														</div>
+													<% end %>
 													</div>
-												<% end %>
+												<div class='d-flex flex-column'>
+													<%= link_to 'Create a new task.', new_section_task_path(section, Task.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn mb-2'}  %>
+													<%= link_to('Edit', edit_section_path(section), class: 'btn btn-light border rounded mb-2 ') %>
+													<%= link_to('Delete', section_path(section), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-delete btn-light') %>
 												</div>
-											<div>
-												<%= link_to 'Create a new task.', new_section_task_path(section, Task.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
 											</div>
 										</div>
 									</div>
-								</div>
-							</div>	
-						<% end %> 
+								</div>	
+							<% end %> 
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		
 	</section>
 
-	<%= link_to 'Create a new section.', new_project_section_path(@project, Section.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
-	<%= link_to('Add a lesson to the course?', new_project_lesson_path(@project), class: 'btn btn-primary') %>
+	<div class='shadow-sm p-4 container mb-4 bg-white rounded mx-auto'>
+		<% if current_user.admin? %>
+			<%= link_to 'Create a new section.', new_project_section_path(@project, Section.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
+			<%= link_to('Add a lesson to the course?', new_project_lesson_path(@project), class: 'btn btn-primary') %>
 
-	<%= link_to('Add a user to this project?', new_project_users_project_path(@project), class: 'btn btn-primary') %>
+			<%= link_to('Add a user to this project?', new_project_users_project_path(@project), class: 'btn btn-primary') %>
+		<% end %>
+	</div>
 	
 	<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg" role="document">

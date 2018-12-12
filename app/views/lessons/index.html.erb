@@ -9,7 +9,7 @@
 					<%= link_to(lesson_path(lesson), remote: true, class: 'nav-link p-0 flex-grow-1 text-grey') do %>
 						<%= render partial: 'lessonhead', locals: { lesson: lesson } %>
 					<% end %>
-					<p class='width-20 pl-4 text-right text-grey'><%= lesson.date %>
+					<p class='width-20 pl-4 text-right text-grey'><%= lesson.date.strftime("%e %B %Y") %>
 				</div>
 			<% end %>
 		<% end %>

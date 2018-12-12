@@ -1,9 +1,9 @@
 <main class="container pr-0 pl-0 ml-5 mr-4 content-container">
 
   	<% @projects.each do |project| %>
-		<div class='shadow-sm pb-4 project-container container mb-4 bg-white rounded mx-auto'>
-			<div class='pt-2 mt-3 pl-3'>
-				<h3><%= link_to(project.title, project, class: 'text-navy nav-link')%></h3>
+		<div class='shadow-sm p-4 project-container container mb-4 bg-white rounded mx-auto'>
+			<div class=''>
+				<h2><%= link_to(project.title, project, class: 'text-navy nav-link p-0')%></h2>
 			</div>
 			<p></p>
 			<div class="timeline_div mt-4 pt-3 pb-3">
@@ -35,7 +35,7 @@
 
 		<div class='d-flex justify-content-start container p-0'>
 
-			<div class='bg-white pl-3 pt-3 pb-4 container rounded shadow-sm width-66 justify-self-start m-0 pl-5 pt-4'>
+			<div class='bg-white p-4 container rounded shadow-sm width-60 justify-self-start m-0'>
 				<h3 class='text-secondary'>
 					Next Steps:
 				</h3>
@@ -51,9 +51,10 @@
 									<% else %> 
 										<i class="far fa-circle mr-2"></i>
 									<% end %> 
-									<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: "nav-link #{'text-overdue' if task.overdue?(current_user)}"}) do%>
+									<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: "nav-link flex-grow-1 #{'text-overdue' if task.overdue?(current_user)}"}) do%>
 										<%= task.title %>
 									<% end %>
+									<span class='text-navy'><%= DateTime.now > task.deadline ? "due" : "due in" %> <%= distance_of_time_in_words(DateTime.now, task.deadline) %> <%= "ago" if DateTime.now > task.deadline %></span>
 								</div>
 							<% end %>
 						<% end %>

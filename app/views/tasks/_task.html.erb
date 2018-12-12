@@ -1,6 +1,6 @@
 <div class="p-4">
 	<div class="d-flex justify-content-between">
-		<h5> Due on <%= task.deadline.strftime("%d/%m/%Y") %> </h5>
+		<h5> Due in <%= distance_of_time_in_words(DateTime.now, task.deadline) %> </h5>
 		<div class="d-flex">
 			<%= link_to('Edit', edit_task_path(task), class: 'nav-link p-0 mr-2') %>
 			<%= link_to('Delete', task_path(task), method: :delete, data: {Confirm: 'Are you sure?'}, class: 'nav-link p-0 mr-2') %>
@@ -14,6 +14,10 @@
 			<%= render partial: 'steps/step', locals: { task: task, step: step} %>
 		<% end %>
 	</div>
-	<p>Add a step</p>
-	<%= render partial: 'steps/form', locals: { task: task, step: Step.new }%>
+	<% if current_user.admin? %>
+		<p>Add a step</p>
+		<%= render partial: 'steps/form', locals: { task: task, step: Step.new }%>
+	<% end %>
 </div>
+
+<!-- <#%= task.deadline.strftime("%d/%m/%Y") %> -->
