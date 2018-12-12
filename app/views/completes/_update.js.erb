@@ -2,7 +2,5 @@ $('#modal-content .modal-header .modal-title').html( "<%= j render partial: 'tas
 $('#modal-content .modal-body').html("<%= j render partial: 'tasks/task', locals: { task: @task } %>");
 
 $('.cb-complete').on('change', function() {
-  $('.cb-complete').parent().parent().find('input[type=submit]').click();
+  $(this).parent().find('input[type=submit]').click();
 });
-
-

@@ -18,4 +18,3 @@
 //= require turbolinks
 //= require chosen
 //= require_tree .
-

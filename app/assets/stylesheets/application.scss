@@ -11,7 +11,8 @@
 @import 'form';
 
 .active {
-	text-decoration: underline;
+	background: #25476a !important;
+	color: white !important;
 }
 
 .bg-navy {
@@ -250,6 +251,10 @@
 
 .width-90 {
 	width: 90%;
+}
+
+.width-70 {
+	width: 70%;
 }
 
 .width-60 {

@@ -59,11 +59,13 @@
 														</div>
 													<% end %>
 													</div>
-												<div class='d-flex flex-column'>
-													<%= link_to 'Create a new task.', new_section_task_path(section, Task.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn mb-2'}  %>
-													<%= link_to('Edit', edit_section_path(section), class: 'btn btn-light border rounded mb-2 ') %>
-													<%= link_to('Delete', section_path(section), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-delete btn-light') %>
-												</div>
+												<% if current_user.admin? %>	
+													<div class='d-flex flex-column'>
+														<%= link_to 'Create a new task.', new_section_task_path(section, Task.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn mb-2'}  %>
+														<%= link_to('Edit', edit_section_path(section), class: 'btn btn-light border rounded mb-2 ') %>
+														<%= link_to('Delete', section_path(section), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-delete btn-light') %>
+													</div>
+												<% end %>
 											</div>
 										</div>
 									</div>
@@ -76,15 +78,14 @@
 		</div>
 		
 	</section>
+	<% if current_user.admin? %>
+		<div class='shadow-sm p-4 container mb-4 bg-white rounded mx-auto'>
+				<%= link_to 'Create a new section.', new_project_section_path(@project, Section.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
+				<%= link_to('Add a lesson to the course?', new_project_lesson_path(@project), class: 'btn btn-primary') %>
 
-	<div class='shadow-sm p-4 container mb-4 bg-white rounded mx-auto'>
-		<% if current_user.admin? %>
-			<%= link_to 'Create a new section.', new_project_section_path(@project, Section.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
-			<%= link_to('Add a lesson to the course?', new_project_lesson_path(@project), class: 'btn btn-primary') %>
-
-			<%= link_to('Add a user to this project?', new_project_users_project_path(@project), class: 'btn btn-primary') %>
-		<% end %>
-	</div>
+				<%= link_to('Add a user to this project?', new_project_users_project_path(@project), class: 'btn btn-primary') %>
+		</div>
+	<% end %>
 	
 	<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg" role="document">

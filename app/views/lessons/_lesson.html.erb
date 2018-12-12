@@ -1,7 +1,11 @@
 <div class='p-4'>
-	<p>Session date: <%= lesson.date %> </p>
-	<p> <%= lesson.project.lesson_section(lesson).title %></p>
-	<p><%= link_to('Edit', edit_lesson_path(lesson)) %> <%= link_to('Delete', lesson_path(lesson), method: :delete, data: {confirm: 'Are you sure?'}) %><p>
+	<p>Session date: <%= lesson.date.strftime("%e %B %Y") %> </p>
+	<% if current_user.admin? %>
+		<p><%= link_to('Edit', edit_lesson_path(lesson)) %> <%= link_to('Delete', lesson_path(lesson), method: :delete, data: {confirm: 'Are you sure?'}) %><p>
+	<% end %>
+	<p><%= lesson.description %></p>
+	<hr>
+	<p><%= link_to(lesson.project.lesson_section(lesson).title, project_path(lesson.project), class: 'nav-link p-0') %></p>
 	<% unless lesson.lesson_no == 1 %>
 		<p><%= link_to('Previous session', lesson_path(lesson.project.lessons.detect {|l| l.lesson_no == lesson.lesson_no - 1 }), remote: true) %> </p>
 	<% else %>

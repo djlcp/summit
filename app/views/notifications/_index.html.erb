@@ -8,7 +8,7 @@
 		</div>
 	</div>
 	<% current_user.notifications.reverse[0..9].each do |notification| %>
-		<div class="width-100 <%= notification.read_at.nil? ?  'bg-lblue-grey contrast-border-left' : 'bg-lgrey' %>">
+		<div class="width-100 <%= notification.read_at.nil? ?  'bg-lblue-grey contrast-border-left' : 'bg-white' %>">
 			<small><p class='m-0 notification-link'>
 				<%= link_to(
 					notification_path(notification), 

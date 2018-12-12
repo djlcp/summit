@@ -14,17 +14,19 @@
 					<% end %>
 					<div class="user-pins d-flex width-100">
 						<% project.users.sort_by { |user| project.user_timeline_position(user) }.each do |user| %>
-							<div class="user-pin width-0" style="left:<%= project.user_timeline_position(user) %>%;">
-								<div>
-									<div class='pin-profile-img-parent rounded-circle d-flex justify-content-center user-pin-image shadow-sm'>
-						              <% if user&.profile&.image&.attached? %>
-						                <%= image_tag (user&.profile&.image), class: 'nav-profile-img pin-image'  %>
-						              <% else %>
-										<img src="https://picsum.photos/40" class='nav-profile-img pin-image'>
-						              <% end %>
-						            </div>
+							<% unless user.admin? %>
+								<div class="user-pin width-0" style="left:<%= project.user_timeline_position(user) %>%;">
+									<div>
+										<div class='pin-profile-img-parent rounded-circle d-flex justify-content-center user-pin-image shadow-sm'>
+							              <% if user&.profile&.image&.attached? %>
+							                <%= image_tag (user&.profile&.image), class: 'nav-profile-img pin-image'  %>
+							              <% else %>
+											<img src="https://picsum.photos/40" class='nav-profile-img pin-image'>
+							              <% end %>
+							            </div>
+									</div>
 								</div>
-							</div>
+							<% end %>
 						<% end %>
 					</div>
 				</div>
@@ -43,20 +45,18 @@
 					<% if current_user.tasks.detect { |task| task.complete?(current_user) == false } == nil %>
 						<p>You're all done</p>
 					<% else %>
-						<% current_user.tasks.each do |task| %>
-							<% unless task.complete?(current_user) %>
-								<div class='d-flex align-items-center'>
-									<% if task.complete?(current_user) %>
-										<i class="far fa-check-circle mr-2"></i>
-									<% else %> 
-										<i class="far fa-circle mr-2"></i>
-									<% end %> 
-									<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: "nav-link flex-grow-1 #{'text-overdue' if task.overdue?(current_user)}"}) do%>
-										<%= task.title %>
-									<% end %>
-									<span class='text-navy'><%= DateTime.now > task.deadline ? "due" : "due in" %> <%= distance_of_time_in_words(DateTime.now, task.deadline) %> <%= "ago" if DateTime.now > task.deadline %></span>
-								</div>
-							<% end %>
+						<% (current_user.tasks.reject {|t| t.complete?(current_user)})[0..4].each do |task| %>
+							<div class='d-flex align-items-center'>
+								<% if task.complete?(current_user) %>
+									<i class="far fa-check-circle mr-2"></i>
+								<% else %> 
+									<i class="far fa-circle mr-2"></i>
+								<% end %> 
+								<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: "nav-link flex-grow-1 #{'text-overdue' if task.overdue?(current_user)}"}) do%>
+									<%= task.title %>
+								<% end %>
+								<span class='text-navy'><%= DateTime.now > task.deadline ? "due" : "due in" %> <%= distance_of_time_in_words(DateTime.now, task.deadline) %> <%= "ago" if DateTime.now > task.deadline %></span>
+							</div>
 						<% end %>
 					<% end %>
 				</div>
