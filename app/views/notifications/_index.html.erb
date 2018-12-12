@@ -1,18 +1,26 @@
 <div class='nav-dd-width'>
-	<h6 class='text-navy font-weight-bold p-3'>Notifications:</h6>
+	<div class='d-flex justify-content-between p-2 align-items-start'>
+		<h6 class='text-navy font-weight-bold'>Notifications:</h6>
+		<div class="d-flex">
+			<small><%= link_to('Mark all as read', read_all_notifications_path, method: :put, remote: true, class: 'nav-link p-0 pr-2 text-navy') %></small>
+			<span class='dot-separator mr-2 text-grey'>·</span> 
+			<small><%= link_to('Clear notifications', destroy_all_notifications_path, method: :delete, remote: true, class: 'nav-link p-0 pr-2 text-navy') %></small>
+		</div>
+	</div>
 	<% current_user.notifications.reverse[0..9].each do |notification| %>
 		<div class="width-100 <%= 'bg-lblue-grey contrast-border-left' if notification.read_at.nil? %>">
-			<p class='m-0 notification-link'>
+			<small><p class='m-0 notification-link'>
 				<%= link_to(
 					notification_path(notification), 
 					method: :put, 
 					class: "dropdown-item nav-link p-3 notification-link #{ 'bg-lblue-grey' if notification.read_at.nil? }", 
 					remote: true) do %>
-				<span class="font-weight-bold text-navy"><%= notification.actor.email %></span>
-				<span class='text-grey'> <%= notification.action %></span> 
-				<span class="font-weight-bold text-navy">
-					<%= notification.notifiable.respond_to?(:title) ? notification.notifiable.title : "your " + notification.notifiable.class.to_s.downcase%></span>  
-			<% end %></p>
+					<span class="font-weight-bold text-navy"><%= notification.actor.email %></span>
+					<span class='text-grey'> <%= notification.action %></span> 
+					<span class="font-weight-bold text-navy">
+						<%= notification.notifiable.respond_to?(:title) ? notification.notifiable.title : "your " + notification.notifiable.class.to_s.downcase %></span>  
+					<span class='text-grey'> - <%= distance_of_time_in_words(notification.created_at, DateTime.now) %> ago</span>
+				<% end %></p></small>
 		</div>
 	<% end %>
 </div>

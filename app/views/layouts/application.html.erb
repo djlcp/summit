@@ -66,7 +66,7 @@
                 <% end %>
                <i class='far fa-bell'></i>
               </button>
-              <div class="dropdown-menu dropdown-menu-right nav-dd-width border-0 shadow-sm">
+              <div class="dropdown-menu dropdown-menu-right nav-dd-width border-0 shadow-sm" id='notification-dd'>
                 <%= render partial: 'notifications/index' %> 
               </div>
             </div>
@@ -96,6 +96,7 @@
     <div class="body-content">
 
       <div class='d-flex'>
+<!--         <div class="col-2 ml-5 pr-0 pl-0"></div> -->
         <div class='profile-nav bg-white col-2 ml-5 pr-0 pl-0 d-flex align-items-center sticky flex-column rounded shadow-sm'>
           <div class="profile-nav-section d-flex flex-column align-items-center">
             <div class='nav-profile-img-parent mt-4 rounded-circle d-flex justify-content-center'>

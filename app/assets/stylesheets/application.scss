@@ -77,7 +77,7 @@
 }
 
 .profile-nav {
-	height: 100vh;
+	height: auto;
 	margin-top: 45px;
 	border: solid 1px white;
 }
@@ -165,6 +165,10 @@
 
 .notification-link {
 
+}
+
+.dot-separator {
+	margin-top: -2px;
 }
 
 .notification-link:hover {

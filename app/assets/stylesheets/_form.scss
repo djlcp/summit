@@ -5,6 +5,21 @@ label {
 input {
 	padding: 10px 15px;
 	box-shadow: none;	
-	border: 1px solid #AAA;
+	border: 1px solid #dee2e6;
 	outline: none;
+}
+
+
+.chosen-container-multi .chosen-choices {
+	padding: 10px 15px;
+	box-shadow: none;
+	border: 1px solid #dee2e6;
+	outline: none;
+	border-radius: 0.25rem;
+	background-image: none;
+}
+
+.question-textarea {
+	border: 1px solid #dee2e6;
+	height: 166px;
 }

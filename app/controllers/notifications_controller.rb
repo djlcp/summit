@@ -23,9 +23,23 @@ class NotificationsController < ApplicationController
 	def destroy_all
 		@notifications = current_user.notifications
 		@notifications.destroy_all
-		render json: {}, status: :ok
+		refresh_dropdown
 	end
 
-	def update_all
-		@notifications = cure
+	def read_all
+		@notifications = current_user.notifications
+		@notifications.each do |notification|
+			notification.read_at = DateTime.now
+			notification.save
+		end
+		refresh_dropdown
+	end
+
+	private
+
+	def refresh_dropdown
+		respond_to do |format|
+		  format.js {render layout: false, partial: 'show'}
+		end
+	end
 end
