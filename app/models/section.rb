@@ -1,6 +1,8 @@
 class Section < ApplicationRecord
 	belongs_to :project
 	has_many :tasks, dependent: :destroy
+	has_one_attached :file
+	belongs_to :user
 
 
 	def start_date

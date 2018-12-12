@@ -14,10 +14,12 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     
   </head>
+    
 
   <body class='bg-light'>
     <p class="notice m-0 p-0 border-0"><%= notice %></p>
     <p class="alert m-0 p-0 border-0"><%= alert %></p>
+    
     <header class='page-head bg-topograph contrast-border'>
       <% if current_user %>
       <nav class="navbar navbar-expand navbar-dark pt-3 pb-3 d-flex align-items-start">
@@ -92,6 +94,7 @@
 
 
     <div class="body-content">
+      
 
       <div class='d-flex'>
         <div class='profile-nav bg-white col-2 ml-5 pr-0 pl-0 d-flex align-items-center sticky flex-column rounded shadow-sm'>
@@ -130,10 +133,12 @@
           <hr class='nav-break mt-0 ml-1 mr-1'>
         </div>
 
+
         <div class='width-100 pl-0 pr-0 yield-container'>
           <div class="d-flex flex-column align-items-center pt-5 pb-5 title-card">
-            <h3 class='text-white'>Page Header</h3>
-            <h6 class='text-white'>Page info</h6>
+          <%= yield :header %>
+          <%= yield :info %>
+          <% page_name = current_page?(edit_user_registration_path) ? 'active' : '' %>
           </div>
           <%= yield %>
         </div>
