@@ -1,3 +1,11 @@
+<% content_for :header do %>
+  <h2 class='text-white pb-4'>Summit Q&A</h2>
+<% end %>
+
+<% content_for :info do %>
+	<h6 class=' width-70 text-center text-white'>Welcome to the Summit Knowledge Base. Here you can view questions and answers asked by previous and the current cohort. Use the search or tags to find what you are looking for, or just ask a new question to the group.</h6>
+<% end %>
+
 <div class="input-group mb-3 in-page-search width-33">
   
 	<%= form_tag(questions_path, method: :get, class: 'd-flex width-100 search-form') do %>
@@ -44,7 +52,7 @@
 					<h5><%= question.title %></h5>
 				<% end %>
 				<div class="d-flex width-100 justify-content-between">
-					<span>Created by <%= question.user.email %></span>
+					<span>Created by <%= question.user&.profile&.user_name.nil? ? question.user.email : question.user.profile.user_name %></span>
 					<span>posted <%= distance_of_time_in_words(question.created_at, DateTime.now) %> ago</span>
 				</div>
 			</div>

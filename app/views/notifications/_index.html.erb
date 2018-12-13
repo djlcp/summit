@@ -15,7 +15,7 @@
 					method: :put, 
 					class: "dropdown-item nav-link p-3 notification-link #{ 'bg-lblue-grey' if notification.read_at.nil? }", 
 					remote: true) do %>
-					<span class="font-weight-bold text-navy"><%= notification.actor.email %></span>
+					<span class="font-weight-bold text-navy"><%= notification.actor&.profile&.user_name.nil? ? notification.actor.email : notification.actor.profile.user_name %></span>
 					<span class='text-grey'> <%= notification.action %></span> 
 					<span class="font-weight-bold text-navy">
 						<%= notification.notifiable.respond_to?(:title) ? notification.notifiable.title : "your " + notification.notifiable.class.to_s.downcase %></span>  

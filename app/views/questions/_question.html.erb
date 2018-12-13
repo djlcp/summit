@@ -3,13 +3,13 @@
 		<%= render partial: 'votes/vote', locals: {post: question, vote: Vote.find_or_create_by(post_id: @question.id, post_type: 'Question', user_id: current_user.id)} %>
 	</div>
 	<div class='flex-grow-1 pr-4'>
-		<div class='pl-4 d-flex'>
-			<div class='flex-grow-1'>
+		<div class='pl-4 d-flex justify-content-between'>
+			<div class='width-75'>
 				<h6><%= question.content %> </h6>
 			</div>
-			<div class='d-flex flex-column justify-content-start align-items-center'>
+			<div class='d-flex flex-column justify-content-start align-items-center width-20 '>
 				<p>Created by:</p>
-				<p><%= question.user.email %></p>
+				<p><%= question.user&.profile&.user_name.nil? ? question.user.email : question.user.profile.user_name %></p>
 				<p><small>Tags: <%= raw question.tags.map(&:title).map { |t| link_to t, tag_path(t) }.join(', ') %></small></p>
 			</div>
 		</div> 
@@ -17,7 +17,7 @@
 			<% question.comments.each do |comment| %>
 				<hr class= 'mt-1 mb-1'>
 				<div class="d-flex justify-content-between">
-					<p class='mb-0'><%= comment.content %> - <%= comment.user.email %></p>
+					<p class='mb-0'><%= comment.content %> - <%= comment.user&.profile&.user_name.nil? ? comment.user.email : comment.user.profile.user_name %></p>
 					<% if comment.user == current_user %>
 						<div class="d-flex align-items-center">
 							<%= link_to('Delete', question_comment_path(question, comment), method: :delete, data: {confirm: 'Are you sure'}, class: 'mr-2', remote: true)%>
