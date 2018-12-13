@@ -63,10 +63,10 @@
 	</section>
 
 	<% content_for :header do %>
-		<h3 class='text-white'> header </h3>
-        <h6 class='text-white'> info </h6>
+      <h3 class='text-white'> Summit Project </h3>
+      <h6 class='text-white'> Add Some Content To "<%=@project.title%>"</h6>
 
-	<% end %>
+    <% end %>
 
 	<%= link_to 'Create a new section.', new_project_section_path(@project, Section.new),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: 'btn btn-primary btn'}  %>
 	<%= link_to('Add a lesson to the course?', new_project_lesson_path(@project), class: 'btn btn-primary') %>

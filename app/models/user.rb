@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   has_many :votes, dependent: :destroy
   accepts_nested_attributes_for :profile
+ 
+  has_many :drops
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
 
 		

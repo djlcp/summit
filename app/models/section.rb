@@ -1,7 +1,7 @@
 class Section < ApplicationRecord
 	belongs_to :project
 	has_many :tasks, dependent: :destroy
-	has_one_attached :file
+	has_many :drops
 	belongs_to :user
 
 

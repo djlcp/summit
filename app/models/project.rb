@@ -3,7 +3,9 @@ class Project < ApplicationRecord
 	has_many :lessons, dependent: :destroy
 	has_many :users_projects, dependent: :destroy
 	has_many :users, :through => :users_projects
-	has_many_attached :files
+	has_many_attached :drops
+	has_many :files
+	has_many :drops
 
 	def completion_date
 		if sections.count > 0

@@ -1,4 +1,8 @@
-<h2>Log in</h2>
+
+  <h2 class='text-white'> Summit Log In</h2>
+  
+
+
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group">
@@ -20,7 +24,10 @@
 
   <div class="actions">
     <%= f.submit "Log in" %>
+    <%= render "users/shared/links" %>
   </div>
+
+
 <% end %>
 
-<%= render "users/shared/links" %>
+

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :drops
   resources :profiles
   devise_for :admins, path: 'admins', controllers: { sessions: "admins/sessions" }
   devise_for :users, path: 'users' , controllers: { sessions: "users/sessions" }
@@ -28,20 +29,25 @@ Rails.application.routes.draw do
     resources :lessons, only: [:new, :create, :index]
     resources :users_projects
 		resources :sections, only: [:new, :create, :edit, :update]
+    resources :drop, only: [:new, :create, :edit, :update, :show]
 	end
 
   resources :lessons, only: [:edit, :update, :destroy, :index, :show]
 
   resources :sections, only: [:edit, :update, :destroy, :show] do
-      resources :tasks, only: [:new, :create, :edit, :update] 
+      resources :tasks, only: [:new, :create, :edit, :update]
+      resources :drop, only: [:new, :create, :edit, :update, :show]
   end
 
   resources :tasks, only: [:edit, :update, :destroy, :show] do
     resources :steps, only: [:new, :create, :edit, :update]
+    resources :drop, only: [:new, :create, :edit, :update, :show] 
+
   end
 
   resources :steps, only: [:edit, :update, :destroy, :show] do
     resources :completes, only: [:new, :create, :edit, :update]
+    resources :drop, only: [:new, :create, :edit, :update, :show]
   end
 
   resources :completes, only: [:destroy]

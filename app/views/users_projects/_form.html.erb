@@ -12,6 +12,12 @@
       </div>
     <% end %>
 
+    <% content_for :header do %>
+      <h3 class='text-white'> Summit Project </h3>
+      <h6 class='text-white'> Add Users To "<%=@project.title%>"</h6>
+
+    <% end %>
+
     <%= form.select(:user_id, (User.all.collect {|user| user.email}).zip(User.all.collect {|user| user.id})) %>
 
   </div>

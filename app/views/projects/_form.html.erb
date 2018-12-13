@@ -12,6 +12,12 @@
       </div>
     <% end %>
 
+    <% content_for :header do %>
+      <h3 class='text-white'> Summit Project </h3>
+      <h6 class='text-white'> Where New Projects Are Born </h6>
+
+    <% end %>
+
     <div>
       <%= form.label :title,'Enter your Project title'%>
       <%= form.text_field :title, placeholder: "Project title..."%>
