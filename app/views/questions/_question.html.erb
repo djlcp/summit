@@ -10,6 +10,7 @@
 			<div class='d-flex flex-column justify-content-start align-items-center'>
 				<p>Created by:</p>
 				<p><%= question.user.email %></p>
+				<p><small>Tags: <%= raw question.tags.map(&:title).map { |t| link_to t, tag_path(t) }.join(', ') %></small></p>
 			</div>
 		</div> 
 		<div class="pl-4">
@@ -17,19 +18,26 @@
 				<hr class= 'mt-1 mb-1'>
 				<div class="d-flex justify-content-between">
 					<p class='mb-0'><%= comment.content %> - <%= comment.user.email %></p>
-					<%= link_to('Delete', question_comment_path(question, comment), method: :delete, data: {confirm: 'Are you sure'}, remote: true)%>
-					<a class="nav-link pl-0" data-toggle="collapse" href="#collapseAnswerCommentEdit<%= comment.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
-						    Edit
-					</a>
+					<% if comment.user == current_user %>
+						<div class="d-flex align-items-center">
+							<%= link_to('Delete', question_comment_path(question, comment), method: :delete, data: {confirm: 'Are you sure'}, class: 'mr-2', remote: true)%>
+							<a class="nav-link pl-0" data-toggle="collapse" href="#collapseAnswerCommentEdit<%= comment.id %>" role="button" aria-expanded="false" aria-controls="collapseExample">
+								    Edit
+							</a>
+							<div class="collapse" id="collapseAnswerCommentEdit<%= comment.id %>">
+							  <div class="card card-body p-0 border-0">
+							    <%= render partial: 'questions/comments/form', locals: {question: question, comment: comment} %>
+							  </div>
+							</div>
+						</div>
+					<% end %>
 				</div>
-				<div class="collapse" id="collapseAnswerCommentEdit<%= comment.id %>">
-				  <div class="card card-body p-0 border-0">
-				    <%= render partial: 'questions/comments/form', locals: {question: question, comment: comment} %>
-				  </div>
-				</div>
+				
 			<% end %>
-			<%= link_to('Edit', edit_question_path(question), remote: true, class: 'nav-link pl-0') %>
-			<%= link_to('Delete', question_path(question), method: :delete, data: {confirm: 'Are you sure?'}, class: 'nav-link pl-0') %>
+			<% if question.user == current_user %>
+				<%= link_to('Edit', edit_question_path(question), remote: true, class: 'nav-link pl-0') %>
+				<%= link_to('Delete', question_path(question), method: :delete, data: {confirm: 'Are you sure?'}, class: 'nav-link pl-0') %>
+			<% end %>
 			<a class="nav-link pl-0" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
 			    Add a comment.
 			</a>
@@ -42,11 +50,10 @@
 	</div>
 </div>
 <h5 class='pl-4'><%= question.answers.count %> <%= question.answers.count == 1 ? "Answer" : 'Answers' %>:</h5>
-<hr class= 'm-1 mx-4'>
 <% question.answers.each do |answer| %>
 	<%= render partial: 'answers/answer', locals: {answer: answer} %>
 <% end %>
 <hr class='m-1 mx-4'>
 <div class="mt-0 p-4">
-		<%= render partial: 'answers/form', locals: {question: question, answer: Answer.new} %>
+	<%= render partial: 'answers/form', locals: {question: question, answer: Answer.new} %>
 </div>

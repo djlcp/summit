@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
 		if params[:qsearch]
 			@questions = Question.where("title LIKE ? OR content LIKE ?", "%#{params[:qsearch]}%", "%#{params[:qsearch]}%")
 		else
-			@questions = Question.all
+			params[:tag] ? @questions = Question.tagged_with(params[:tag]) : @questions = Question.all
 		end
 	end
 
@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
 		@question.user = current_user
 		@question.save
 		#User.all to be updated once user schema issue corrected
-		User.all.each do |user|
+		(User.all - [current_user]).each do |user|
 			Notification.create(recipient: user, actor: current_user, action: 'asked a new question:', notifiable: @question)
 		end
 		redirect_to questions_path
@@ -38,7 +38,7 @@ class QuestionsController < ApplicationController
 
 	def update
 	    @question.update(question_params)
-	    @question.users.each do |user|
+	    (@question.users - [current_user]).each do |user|
 			Notification.create(recipient: user, actor: current_user, action: 'edited their question: ', notifiable: @question)
 		end
 	    js_modal_refresh
@@ -52,7 +52,7 @@ class QuestionsController < ApplicationController
 	private
 
 	def question_params
-		params.require(:question).permit(:title, :content, :qsearch)
+		params.require(:question).permit(:title, :content, :qsearch, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
 	end
 
 	def set_question

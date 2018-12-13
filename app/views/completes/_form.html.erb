@@ -2,7 +2,8 @@
 
 	<div class='form-check m-0 d-flex align-items-center mr-4'>
 	  <%= form.check_box :completed, { checked: complete.completed, class: 'form-check-input cb-complete m-0', id: 'cb-complete' }, checked_value: true, unchecked_value: false %>
+	  <%= form.submit '', class: 'stealth-form-submit' %>
 	</div>	
 
-	<%= form.submit '', class: 'stealth-form-submit' %>
+	
 <% end %>

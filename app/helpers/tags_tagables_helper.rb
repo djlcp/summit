@@ -1,0 +1,2 @@
+module TagsTagablesHelper
+end
