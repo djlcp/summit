@@ -4,7 +4,7 @@ class SectionsController < ApplicationController
 	before_action :set_section, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@section = Section.all
+		params[:tag] ? @sections = Section.tagged_with(params[:tag]) : @sections = Section.all
 	end
 
 	def show
@@ -58,6 +58,6 @@ class SectionsController < ApplicationController
 	end
 
 	def section_params
-		params.require(:section).permit(:title, :commencement_day, :duration)
+		params.require(:section).permit(:title, :commencement_day, :duration, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
 	end
 end

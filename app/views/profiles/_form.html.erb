@@ -1,3 +1,4 @@
+<div class="container bg-white border rounded content-container">
 <%= form_with(model: profile, local: true) do |form| %>
   <% if profile.errors.any? %>
     <div id="error_explanation">
@@ -35,3 +36,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>

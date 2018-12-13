@@ -49,6 +49,6 @@ class StepsController < ApplicationController
 	end
 
 	def step_params
-		params.require(:step).permit(:title, :description)
+		params.require(:step).permit(:title, :description, :drop)
 	end
 end

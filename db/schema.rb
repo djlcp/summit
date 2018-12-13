@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_09_101638) do
+ActiveRecord::Schema.define(version: 2018_12_12_002729) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -83,12 +83,20 @@ ActiveRecord::Schema.define(version: 2018_12_09_101638) do
     t.index ["user_id"], name: "index_completes_on_user_id"
   end
 
+  create_table "drops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lessons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.integer "lesson_no"
     t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
     t.index ["lesson_no"], name: "index_lessons_on_lesson_no"
     t.index ["project_id"], name: "index_lessons_on_project_id"
     t.index ["title"], name: "index_lessons_on_title"
@@ -150,6 +158,22 @@ ActiveRecord::Schema.define(version: 2018_12_09_101638) do
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_steps_on_task_id"
     t.index ["title"], name: "index_steps_on_title"
+  end
+
+  create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags_tagables", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "tagable_id"
+    t.string "tagable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_tags_tagables_on_tag_id"
+    t.index ["tagable_id"], name: "index_tags_tagables_on_tagable_id"
   end
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

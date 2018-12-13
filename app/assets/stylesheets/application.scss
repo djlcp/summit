@@ -1,4 +1,6 @@
-
+/*
+*= require chosen
+*/
 
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
@@ -6,8 +8,11 @@
 @import "font-awesome";
 @import 'timeline';
 
+@import 'form';
+
 .active {
-	text-decoration: underline;
+	background: #25476a !important;
+	color: white !important;
 }
 
 .bg-navy {
@@ -73,7 +78,7 @@
 }
 
 .profile-nav {
-	height: 100vh;
+	height: auto;
 	margin-top: 45px;
 	border: solid 1px white;
 }
@@ -97,10 +102,31 @@
 	overflow: hidden;
 }
 
+.pin-profile-img-parent {
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+
+.pin-profile-img-parent:hover {
+	opacity: 1;
+	position: relative;
+}
+
+.user-pin:hover {
+	z-index: 999;
+}
+
+.pin-image:hover {
+	position: relative;
+	z-index: -1;
+}
+
 .nav-profile-img {
   height: 100%;
   object-fit: cover;
-  z-index: 1;
 }
 
 .navbar-logo {
@@ -139,8 +165,11 @@
 }
 
 .notification-link {
-	word-wrap: break-word;
-	overflow: ellipsis;
+
+}
+
+.dot-separator {
+	margin-top: -2px;
 }
 
 .notification-link:hover {
@@ -173,6 +202,7 @@
 
 .search-button-div {
 	width: 40px;
+	z-index: 2;
 }
 
 .search-form {
@@ -207,6 +237,10 @@
 	width: 40%
 }
 
+.width-50 {
+	width: 50%;
+}
+
 .width-30 {
 	width: 30%;
 }
@@ -219,6 +253,14 @@
 	width: 90%;
 }
 
+.width-70 {
+	width: 70%;
+}
+
+.width-60 {
+	width: 60%;
+}
+
 .height-60 {
 	height: 60%;
 }
@@ -228,7 +270,7 @@
 }
 
 .in-page-search {
-	position: fixed;
+	position: absolute;
 	right: 0;
 	top: 195px;
 }
@@ -266,6 +308,10 @@
 
 .vote-form {
 	padding-top: -35px;
+}
+
+.dropdown-item {
+	white-space: normal !important;
 }
 
 .bg-topograph {

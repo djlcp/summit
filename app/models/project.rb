@@ -3,6 +3,9 @@ class Project < ApplicationRecord
 	has_many :lessons, dependent: :destroy
 	has_many :users_projects, dependent: :destroy
 	has_many :users, :through => :users_projects
+	has_many_attached :drops
+	has_many :files
+	has_many :drops
 
 	def completion_date
 		if sections.count > 0
@@ -44,7 +47,7 @@ class Project < ApplicationRecord
 	end
 
     def user_timeline_position(user)
-    	(user_progress(user).to_f/project_length)*100
+		(user_progress(user).to_f/project_length)*100
     end
 
     def user_progress(user)
@@ -60,5 +63,11 @@ class Project < ApplicationRecord
   		end
   		progress += section_progress
     end
+
+    def lesson_section(lesson)
+    	sections.detect { |s| lesson.date >= s.start_date && lesson.date <= s.deadline}
+    end
+
+
 
 end

@@ -69,3 +69,10 @@ gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 gem 'popper_js'
 gem 'autoprefixer-rails'
+gem 'bootstrap-popover-rails'
+
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3' 
+  gem 'rails-assets-chosen'
+end
