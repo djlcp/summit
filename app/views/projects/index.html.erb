@@ -13,19 +13,21 @@
 						<%= link_to '', section_path(section), { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class: "timeline_item dot shadow-sm #{'dot-overdue' if section.overdue?(current_user)} #{'dot-complete' if section.complete?(current_user)}", style: "left: #{section.timeline_position}%;" } %>
 					<% end %>
 					<div class="user-pins d-flex width-100">
-						<% project.users.sort_by { |user| project.user_timeline_position(user) }.each do |user| %>
-							<% unless user.admin? %>
-								<div class="user-pin width-0" style="left:<%= project.user_timeline_position(user) %>%;">
-									<div>
-										<div class='pin-profile-img-parent rounded-circle d-flex justify-content-center user-pin-image shadow-sm'>
-							              <% if user&.profile&.image&.attached? %>
-							                <%= image_tag (user&.profile&.image), class: 'nav-profile-img pin-image'  %>
-							              <% else %>
-											<img src="https://picsum.photos/40" class='nav-profile-img pin-image'>
-							              <% end %>
-							            </div>
+						<% unless project.sections.count < 2 %>
+							<% project.users.sort_by { |user| project.user_timeline_position(user) }.each do |user| %>
+								<% unless user.admin? %>
+									<div class="user-pin width-0" style="left:<%= project.user_timeline_position(user) %>%;">
+										<div>
+											<div class='pin-profile-img-parent rounded-circle d-flex justify-content-center user-pin-image shadow-sm'>
+								              <% if user&.profile&.image&.attached? %>
+								                <%= image_tag (user&.profile&.image), class: 'nav-profile-img pin-image'  %>
+								              <% else %>
+												<img src="https://picsum.photos/40" class='nav-profile-img pin-image'>
+								              <% end %>
+								            </div>
+										</div>
 									</div>
-								</div>
+								<% end %>
 							<% end %>
 						<% end %>
 					</div>
