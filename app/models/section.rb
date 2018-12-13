@@ -1,10 +1,7 @@
 class Section < ApplicationRecord
 	belongs_to :project
 	has_many :tasks, dependent: :destroy
-
 	has_many :drops
-	belongs_to :user
-
 	has_many :tags_tagables, as: :tagable, dependent: :destroy
 	has_many :tags, through: :tags_tagables
 

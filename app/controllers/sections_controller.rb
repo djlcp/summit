@@ -1,5 +1,4 @@
 class SectionsController < ApplicationController
-	before_action :authenticate_user!
 	before_action :set_project, only: [:new, :create]
 	before_action :set_section, only: [:show, :edit, :update, :destroy]
 
@@ -24,7 +23,7 @@ class SectionsController < ApplicationController
 	end
 
 	def create
-		@section = Section.new(section_params)
+		@section = @project.sections.create(section_params)
 		@section.project = @project
 		@section.save
 		redirect_to @project

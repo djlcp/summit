@@ -32,11 +32,9 @@ Rails.application.routes.draw do
   resources :lessons, only: [:edit, :update, :destroy, :index, :show]
 
   resources :sections, only: [:edit, :update, :destroy, :show] do
-
     resources :tags_tagables, module: :sections, only: [:create, :destroy]
     resources :tasks, only: [:new, :create, :edit, :update] 
     resources :drop, only: [:new, :create, :edit, :update, :show]
-
   end
 
   resources :tasks, only: [:edit, :update, :destroy, :show] do

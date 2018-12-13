@@ -41,7 +41,7 @@
 										<div class="card-body pl-4 pr-0 pt-3">
 											<div class="d-flex justify-content-between container pl-3 pr-0">
 												<div class="d-flex flex-column flex-grow-1">
-													<% section.tasks.each do |task| %>
+													<% (section.tasks.sort_by {|t| t.deadline }).each do |task| %>
 														<div class='d-flex align-items-center text.lgrey justify-content-between'>
 															<div class="d-flex flex-grow-1 align-items-center">
 																<span class='text-grey'>

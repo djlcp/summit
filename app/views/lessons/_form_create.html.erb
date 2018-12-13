@@ -29,6 +29,11 @@
     </div>
 
     <div>
+      <%= form.label :description,'Enter a description of the session'%>
+      <%= form.text_area :description %>
+    </div>
+
+    <div>
       <%= form.submit 'Go!', class: 'actions'%>
       <%= link_to 'Back', project_path(project)%>
     </div>
