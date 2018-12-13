@@ -28,26 +28,73 @@
       <%= form.date_field :start_date%>
     </div>
 
-    <div>
-      <%= check_box_tag(:sunday, 64, @checked_weekdays.include?(:sunday)) %>
-      <%= label_tag(:sunday, "Sunday") %>
-      <%= check_box_tag(:monday, 32, @checked_weekdays.include?(:monday)) %>
-      <%= label_tag(:monday, "Monday") %>
-      <%= check_box_tag(:tuesday, 16, @checked_weekdays.include?(:tuesday)) %>
-      <%= label_tag(:tuesday, "Tuesday") %>
-      <%= check_box_tag(:wednesday, 8, @checked_weekdays.include?(:wednesday)) %>
-      <%= label_tag(:wednesday, "Wednesday") %>
-      <%= check_box_tag(:thursday, 4, @checked_weekdays.include?(:thursday)) %>
-      <%= label_tag(:thursday, "Thursday") %>
-      <%= check_box_tag(:friday, 2, @checked_weekdays.include?(:friday)) %>
-      <%= label_tag(:friday, "Friday") %>
-      <%= check_box_tag(:saturday, 1, @checked_weekdays.include?(:saturday)) %>
-      <%= label_tag(:saturday, "Saturday") %>
-    </div>
+    <div class='py-3'>
+       <div>
+         <div class="pretty p-icon p-jelly">
+          <%= check_box_tag(:sunday, 64, @checked_weekdays.include?(:sunday)) %>
+            <div class="state p-primary">
+              <i class="icon fas fa-check"></i>
+              <%= label_tag(:sunday, "Sunday") %>
+            </div>
+        </div>
+      </div>
+      <div>
+        <div class="pretty p-icon p-jelly">
+          <%= check_box_tag(:monday, 32, @checked_weekdays.include?(:monday)) %>
+            <div class="state p-primary">
+              <i class="icon fas fa-check"></i>
+              <%= label_tag(:sunday, "Monday") %>
+            </div>
+        </div>
+      </div>
+      <div>
+        <div class="pretty p-icon p-jelly">
+          <%= check_box_tag(:tuesday, 16, @checked_weekdays.include?(:tuesday)) %>
+            <div class="state p-primary">
+              <i class="icon fas fa-check"></i>
+              <%= label_tag(:sunday, "Tuesday") %>
+            </div>
+        </div>
+      </div>
+      <div>
+        <div class="pretty p-icon p-jelly">
+          <%= check_box_tag(:wednesday, 8, @checked_weekdays.include?(:wednesday)) %>
+            <div class="state p-primary">
+              <i class="icon fas fa-check"></i>
+              <%= label_tag(:sunday, "Wednesday") %>
+            </div>
+        </div>
+      </div>
+      <div>
+        <div class="pretty p-icon p-jelly">
+          <%= check_box_tag(:thursday, 4, @checked_weekdays.include?(:thursday)) %>
+            <div class="state p-primary">
+              <i class="icon fas fa-check"></i>
+              <%= label_tag(:sunday, "Thursday") %>
+            </div>
+        </div>
+      </div>
+      <div>
+        <div class="pretty p-icon p-jelly">
+          <%= check_box_tag(:friday, 2, @checked_weekdays.include?(:friday)) %>
+            <div class="state p-primary">
+              <i class="icon fas fa-check"></i>
+              <%= label_tag(:sunday, "Friday") %>
+            </div>
+        </div>
+      </div>
+      <div>
+        <div class="pretty p-icon p-jelly">
+          <%= check_box_tag(:saturday, 1, @checked_weekdays.include?(:saturday)) %>
+            <div class="state p-primary">
+              <i class="icon fas fa-check"></i>
+              <%= label_tag(:sunday, "Saturday") %>
+            </div>
+        </div>
+      </div>    </div>
 
     <div>
-      <%= form.submit 'Go!', class: 'actions'%>
-      <%= link_to 'Back', projects_path%>
+      <%= form.submit 'Go!', class: 'actions btn btn-primary' %>
     </div>
   </div>
 <% end %>

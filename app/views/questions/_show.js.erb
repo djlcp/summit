@@ -1,3 +1,8 @@
 $('#modal-content .modal-header .modal-title').html( "<%= @question.title %>" )
 $('#modal-content .modal-body').html("<%= j render partial: 'questions/question', locals: {question: @question} %>");
 $('#modal-window').modal();
+
+$('#question_tag_ids').chosen({
+  allow_single_deselect: true,
+  width: '100%'
+});
