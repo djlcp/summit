@@ -1,5 +1,5 @@
 <div class="card border-0">
-<div class="card-header d-flex px-0 justify-content-between border-0 bg-lgrey" id="heading<%= step.id %>">
+<div class="card-header d-flex px-0 justify-content-between border-0 bg-lgrey pb-0" id="heading<%= step.id %>">
 	<div class="d-flex justify-content-between">
     	<%= render partial: 'completes/form', locals: { step: step, complete: Complete.find_or_create_by(step_id: step.id, user_id: current_user.id)} %>
         <h5 class='mb-0 d-flex justify-content-between '>
@@ -22,9 +22,9 @@
 <div id="collapse<%= step.id %>" class="collapse" aria-labelledby="heading<%= step.id %>" data-parent="#accordionStep">
   <div class="card-body pl-5 bg-lgrey">
   	<div class="pl-3">
-	    <%= step.description %><br />
+	    <span class='text-navy'><%= step.description %></span>
 
-      <%= link_to 'Show relevant resources for this step', @step_drop %>
+      <!-- <#%= link_to 'Show relevant resources for this step', @step_drop %> -->
     </div>
   </div>
 </div>

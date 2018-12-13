@@ -1,6 +1,6 @@
 <div class="p-4">
 	<div class="d-flex justify-content-between">
-		<h5> Due in <%= distance_of_time_in_words(DateTime.now, task.deadline) %> </h5>
+		<h5 class='text-navy'> Due in <%= distance_of_time_in_words(DateTime.now, task.deadline) %> </h5>
 		<% if current_user.admin? %>
 			<div class="d-flex">
 				<%= link_to('Edit', edit_task_path(task), class: 'nav-link p-0 mr-2') %>
@@ -8,9 +8,9 @@
 			</div>
 		<% end %>
 	</div>
-	<p> <%= task.description %> </p>
+	<p class='text-navy'> <%= task.description %> </p>
 	<hr>
-	<p>Steps to complete the task</p>
+	<p class='text-navy'>Steps to complete the task</p>
 	<div class="accordion" id="accordionStep">
 		<% task.steps.each do |step| %>
 			<%= render partial: 'steps/step', locals: { task: task, step: step} %>
