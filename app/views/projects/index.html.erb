@@ -3,13 +3,13 @@
 <% end %>
 
 <% content_for :info do %>
-	<h6 class=' width-70 text-center text-white'>Welcome to your dashboard. From here you can access the various tasks for your course and see a breakdown of how you, and the other members of the course, are progressing</h6>
+	<h6 class=' width-70 text-center text-white'>Welcome to your dashboard. From here you can access the various tasks for your course and see a breakdown of how you, and the other members of the course, are progressing.</h6>
 <% end %>
 
 <main class="container pr-0 pl-0 ml-5 mr-4">
 
   	<% @projects.each do |project| %>
-		<div class='shadow-sm p-4 project-container container mb-4 bg-white rounded mx-auto'>
+		<div class='shadow-sm p-4 project-container container mb-4 bg-white rounded '>
 			<div class='pb-4'>
 				<h2><%= link_to(project.title, project, class: 'text-navy nav-link p-0')%></h2>
 			</div>
