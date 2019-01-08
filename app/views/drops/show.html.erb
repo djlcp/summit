@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @drop.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @drop.description %>
+</p>
+
+<%= link_to 'Edit', edit_drop_path(@drop) %> |
+<%= link_to 'Back', drops_path %>

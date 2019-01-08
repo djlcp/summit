@@ -1,0 +1,6 @@
+<div class="container bg-white border rounded">
+	<h2>Add a user to <%= @project.title %></h2>
+	<%= @project.users.collect {|user| user.email}%>
+
+	<%= render 'form', {project: @project, users_project: UsersProject.new} %>
+</div>

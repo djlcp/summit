@@ -1,0 +1,1 @@
+<%= select(:tag_id, (User.all.collect {|user| user.email}).zip(User.all.collect {|user| user.id})) %>

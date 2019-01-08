@@ -1,0 +1,20 @@
+<%= form_for [question, answer, comment], remote: true do |form| %>
+  <div>
+    <% if comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(comment.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+        <ul>
+        <% comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class='d-flex'>
+      <%= form.text_area :content, class: 'form-control', placeholder: "Your comment here", rows: "1"%>
+      <%= form.submit 'Post!', class: 'btn btn-outline-primary' %>
+    </div>
+  </div>
+<% end %>

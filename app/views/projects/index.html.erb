@@ -1,0 +1,109 @@
+<% content_for :header do %>
+  <h2 class='text-white pb-4'>Summit Dashboard</h2>
+<% end %>
+
+<% content_for :info do %>
+	<h6 class=' width-70 text-center text-white'>Welcome to your dashboard. From here you can access the various tasks for your course and see a breakdown of how you, and the other members of the course, are progressing.</h6>
+<% end %>
+
+<main class="container pr-0 pl-0 ml-5 mr-4">
+
+  	<% @projects.each do |project| %>
+		<div class='shadow-sm p-4 project-container container mb-4 bg-white rounded '>
+			<div class='pb-4'>
+				<h2><%= link_to(project.title, project, class: 'text-navy nav-link p-0')%></h2>
+			</div>
+			<p></p>
+			<div class="timeline_div mt-4 pt-3 pb-3">
+				<div class='timeline_line bg-grey'>
+					<div class="dot timeline_item first_item dot-complete shadow-sm"></div>
+					<% project.sections.each do |section| %>
+						<%= link_to '', section_path(section), { remote: true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window',class: "timeline_item dot shadow-sm #{'dot-overdue' if section.overdue?(current_user)} #{'dot-complete' if section.complete?(current_user)}", style: "left: #{section.timeline_position}%;" } %>
+					<% end %>
+					<div class="user-pins d-flex width-100">
+						<% unless project.sections.count < 2 %>
+							<% project.users.sort_by { |user| project.user_timeline_position(user) }.each do |user| %>
+								<% unless user.admin? %>
+									<div class="user-pin width-0" style="left:<%= project.user_timeline_position(user) %>%;">
+										<div>
+											<div class='pin-profile-img-parent rounded-circle d-flex justify-content-center user-pin-image shadow-sm'>
+								              <% if user&.profile&.image&.attached? %>
+								                <%= image_tag (user&.profile&.image), class: 'nav-profile-img pin-image'  %>
+								              <% else %>
+												<img src="https://picsum.photos/40" class='nav-profile-img pin-image'>
+								              <% end %>
+								            </div>
+										</div>
+									</div>
+								<% end %>
+							<% end %>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<% end %>
+
+		<div class='d-flex justify-content-between container p-0'>
+
+			<div class='bg-white p-4 container rounded shadow-sm width-65 justify-self-start m-0 mb-4'>
+				<h3 class='text-secondary'>
+					Next Steps:
+				</h3>
+				<div>
+					<% if current_user.tasks.detect { |task| task.complete?(current_user) == false } == nil %>
+						<p>You're all done</p>
+					<% else %>
+						<% (current_user.tasks.reject {|t| t.complete?(current_user)})[0..4].each do |task| %>
+							<div class='d-flex align-items-center'>
+								<% if task.complete?(current_user) %>
+									<i class="far fa-check-circle mr-2"></i>
+								<% else %> 
+									<i class="far fa-circle mr-2"></i>
+								<% end %> 
+								<%= link_to(task_path(task), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window', class: "nav-link flex-grow-1 #{'text-overdue' if task.overdue?(current_user)}"}) do%>
+									<%= task.title %>
+								<% end %>
+								<span class='text-navy'><%= DateTime.now > task.deadline ? "due" : "due in" %> <%= distance_of_time_in_words(DateTime.now, task.deadline) %> <%= "ago" if DateTime.now > task.deadline %></span>
+							</div>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+
+			<div class='bg-white p-4 container rounded shadow-sm width-33 justify-self-start m-0 mb-4'>
+				<h3 class='text-secondary'>
+					Next Session:
+				</h3>
+				<div class="">
+					<% next_lesson = ((Project.first.lessons.sort_by { |l| l.lesson_no }).reject { |l| l.date < Date.today })[0] %>
+					<%= link_to(lesson_path(next_lesson), class: 'nav-link p-0 border px-4 py-4', remote: true) do %>
+						<h5 class='text-navy'><%= next_lesson.title %></h5>
+						<p class='text-grey'><%= next_lesson.description %></p>
+						<p class='text-grey align-self-end text-right'><%= next_lesson.date.strftime('%A, %e %B') %></p>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
+
+</main>
+
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg" role="document">
+		    <div id="modal-content" class="modal-content">
+				<div class="modal-header contrast-border border-bottom-0 rounded-top">
+				  <h4 class="modal-title" id="myModalLabel"></h4>
+				  <button type="button" class="close" data-dismiss="modal">x</button>
+				</div>
+				<div class="modal-body bg-lgrey border-0 rounded-bottom p-0">
+				</div>
+		    </div>
+	  </div>
+</div>
+
+
+<script>$('#modal-window').on('hidden.bs.modal', function () {
+  location.reload();
+});</script>

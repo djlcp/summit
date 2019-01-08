@@ -1,0 +1,22 @@
+<div class="container bg-white border rounded content-container">	
+	<%= render partial: 'question', question: @question %>
+	<%= link_to('Edit', edit_question_path(@question)) %>
+	<%= link_to('Delete', question_path(@question), method: :delete, data: {confirm: 'Are you sure?'}) %>
+	<%= render partial: 'votes/vote', locals: {post: @question, vote: Vote.find_or_create_by(post_id: @question.id, post_type: 'Question', user_id: current_user.id)} %>
+	<%= "Votes: #{@question.score}" %>
+	<h4>Comments:</h4>
+	<%= link_to('Add a comment', new_question_comment_path(@question)) %>
+	<% @question.comments.each do |comment| %>
+		<%= render partial: 'questions/comments/comment', locals: {question: @question, comment: comment} %>
+		<hr>
+	<% end %>
+	<% if @question.answers.count >= 1 %>
+		<h3> Answers: </h3>
+	<% end %> 
+	<% @question.answers.each do |answer| %>
+		<%= render partial: 'answers/answer', locals: {answer: answer} %>
+		<hr>
+	<% end %>
+	<h3>Your Answer</h3>
+	<%= render partial: 'answers/form', locals: { question: @question, answer: Answer.new } %>
+</div>

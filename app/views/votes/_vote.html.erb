@@ -1,0 +1,27 @@
+<div class='d-flex flex-column align-items-center'>
+  <%= form_with model: [post, vote], local: false, class: 'form' do |f| %>
+
+    <%= f.hidden_field :direction, value: :up %>
+
+    <%= f.submit '&uarr;'.html_safe,
+      class: 'voting-button btn btn-outline-primary border-0 rounded-circle',
+      style: 'width: 40px; height: 40px;',
+      disabled: vote.up?
+    %>
+
+  <% end %>
+
+  <span class='mx-auto'> <%= post.score %></span>
+
+  <%= form_with model: [post, vote], local: false, class: 'form' do |f| %>
+
+    <%= f.hidden_field :direction, value: :down %>
+
+    <%= f.submit '&darr;'.html_safe,
+      class: 'voting-button btn btn-outline-primary border-0 rounded-circle',
+      style: 'width: 40px; height: 40px;',
+      disabled: vote.down?
+    %>
+
+  <% end %>
+</div>

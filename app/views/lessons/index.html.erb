@@ -1,0 +1,27 @@
+<% content_for :header do %>
+  <h2 class='text-white pb-4'>Course Schedule</h2>
+<% end %>
+
+<% content_for :info do %>
+	<h6 class=' width-70 text-center text-white'>Use this page to get more detailed information on the varous sections of the course. Click on a session for more information</h6>
+<% end %>
+
+<main class='container pr-0 pl-0 ml-5 mr-4 content-container'>
+
+	<div class='shadow-sm p-4 container project_container mb-2 bg-white border rounded'>
+		<% current_user.projects.each do |project| %>
+			<h2><%= link_to(project.title, project_path(project), class: 'nav-link p-0 text-navy') %></h2>
+			<hr class="my-4">
+			<% project.lessons.sort_by { |l| l.lesson_no}.each do |lesson| %>
+				<div class='d-flex justify-content-between pb-2'>
+					<%= link_to(lesson_path(lesson), remote: true, class: 'nav-link p-0 flex-grow-1 text-grey') do %>
+						<%= render partial: 'lessonhead', locals: { lesson: lesson } %>
+					<% end %>
+					<p class='width-20 pl-4 text-right text-grey'><%= lesson.date.strftime("%e %B %Y") %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+
+
+</main>

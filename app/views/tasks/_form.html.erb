@@ -1,0 +1,35 @@
+<%= form_for([section, task]) do |form| %>
+  <div>
+    <% if task.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@task.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+        <% @task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= form.label :title,'Enter your task title'%>
+      <%= form.text_field :title, placeholder: "Task title..."%>
+    </div>
+
+    <div>
+      <%= form.label :days_given,'How many days are given?'%>
+      <%= form.text_field :days_given%>
+    </div>
+
+    <div>
+      <%= form.label :description, 'Enter a description of the task'%>
+      <%= form.text_area :description %>
+    </div>
+
+    <div>
+      <%= form.submit 'Go!', class: 'actions'%>
+      <%= link_to 'Back', section_path(@section)%>
+    </div>
+  </div>
+<% end %>

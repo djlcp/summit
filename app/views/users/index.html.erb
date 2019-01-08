@@ -1,0 +1,23 @@
+<main class="container pr-0 pl-0 ml-5 mr-4 content-container">
+	<div class='shadow-sm container mb-4 bg-white rounded mx-auto'>
+		<table class='table table-hover m-0 rounded p-4'>
+			<thead>
+				<th>User Email</th>
+				<th>Admin</th>
+				<th>Projects</th>
+			</thead>
+		
+			<% @users.each do |user| %>
+				<tr>
+					<td><%= link_to(user.email, user_path(user), remote: true) %></td>
+					<td><%= user.admin? %></td>
+					<td><% user.projects.each do |project| %>
+							<%= project.title %>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+
+		</table>
+	</div>
+</main>

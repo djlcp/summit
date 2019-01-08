@@ -1,0 +1,41 @@
+<%= form_for([project, lesson]) do |form| %>
+  <div>
+    <% if lesson.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+        <% @lesson.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% content_for :header do %>
+      <h3 class='text-white'> Summit Project </h3>
+      <h6 class='text-white'> Add Some Content To Your Project</h6>
+
+    <% end %>
+
+    <div>
+      <%= form.label :title,'Enter your Lesson title'%>
+      <%= form.text_field :title, placeholder: "Lesson title..."%>
+    </div>
+
+    <div>
+      <%= form.label :lesson_no,'Enter the lesson number'%>
+      <%= form.text_field :lesson_no%>
+    </div>
+
+    <div>
+      <%= form.label :description,'Enter a description of the session'%>
+      <%= form.text_area :description %>
+    </div>
+
+    <div>
+      <%= form.submit 'Go!', class: 'actions'%>
+      <%= link_to 'Back', project_path(project)%>
+    </div>
+  </div>
+<% end %>

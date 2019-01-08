@@ -1,0 +1,52 @@
+<hr class= 'm-1 mx-4'>
+<div class="d-flex p-4">
+	<div class="d-flex flex-column justify-content-start vote-form">
+		<%= render partial: 'votes/vote', locals: {post: answer, vote: Vote.find_or_create_by(post_id: answer.id, post_type: 'Answer', user_id: current_user.id)} %>
+	</div>
+	<div class='flex-grow-1 pr-4'>
+		<div class='pl-4 d-flex justify-content-between'>
+			<div class='width-75'>
+				<h6><%= answer.content %> </h6>
+				
+			</div>
+			<div class='d-flex flex-column justify-content-start align-items-center width-20'>
+				<p>Created by:</p>
+				<p><%= answer.user&.profile&.user_name.nil? ? answer.user.email : answer.user.profile.user_name %></p>
+			</div>
+		</div> 
+		<div class="pl-4">
+			<% answer.comments.each do |comment| %>
+				<hr class= 'mt-1 mb-1'>
+				<div class="d-flex justify-content-between">
+					<p class='mb-0'><%= comment.content %> - <%= comment.user&.profile&.user_name.nil? ? comment.user.email : comment.user.profile.user_name %></p>
+					<% if comment.user == current_user %>
+						<div class="d-flex align-items-center">
+							<%= link_to('Delete', question_answer_comment_path(answer.question, answer, comment), method: :delete, data: {confirm: 'Are you sure'}, class: 'mr-2', remote: true)%>
+							<a class="nav-link pl-0" data-toggle="collapse" href="#collapseAnswerCommentEdit" role="button" aria-expanded="false" aria-controls="collapseExample">
+							    Edit
+							</a>
+						</div>
+						<div class="collapse" id="collapseAnswerCommentEdit">
+						  <div class="card card-body p-0 border-0">
+						    <%= render partial: 'answers/comments/form', locals: {question: answer.question, answer: answer, comment: comment} %>
+						  </div>
+						</div>
+					<% end %>
+				</div>
+				
+			<% end %>
+			<% if answer.user == current_user %>
+				<%= link_to('Edit', edit_question_answer_path(answer.question, answer), remote: true) %>
+				<%= link_to('Delete', question_answer_path(answer.question, answer), method: :delete, data: {confirm: 'Are you sure?'}, remote: true) %>
+			<% end %>
+			<a class="nav-link pl-0" data-toggle="collapse" href="#collapseAnswer<%= answer.id %>Comment" role="button" aria-expanded="false" aria-controls="collapseAnswer<%= answer.id %>Comment">
+			    Add a comment.
+			</a>
+			<div class="collapse" id="collapseAnswer<%= answer.id%>Comment">
+			  <div class="card card-body p-0 border-0">
+			    <%= render partial: 'answers/comments/form', locals: {question: answer.question, answer: answer, comment: Comment.new} %>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,32 @@
+<%= form_with(model: question, local: true) do |form| %>
+  <div>
+      <% if question.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+          <ul>
+          <% question.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+  </div>
+
+  <div class="d-flex">
+    <div class="form-group width-66">
+      <%= form.text_area :content, placeholder: "Have a question? Ask it right here.", rows: "7", class: 'form-control bg-white rounded question-textarea'%>
+    </div>
+    <div class='width-33 rounded ml-4'>
+      <div>
+        <%= form.text_field :title, placeholder: "Give your question a title", class: 'width-100 bg-white border rounded mb-4' %>
+        <%= form.select(:tag_ids, (Tag.all.collect { |t| t.title}).zip(Tag.all.collect { |t| t.id }), { placeholder: 'Add some tags'}, {multiple: true, class: 'js-select rounded pt-4'}) %>
+        
+      </div>
+
+      <div class="actions d-flex justify-content-around mt-4">
+        <%= form.submit 'Post!', class: 'btn btn-primary width-100' %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<div class="container bg-white border rounded content-container">
+	<h2><%=@project.title%></h2>
+	<h1><%= @section.title %> 
+		<%= link_to('edit', edit_section_path(@section)) %>
+		<%= link_to('Delete', section_path(@section), method: :delete, data: {confirm: "Are you sure?"}) %>
+	</h1>
+	<h3>
+		<% @section.tasks.each do |task| %>
+			<%= render partial: "tasks/task", locals: { task: task } %>
+		<% end %> 
+	</h3>
+
+	<p> <%= render partial: 'tasks/form', locals: {section: @section, task: Task.new }%> </p>
+</div>

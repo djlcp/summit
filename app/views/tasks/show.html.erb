@@ -1,0 +1,15 @@
+<div class="container bg-white border rounded">
+	<h3><%= @project.title %></h3>
+	<h2><%= @section.title %></h2>
+	<h1><%= @task.title %> 
+		<%= link_to('edit', edit_task_path(@task)) %>
+		<%= link_to('Delete', task_path(@task), method: :delete, data: {confirm: "Are you sure?"}) %>
+	</h1>
+	<h3>
+		<% @task.steps.each do |step| %>
+			<%= render partial: "steps/step", locals: { step: step } %>
+		<% end %> 
+	</h3>
+	<h4>Add a step</h4>
+	<p> <%= render partial: 'steps/form', locals: {task: @task, step: Step.new }%> </p>
+</div>
